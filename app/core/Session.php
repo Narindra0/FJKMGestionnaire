@@ -10,7 +10,10 @@ final class Session
     public static function start(): void
     {
         if (session_status() === PHP_SESSION_ACTIVE) return;
-        session_name(config_app('session_name'));
+        // Assainir le nom de session : garder uniquement alphanumeriques, tirets et underscores
+        $rawName = (string)(config_app('session_name') ?? 'FJKM_SESSION');
+        $safeName = preg_replace('/[^a-zA-Z0-9\-]/', '', $rawName);
+        session_name($safeName !== '' ? $safeName : 'FJKM_SESSION');
         session_set_cookie_params([
             'lifetime' => 0,
             'path' => '/',

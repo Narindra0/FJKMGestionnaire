@@ -10,14 +10,23 @@ function config_app(?string $key = null): mixed {
 }
 
 function url(string $path = ''): string {
-    $base = rtrim(config_app('url'), '/');
+    // Auto-détecter l'URL de base en production
+    $configUrl = config_app('url');
+    if ($configUrl && !str_contains($configUrl, 'localhost')) {
+        $base = rtrim($configUrl, '/');
+    } else {
+        // Construire l'URL à partir de la requête courante
+        $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $base = $scheme . '://' . $host;
+    }
     return $base . '/' . ltrim($path, '/');
 }
 
 function asset(string $path): string {
     $cleanPath = ltrim($path, '/');
 
-    // En mode production (debug=false), utiliser les fichiers minifiés avec hash
+    // En mode production (debug=false), essayer les fichiers minifiés avec hash
     $debug = config_app('debug');
     if (!$debug) {
         static $manifest = null;
@@ -30,6 +39,12 @@ function asset(string $path): string {
         $relativePath = 'assets/' . $cleanPath;
         if (isset($manifest[$relativePath])) {
             return url($manifest[$relativePath]);
+        }
+        // Si le minifié n'existe pas, servir l'original
+        $minFile = BASE_PATH . '/public/assets/' . str_replace('.css', '.min.css', str_replace('.js', '.min.js', $cleanPath));
+        if (is_file($minFile)) {
+            $minPath = str_replace('.css', '.min.css', str_replace('.js', '.min.js', $relativePath));
+            return url($minPath) . '?v=' . md5_file($minFile);
         }
     }
 

@@ -27,3 +27,8 @@ public/assets/js/app.min.js
 public/assets/js/dashboard.min.js
 public/assets/manifest.json
 build.php
+
+# Docker
+.env
+storage/logs/*
+public/uploads/*

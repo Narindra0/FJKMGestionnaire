@@ -8,7 +8,9 @@ public/uploads/*
 public/assets/css/app.min.css
 public/assets/js/app.min.js
 public/assets/js/dashboard.min.js
-public/assets/manifest.json
+public/assets/css/app.min.css
+public/assets/js/app.min.js
+public/assets/js/dashboard.min.js
 build.php
 *.md
 docs/

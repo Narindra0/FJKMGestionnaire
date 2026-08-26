@@ -10,7 +10,6 @@ public/assets/js/app.min.js
 public/assets/js/dashboard.min.js
 public/assets/manifest.json
 build.php
-docker/
 *.md
 docs/
 .vscode/

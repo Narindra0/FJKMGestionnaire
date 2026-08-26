@@ -11,13 +11,13 @@ function config_app(?string $key = null): mixed {
 
 function url(string $path = ''): string {
     // Auto-détecter l'URL de base en production
-    $configUrl = config_app('url');
-    if ($configUrl && !str_contains($configUrl, 'localhost')) {
+    $configUrl = trim((string)(config_app('url') ?? ''), " \t\n\r\0\x0B");
+    if ($configUrl !== '' && !str_contains($configUrl, 'localhost')) {
         $base = rtrim($configUrl, '/');
     } else {
         // Construire l'URL à partir de la requête courante
         $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $host = trim($_SERVER['HTTP_HOST'] ?? 'localhost');
         $base = $scheme . '://' . $host;
     }
     return $base . '/' . ltrim($path, '/');

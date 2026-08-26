@@ -10,7 +10,7 @@ return [
     'short_name' => env('APP_SHORT_NAME', 'FJKM Obligations'),
     'env' => env('APP_ENV', 'local'),
     'debug' => env('APP_DEBUG', false),
-    'url' => env('APP_URL', 'http://localhost/gestion-obligation-fjkm-malaza-gileada'),
+    'url' => trim((string)env('APP_URL', 'http://localhost/gestion-obligation-fjkm-malaza-gileada')),
     'timezone' => env('APP_TIMEZONE', 'Indian/Antananarivo'),
     'locale' => env('APP_LOCALE', 'fr_MG'),
     'session_name' => env('SESSION_NAME', 'FJKM_OBLIGATION_SESSION'),

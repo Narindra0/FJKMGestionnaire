@@ -13,9 +13,14 @@
     RewriteRule ^ index.php [QSA,L]
 </IfModule>
 
-<FilesMatch "\.(env|env\.example|ini|log|sql|json|md)$">
+<FilesMatch "\.(env|env\.example|ini|log|sql|md)$">
     Require all denied
 </FilesMatch>
+
+# Autoriser manifest.json (PWA)
+<Files "manifest.json">
+    Require all granted
+</Files>
 
 # Cacher les fichiers de config
 <FilesMatch "\.(git|gitignore|editorconfig|htaccess)$">

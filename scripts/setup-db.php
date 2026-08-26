@@ -8,6 +8,9 @@
 
 define('BASE_PATH', dirname(__DIR__));
 
+// Autoloader Composer (classe App\Core\Database, etc.)
+require BASE_PATH . '/vendor/autoload.php';
+
 // Charger les helpers
 require BASE_PATH . '/app/helpers/url_helper.php';
 require BASE_PATH . '/app/helpers/security_helper.php';

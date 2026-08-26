@@ -1,0 +1,29 @@
+# Environnement
+.env
+
+# Dépendances
+/vendor/
+
+# Uploads (fichiers utilisateur)
+/public/uploads/*
+
+# Logs
+/storage/logs/*
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build artifacts (générés par build.php)
+public/assets/css/app.min.css
+public/assets/js/app.min.js
+public/assets/js/dashboard.min.js
+public/assets/manifest.json
+build.php

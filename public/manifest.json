@@ -1,0 +1,11 @@
+{
+  "name": "GESTION D’OBLIGATION FJKM MALAZA GILEADA",
+  "short_name": "FJKM Obligations",
+  "start_url": "/gestion-obligation-fjkm-malaza-gileada/dashboard",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d47a1",
+  "icons": [
+    {"src": "assets/img/logo.svg", "sizes": "192x192", "type": "image/svg+xml"}
+  ]
+}

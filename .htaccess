@@ -1,0 +1,7 @@
+# Commentaire technique
+# Ce fichier contient des règles Apache pour protéger les dossiers et orienter correctement les requêtes.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^$ public/ [L]
+    RewriteRule (.*) public/$1 [L]
+</IfModule>

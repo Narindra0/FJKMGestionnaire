@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Logo FJKM Malaza Gileada">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0d47a1"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="url(#g)"/>
+  <path d="M128 38v160" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+  <path d="M82 86h92" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+  <path d="M62 210c28-36 48-54 66-54s38 18 66 54" fill="none" stroke="#facc15" stroke-width="15" stroke-linecap="round"/>
+  <text x="128" y="235" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#fff">FJKM</text>
+</svg>

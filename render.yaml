@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: fjkm-gestionnaire
+    runtime: docker
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        sync: false
+      - key: DB_HOST
+        fromDatabase:
+          name: fjkm-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: fjkm-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: fjkm-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: fjkm-db
+          property: username
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: fjkm-db
+          property: password
+      - key: DB_DRIVER
+        value: mysql
+      - key: DB_CHARSET
+        value: utf8mb4
+      - key: DB_COLLATION
+        value: utf8mb4_unicode_ci
+      - key: SESSION_NAME
+        value: FJKM_SESSION_PROD
+      - key: CSRF_KEY
+        value: fjkm_csrf_prod_2026
+
+databases:
+  - name: fjkm-db
+    plan: free
+    databaseName: fjkm_obligation
+    ipAllowList: []

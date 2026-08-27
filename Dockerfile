@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Installer les extensions PHP nécessaires
+# Installer les extensions PHP + Composer
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg62-turbo-dev \
@@ -14,15 +14,26 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
     && a2enmod rewrite \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Copier la config Apache pour pointer vers /public
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Copier le code de l'application
 WORKDIR /var/www/html
+
+# Etape 1 : copier composer.json/lock d'abord (cache Docker)
+COPY composer.json composer.lock ./
+
+# Etape 2 : installer les dépendances PHP
+RUN composer install --no-dev --optimize-autoloader --no-scripts --no-autoloader
+
+# Etape 3 : copier le code de l'application
 COPY . .
+
+# Etape 4 : generer l'autoloader avec le code present
+RUN composer dump-autoload --optimize --no-dev
 
 # Permissions
 RUN chown -R www-data:www-data /var/www/html \
@@ -33,7 +44,6 @@ RUN chown -R www-data:www-data /var/www/html \
 COPY render-start.sh /usr/local/bin/render-start.sh
 RUN chmod +x /usr/local/bin/render-start.sh
 
-# Exposer le port
 EXPOSE 80
 
 CMD ["/usr/local/bin/render-start.sh"]

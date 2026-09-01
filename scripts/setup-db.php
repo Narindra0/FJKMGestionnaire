@@ -68,20 +68,28 @@ try {
         if (is_file($sqlFile)) {
             $sql = file_get_contents($sqlFile);
             
-            // Séparer les requêtes
-            $queries = array_filter(array_map('trim', explode(';', $sql)));
+            // Séparer les requêtes et nettoyer les commentaires SQL
+            $chunks = explode(';', $sql);
+            $queries = [];
+            foreach ($chunks as $chunk) {
+                // Supprimer les lignes de commentaires (-- et #)
+                $lines = explode("\n", $chunk);
+                $lines = array_filter($lines, fn($line) => !preg_match('/^\s*(--|#)/', $line));
+                $cleaned = trim(implode("\n", $lines));
+                if (!empty($cleaned)) {
+                    $queries[] = $cleaned;
+                }
+            }
             
             $imported = 0;
             foreach ($queries as $query) {
-                if (!empty($query) && !str_starts_with($query, '--') && !str_starts_with($query, '#')) {
-                    try {
-                        $db->exec($query);
-                        $imported++;
-                    } catch (PDOException $e) {
-                        // Ignorer les erreurs de doublons
-                        if ($e->getCode() != '42S01') {
-                            echo "⚠️  Erreur : " . $e->getMessage() . "\n";
-                        }
+                try {
+                    $db->exec($query);
+                    $imported++;
+                } catch (PDOException $e) {
+                    // Ignorer les erreurs de doublons (table/collection existe déjà)
+                    if ($e->getCode() != '42S01') {
+                        echo "⚠️  Erreur : " . $e->getMessage() . "\n";
                     }
                 }
             }

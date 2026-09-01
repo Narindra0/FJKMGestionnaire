@@ -16,7 +16,11 @@
   // Disponible dès l'initialisation pour les totaux affichés au chargement.
   window.formatMoney = function(n){ return formatMoneyInputValue(n) + ' Ar'; };
 
-  if(localStorage.getItem('fjkm-dark') === '1') document.body.classList.add('dark');
+  if(localStorage.getItem('fjkm-dark') === '1'){
+    document.body.classList.add('dark-mode');
+    const icon = document.querySelector('#darkModeToggle i');
+    if(icon) icon.className = 'bi bi-sun';
+  }
   initSidebarToggle();
   initActiveSidebar();
   prepareResponsiveInterface();
@@ -55,8 +59,11 @@
       }
     }
     if(e.target.id === 'darkModeToggle'){
-      document.body.classList.toggle('dark');
-      localStorage.setItem('fjkm-dark', document.body.classList.contains('dark') ? '1' : '0');
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('fjkm-dark', document.body.classList.contains('dark-mode') ? '1' : '0');
+      // Update icon
+      const icon = document.querySelector('#darkModeToggle i');
+      if(icon) icon.className = document.body.classList.contains('dark-mode') ? 'bi bi-sun' : 'bi bi-moon-stars';
     }
     const edit = e.target.closest('.edit-to-form');
     if(edit){
@@ -296,29 +303,25 @@
       });
     }
 
-    // Toggle mobile (ouvrir/fermer le menu déroulant)
-    if(mobileToggle && nav){
+    // Toggle mobile (ouvrir/fermer le menu)
+    var overlay = document.getElementById('sidebarOverlay');
+    if(mobileToggle){
       mobileToggle.addEventListener('click', function(){
-        nav.classList.toggle('open');
-        const isOpen = nav.classList.contains('open');
-        mobileToggle.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
-        mobileToggle.innerHTML = isOpen ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+        sidebar.classList.toggle('mobile-open');
+        if(overlay) overlay.classList.toggle('active', sidebar.classList.contains('mobile-open'));
       });
-      // Fermer le menu mobile après avoir cliqué sur un lien
-      nav.querySelectorAll('.nav-link').forEach(function(link){
-        link.addEventListener('click', function(){
-          nav.classList.remove('open');
-          mobileToggle.innerHTML = '<i class="bi bi-list"></i>';
-          mobileToggle.setAttribute('aria-label', 'Ouvrir le menu');
+      if(overlay){
+        overlay.addEventListener('click', function(){
+          sidebar.classList.remove('mobile-open');
+          overlay.classList.remove('active');
         });
-      });
-      // Fermer le menu mobile en cliquant ailleurs
-      document.addEventListener('click', function(e){
-        if(nav.classList.contains('open') && !sidebar.contains(e.target)){
-          nav.classList.remove('open');
-          mobileToggle.innerHTML = '<i class="bi bi-list"></i>';
-          mobileToggle.setAttribute('aria-label', 'Ouvrir le menu');
-        }
+      }
+      // Fermer le menu mobile après avoir cliqué sur un lien
+      sidebar.querySelectorAll('.nav-link').forEach(function(link){
+        link.addEventListener('click', function(){
+          sidebar.classList.remove('mobile-open');
+          if(overlay) overlay.classList.remove('active');
+        });
       });
     }
   }

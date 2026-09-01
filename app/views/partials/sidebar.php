@@ -17,7 +17,7 @@
         <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Réduire / agrandir le menu" title="Réduire le menu">
             <i class="bi bi-chevron-left"></i>
         </button>
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Ouvrir le menu" title="Menu" style="display:none">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Ouvrir le menu" title="Menu">
             <i class="bi bi-list"></i>
         </button>
     </div>
@@ -74,10 +74,13 @@
             </div>
             <button type="button" class="user-logout" title="Déconnexion" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <i class="bi bi-box-arrow-right"></i>
-            </a>
+            </button>
         </div>
     </div>
 </aside>
+
+<!-- Overlay mobile -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <!-- Modal de confirmation de déconnexion -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">

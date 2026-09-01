@@ -9,17 +9,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:wght@600;700&display=swap');
 
 :root{
-  --fjkm-blue:#0d47a1;--fjkm-blue2:#1565c0;--fjkm-teal:#0f766e;
-  --white:#fff;--bg:#f4f7fb;--text:#14213d;--muted:#4a5a7a;
-  --danger:#d32f2f;--success:#087f5b;--card:#ffffff;--border:#e8eef7;--warning:#f59e0b;
+  /* Primary: Spiritual Purple */
+  --fjkm-blue:#7C3AED;--fjkm-blue2:#6D28D9;--fjkm-teal:#0f766e;
+  /* Surfaces */
+  --white:#fff;--bg:#FAF5FF;--text:#1E1B4B;--muted:#64748B;
+  /* Semantic */
+  --danger:#DC2626;--success:#059669;--card:#ffffff;--border:#DDD6FE;--warning:#D97706;
   /* Gold premium accents */
-  --gold:#c8a45c;--gold-light:#f5e9c4;--gold-subtle:rgba(200,164,92,0.1);
-  --gold-glow:rgba(200,164,92,0.2);
+  --gold:#A16207;--gold-light:#FEF3C7;--gold-subtle:rgba(161,98,7,0.08);
+  --gold-glow:rgba(161,98,7,0.15);
   /* Premium shadows */
-  --shadow-card:0 4px 24px rgba(13,71,161,0.06);
-  --shadow-premium:0 20px 60px rgba(13,71,161,0.1);
-  --shadow-premium-hover:0 28px 72px rgba(13,71,161,0.14);
-  --shadow-gold:0 8px 32px rgba(200,164,92,0.15);
+  --shadow-card:0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-premium:0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-premium-hover:0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+  --shadow-gold:0 4px 14px rgba(161,98,7,0.12);
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-premium: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -187,14 +190,36 @@
   margin-left:68px;width:calc(100% - 68px);
 }.topbar{
   position:sticky;top:0;z-index:5;
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(20px) saturate(1.2);
-  -webkit-backdrop-filter:blur(20px) saturate(1.2);
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(12px) saturate(1.5);
+  -webkit-backdrop-filter:blur(12px) saturate(1.5);
   display:flex;justify-content:space-between;align-items:center;
-  padding:18px 28px;
-  border-bottom:1px solid rgba(232,238,247,.7);
+  padding:14px 24px;
+  border-bottom:1px solid var(--border);
   transition:all 0.3s var(--ease-out);
 }
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-left .mobile-menu-toggle{display:none}
+.topbar-icon-btn{
+  width:40px;height:40px;border-radius:12px;
+  border:1px solid var(--border);background:var(--card);
+  color:var(--muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;transition:all 0.2s;
+}
+.topbar-icon-btn:hover{background:var(--fjkm-blue);color:#fff;border-color:var(--fjkm-blue)}
+.topbar-user{
+  display:flex;align-items:center;gap:10px;
+  padding:6px 12px 6px 6px;
+  background:var(--bg);border-radius:14px;
+  border:1px solid var(--border);
+  transition:all 0.2s;
+}
+.topbar-user:hover{border-color:var(--fjkm-blue)}
+.topbar-user-avatar{font-size:1.6rem;color:var(--fjkm-blue);line-height:1}
+.topbar-user-info{display:flex;flex-direction:column}
+.topbar-user-name{font-size:.85rem;font-weight:700;color:var(--text);line-height:1.2}
+.topbar-user-role{font-size:.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 .topbar::after{
   content:'';position:absolute;bottom:-1px;left:28px;right:28px;
   height:2px;
@@ -2450,4 +2475,132 @@ body, body * {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ============================
+   23. DARK MODE — WCAG Compliant
+   ============================ */
+body.dark-mode{
+  --bg:#0F0D1A;--text:#E8E5F5;--muted:#94A3B8;
+  --card:#1A1730;--border:#2D2A45;
+  --fjkm-blue:#A78BFA;--fjkm-blue2:#8B5CF6;
+  --gold:#F59E0B;--gold-light:#78350F;--gold-subtle:rgba(245,158,11,0.1);
+  --gold-glow:rgba(245,158,11,0.2);
+  --success:#34D399;--danger:#F87171;--warning:#FBBF24;
+  --shadow-card:0 1px 3px rgba(0,0,0,0.3);
+  --shadow-premium:0 4px 6px rgba(0,0,0,0.3);
+  --shadow-premium-hover:0 10px 15px rgba(0,0,0,0.4);
+}
+body.dark-mode .sidebar{
+  background:linear-gradient(180deg,#1A1730,#0D0B1A);
+}
+body.dark-mode .topbar{
+  background:rgba(15,13,26,0.92);
+  border-bottom-color:var(--border);
+}
+body.dark-mode .topbar::after{
+  background:linear-gradient(90deg,var(--gold),var(--fjkm-blue),transparent);
+}
+body.dark-mode .nav-link:hover{background:rgba(167,139,250,0.12)}
+body.dark-mode .nav-link.active{
+  background:rgba(167,139,250,0.18);
+  box-shadow:inset 4px 0 0 var(--fjkm-blue);
+}
+body.dark-mode .premium-card{
+  background:var(--card);border-color:var(--border);
+}
+body.dark-mode .stat-card{
+  background:linear-gradient(135deg,var(--card) 60%,rgba(167,139,250,0.04));
+  border-left-color:var(--fjkm-blue);
+}
+body.dark-mode .stat-card .stat-icon{
+  background:linear-gradient(135deg,rgba(167,139,250,0.15),rgba(167,139,250,0.08));
+}
+body.dark-mode .stat-card strong{color:var(--fjkm-blue)}
+body.dark-mode .modal-content{background:var(--card);color:var(--text);border-color:var(--border)}
+body.dark-mode .modal-header{border-bottom-color:var(--border)}
+body.dark-mode .modal-footer{border-top-color:var(--border)}
+body.dark-mode table.dataTable{color:var(--text)}
+body.dark-mode .dataTables_wrapper .dataTables_filter input,
+body.dark-mode .dataTables_wrapper .dataTables_length select{
+  background:var(--card);color:var(--text);border-color:var(--border)}
+body.dark-mode .page-link{color:var(--fjkm-blue)}
+body.dark-mode .page-item.active .page-link{background:var(--fjkm-blue);border-color:var(--fjkm-blue)}
+body.dark-mode .btn-outline-primary{color:var(--fjkm-blue);border-color:var(--fjkm-blue)}
+body.dark-mode .form-control,
+body.dark-mode .form-select{background:var(--card);color:var(--text);border-color:var(--border)}
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus{background:var(--card);color:var(--text);border-color:var(--fjkm-blue);box-shadow:0 0 0 3px rgba(167,139,250,0.25)}
+body.dark-mode .table{color:var(--text)}
+body.dark-mode .table-striped>tbody>tr:nth-of-type(odd)>td{background:rgba(167,139,250,0.04)}
+body.dark-mode .badge{color:var(--text)}
+body.dark-mode .alert-info{background:rgba(167,139,250,0.12);color:var(--fjkm-blue);border-color:rgba(167,139,250,0.2)}
+body.dark-mode .dropdown-menu{background:var(--card);border-color:var(--border);color:var(--text)}
+body.dark-mode .dropdown-item:hover{background:rgba(167,139,250,0.12);color:var(--text)}
+body.dark-mode .text-muted{color:var(--muted)}
+body.dark-mode .bg-light{background:rgba(167,139,250,0.06)!important}
+body.dark-mode ::-webkit-scrollbar{width:6px;height:6px}
+body.dark-mode ::-webkit-scrollbar-track{background:var(--bg)}
+body.dark-mode ::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px}
+
+/* ============================
+   24. FOCUS RING — Accessibility
+   ============================ */
+:focus-visible{
+  outline:3px solid var(--fjkm-blue);
+  outline-offset:2px;
+}
+a:focus-visible,
+button:focus-visible{
+  outline:3px solid var(--fjkm-blue);
+  outline-offset:2px;
+  border-radius:4px;
+}
+
+/* ============================
+   25. RESPONSIVE — Mobile First
+   ============================ */
+@media (max-width:991.98px) {
+  .sidebar{
+    transform:translateX(-100%);
+    width:280px;
+  }
+  .sidebar.mobile-open{
+    transform:translateX(0);
+  }
+  .main-content{
+    margin-left:0!important;width:100%!important;
+  }
+  .topbar{padding:14px 16px}
+  .topbar h1{font-size:18px}
+  .page-content{padding:16px}
+  .mobile-menu-toggle{display:flex!important}
+  .sidebar-toggle{display:none}
+}
+@media (max-width:575.98px) {
+  .topbar{padding:12px 12px}
+  .topbar h1{font-size:16px}
+  .topbar p{font-size:.8rem}
+  .page-content{padding:12px}
+  .stat-card{padding:16px;min-height:120px}
+  .stat-card strong{font-size:24px}
+  .premium-card{padding:16px;border-radius:16px}
+}
+
+/* ============================
+   26. MOBILE OVERLAY
+   ============================ */
+.sidebar-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.5);z-index:99;
+  backdrop-filter:blur(4px);
+}
+.sidebar-overlay.active{display:block}
+
+/* ============================
+   27. TABLE RESPONSIVE — Card layout on mobile
+   ============================ */
+@media (max-width:767.98px) {
+  .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .dataTables_wrapper .dataTables_scrollBody{overflow-x:auto}
 }

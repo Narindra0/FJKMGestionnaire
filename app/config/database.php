@@ -14,4 +14,5 @@ return [
     'password' => env('DB_PASSWORD', ''),
     'charset' => env('DB_CHARSET', 'utf8mb4'),
     'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+    'ssl_ca' => env('DB_SSL_CA', ''),
 ];

@@ -36,6 +36,8 @@ services:
         value: utf8mb4
       - key: DB_COLLATION
         value: utf8mb4_unicode_ci
+      - key: DB_SSL_CA
+        value: ""
       - key: SESSION_NAME
         value: FJKM_SESSION_PROD
       - key: CSRF_KEY

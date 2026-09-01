@@ -26,13 +26,13 @@ WORKDIR /var/www/html
 # Etape 1 : copier composer.json/lock d'abord (cache Docker)
 COPY composer.json composer.lock ./
 
-# Etape 2 : installer les dépendances PHP
-RUN composer install --no-dev --optimize-autoloader --no-scripts --no-autoloader
+# Etape 2 : installer les dépendances PHP (sans autoloader, on le génère après)
+RUN composer install --no-dev --no-scripts --no-autoloader
 
 # Etape 3 : copier le code de l'application
 COPY . .
 
-# Etape 4 : generer l'autoloader avec le code present
+# Etape 4 : generer l'autoloader optimisé avec le code applicatif présent
 RUN composer dump-autoload --optimize --no-dev
 
 # Permissions

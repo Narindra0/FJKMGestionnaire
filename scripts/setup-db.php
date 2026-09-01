@@ -11,6 +11,22 @@ define('BASE_PATH', dirname(__DIR__));
 // Autoloader Composer (classe App\Core\Database, etc.)
 require BASE_PATH . '/vendor/autoload.php';
 
+// Autoloader personnalisé pour les namespaces PSR-4 avec casse lowercase
+// Les dossiers app/ utilisent des noms lowercase (core, controllers, etc.)
+// tandis que les namespaces PSR-4 utilisent PascalCase (App\Core, App\Controllers, etc.)
+spl_autoload_register(function (string $class): void {
+    $prefix = 'App\\';
+    if (str_starts_with($class, $prefix)) {
+        $relative = substr($class, strlen($prefix));
+        $parts = explode('\\', $relative);
+        if (!empty($parts[0])) {
+            $parts[0] = strtolower($parts[0]);
+        }
+        $file = BASE_PATH . '/app/' . implode('/', $parts) . '.php';
+        if (file_exists($file)) require $file;
+    }
+});
+
 // Charger les helpers
 require BASE_PATH . '/app/helpers/url_helper.php';
 require BASE_PATH . '/app/helpers/security_helper.php';

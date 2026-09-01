@@ -67,6 +67,12 @@
 <!-- SweetAlert2 : defer -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer crossorigin="anonymous"></script>
 
+<!-- Modules JS -->
+<script src="<?= asset('js/dark-mode.js') ?>" defer></script>
+<script src="<?= asset('js/sidebar.js') ?>" defer></script>
+<script src="<?= asset('js/forms.js') ?>" defer></script>
+<script src="<?= asset('js/modals.js') ?>" defer></script>
+
 <!-- JavaScript principal -->
 <script src="<?= asset('js/app.js') ?>" defer></script>
 

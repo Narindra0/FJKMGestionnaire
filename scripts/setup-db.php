@@ -37,6 +37,17 @@ use App\Core\Database;
 
 echo "=== FJKM Gestionnaire - Setup Database ===\n\n";
 
+// Diagnostic : afficher les paramètres de connexion (sans le mot de passe)
+$config = require BASE_PATH . '/app/config/database.php';
+echo "📋 Paramètres de connexion :\n";
+echo "   Driver   : {$config['driver']}\n";
+echo "   Host     : {$config['host']}\n";
+echo "   Port     : {$config['port']}\n";
+echo "   Database : {$config['database']}\n";
+echo "   Username : {$config['username']}\n";
+echo "   Password : " . (strlen($config['password']) > 0 ? '***(' . strlen($config['password']) . ' chars)' : '(vide)') . "\n";
+echo "   SSL CA   : " . ($config['ssl_ca'] ?: '(auto-detect)') . "\n\n";
+
 try {
     $db = Database::connection();
     echo "✅ Connexion à la base de données réussie\n\n";

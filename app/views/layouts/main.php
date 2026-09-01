@@ -23,6 +23,10 @@
     <!-- CSS critique : charge immédiatement -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/layout.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/dark.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
 
     <!-- CSS non critique : charge après le rendu -->
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">

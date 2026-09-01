@@ -1,0 +1,233 @@
+/*
+ * utilities.css — Animations, responsive, focus rings, print
+ * FJKM Malaza Gileada
+ */
+
+/* ============================
+   SMOOTH EXPERIENCE
+   ============================ */
+*, *::before, *::after {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+a, button, .btn, input, select, textarea, .nav-link, .modal, .form-control, .form-select {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+button:active, .btn:active, a:active {
+  transform: scale(0.97);
+  transition-duration: 0.08s;
+}
+
+/* Page load animation */
+.page-content {
+  animation: pageSlideIn 0.45s var(--ease-out) both;
+}
+@keyframes pageSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Flash messages */
+.flash-message {
+  animation: flashSlideIn 0.4s var(--ease-out) both;
+  position:relative;overflow:hidden;
+}
+.flash-message::after {
+  content:'';position:absolute;bottom:0;left:0;height:3px;width:100%;
+  background:currentColor;opacity:0.15;
+  animation: flashProgress 5s linear forwards;
+}
+.flash-message.flash-dismiss {
+  animation: flashSlideOut 0.35s var(--ease-out) forwards;
+}
+@keyframes flashSlideIn {
+  from { opacity:0; transform:translateY(-16px) scale(0.96); max-height:0; margin-bottom:0; padding:0; }
+  to   { opacity:1; transform:translateY(0) scale(1); max-height:200px; }
+}
+@keyframes flashSlideOut {
+  from { opacity:1; transform:translateY(0) scale(1); max-height:200px; }
+  to   { opacity:0; transform:translateY(-16px) scale(0.96); max-height:0; margin:0; padding:0; }
+}
+@keyframes flashProgress {
+  from { width:100%; }
+  to   { width:0%; }
+}
+
+/* Modals */
+.modal-content {
+  animation: modalSlideUp 0.35s var(--ease-out) both;
+  transform-origin: center bottom;
+}
+@keyframes modalSlideUp {
+  from { opacity:0; transform:translateY(40px) scale(0.95); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+.modal-backdrop.show { animation: fadeIn 0.3s ease both; }
+
+/* Table rows cascade */
+.data-table tbody tr, .print-clean-table tbody tr {
+  animation: rowFadeIn 0.3s ease both;
+}
+.data-table tbody tr:nth-child(1) { animation-delay: 0.02s; }
+.data-table tbody tr:nth-child(2) { animation-delay: 0.04s; }
+.data-table tbody tr:nth-child(3) { animation-delay: 0.06s; }
+.data-table tbody tr:nth-child(4) { animation-delay: 0.08s; }
+.data-table tbody tr:nth-child(5) { animation-delay: 0.10s; }
+@keyframes rowFadeIn {
+  from { opacity:0; transform:translateX(-8px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+
+/* Stat cards pop */
+.stat-card { animation: cardPop 0.5s var(--ease-premium) both; }
+.stat-card:nth-child(1) { animation-delay: 0.05s; }
+.stat-card:nth-child(2) { animation-delay: 0.1s; }
+.stat-card:nth-child(3) { animation-delay: 0.15s; }
+.stat-card:nth-child(4) { animation-delay: 0.2s; }
+@keyframes cardPop {
+  from { opacity:0; transform:translateY(20px) scale(0.95); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+/* Premium cards */
+.premium-card { animation: cardFadeIn 0.45s var(--ease-out) both; }
+@keyframes cardFadeIn {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* Filter card */
+.filter-card { animation: filterSlideIn 0.35s var(--ease-out) both; animation-delay: 0.1s; }
+@keyframes filterSlideIn {
+  from { opacity:0; transform:translateY(-8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* Activity timeline */
+.activity-list li { animation: activityFadeIn 0.4s var(--ease-out) both; }
+.activity-list li:nth-child(1) { animation-delay: 0.05s; }
+.activity-list li:nth-child(2) { animation-delay: 0.1s; }
+.activity-list li:nth-child(3) { animation-delay: 0.15s; }
+.activity-list li:nth-child(4) { animation-delay: 0.2s; }
+@keyframes activityFadeIn {
+  from { opacity:0; transform:translateX(-12px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+
+/* Badge pop */
+.badge { animation: badgePop 0.3s var(--ease-premium) both; }
+@keyframes badgePop {
+  from { opacity:0; transform:scale(0.7); }
+  to   { opacity:1; transform:scale(1); }
+}
+
+/* Button loading spinner */
+.btn-loading {
+  position:relative;pointer-events:none;opacity:0.75;
+}
+.btn-loading::after {
+  content:'';position:absolute;width:18px;height:18px;
+  border:2.5px solid currentColor;border-right-color:transparent;
+  border-radius:50%;animation:spin 0.7s linear infinite;
+  top:50%;left:50%;margin:-9px 0 0 -9px;
+}
+.btn-loading > * { opacity:0; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+:target { scroll-margin-top: 80px; }
+
+/* ============================
+   FOCUS RING — Accessibility
+   ============================ */
+:focus-visible{
+  outline:3px solid var(--fjkm-blue);outline-offset:2px;
+}
+a:focus-visible,button:focus-visible{
+  outline:3px solid var(--fjkm-blue);outline-offset:2px;border-radius:4px;
+}
+
+/* ============================
+   RESPONSIVE — Mobile First
+   ============================ */
+/* Tablet */
+@media (min-width:768px) and (max-width:1199.98px){
+  .page-content{padding:22px}
+  .premium-card,.stat-card{border-radius:20px;padding:20px}
+  .topbar{padding:16px 20px}
+  .topbar h1{font-size:1.25rem}
+  .stat-card strong{font-size:clamp(1.25rem,2.5vw,1.7rem)}
+  .month-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* Mobile — sidebar slides in */
+@media (max-width:991.98px){
+  .sidebar{
+    transform:translateX(-100%);width:280px;
+  }
+  .sidebar.mobile-open{transform:translateX(0)}
+  .main-content{margin-left:0!important;width:100%!important}
+  .topbar{padding:14px 16px}
+  .topbar h1{font-size:18px}
+  .page-content{padding:16px}
+  .mobile-menu-toggle{display:flex!important}
+  .sidebar-toggle{display:none}
+  .sidebar nav::-webkit-scrollbar{display:none}
+  .sidebar nav{-ms-overflow-style:none;scrollbar-width:none}
+  .nav-link{min-height:44px}
+  .btn{min-height:44px}
+  .form-control,.form-select{min-height:44px}
+}
+
+/* Small mobile */
+@media (max-width:575.98px){
+  .topbar{padding:12px 12px}
+  .topbar h1{font-size:16px}
+  .topbar p{font-size:.8rem}
+  .page-content{padding:12px}
+  .stat-card{padding:16px;min-height:120px}
+  .stat-card strong{font-size:24px}
+  .premium-card{padding:16px;border-radius:16px}
+}
+
+/* Mobile table cards */
+@media (max-width:767.98px){
+  .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .dataTables_wrapper .dataTables_scrollBody{overflow-x:auto}
+  table.responsive-card-table tbody tr{animation:cardSlideIn 0.35s var(--ease-out) both}
+  @keyframes cardSlideIn {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .filter-card .filter-actions-row{flex-direction:column;align-items:stretch}
+  .filter-card .filter-actions-left{width:100%;justify-content:center}
+  .filter-card .filter-actions-right{width:100%;margin-left:0}
+  .filter-card .filter-actions-right .btn{width:100%}
+  .dataTables_wrapper .dt-paging .paginate_button{min-width:38px;min-height:38px;display:inline-flex;align-items:center;justify-content:center}
+  .dataTables_wrapper .dt-search{margin-bottom:8px}
+  .dataTables_wrapper .dt-search input{width:100%!important;min-height:42px}
+}
+
+/* ============================
+   PRINT
+   ============================ */
+@media print {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================
+   REDUCED MOTION — Accessibility
+   ============================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

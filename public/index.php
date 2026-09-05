@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-define('BASE_PATH', dirname(__DIR__));
+if (!defined('BASE_PATH')) define('BASE_PATH', dirname(__DIR__));
 
 spl_autoload_register(function (string $class): void {
     $prefix = 'App\\';
@@ -24,9 +24,9 @@ if (file_exists(BASE_PATH . '/vendor/autoload.php')) {
     require BASE_PATH . '/vendor/autoload.php';
 }
 
-require BASE_PATH . '/app/helpers/url_helper.php';
-require BASE_PATH . '/app/helpers/security_helper.php';
-require BASE_PATH . '/app/helpers/format_helper.php';
+require_once BASE_PATH . '/app/helpers/url_helper.php';
+require_once BASE_PATH . '/app/helpers/security_helper.php';
+require_once BASE_PATH . '/app/helpers/format_helper.php';
 
 // Chargement des variables d'environnement depuis le fichier .env
 load_env();

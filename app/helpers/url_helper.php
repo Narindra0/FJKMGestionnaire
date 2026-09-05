@@ -19,6 +19,12 @@ function url(string $path = ''): string {
         $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
         $host = trim($_SERVER['HTTP_HOST'] ?? 'localhost');
         $base = $scheme . '://' . $host;
+        // Préserver le sous-dossier d'installation (ex: APP_URL=http://localhost/gestion-obligation-...)
+        // sinon les assets pointent vers la racine du vhost et renvoient 404.
+        $basePath = parse_url($configUrl, PHP_URL_PATH) ?: '';
+        if ($basePath !== '' && $basePath !== '/') {
+            $base .= rtrim($basePath, '/');
+        }
     }
     return $base . '/' . ltrim($path, '/');
 }

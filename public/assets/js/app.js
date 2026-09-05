@@ -555,24 +555,27 @@
   /* ============================
      INIT
      ============================ */
-  window.FJKM_initDarkMode();
-  window.FJKM_setupDarkModeToggle();
-  window.FJKM_initSidebar();
-  window.FJKM_initActiveSidebar();
+  // Attention : les modules dark-mode.js, sidebar.js, forms.js, modals.js
+  // sont chargés en blocking avant app.js. Si l'un d'eux manque, ces appels
+  // ne planteront pas car on vérifie l'existence de chaque fonction.
+  (window.FJKM_initDarkMode && window.FJKM_initDarkMode());
+  (window.FJKM_setupDarkModeToggle && window.FJKM_setupDarkModeToggle());
+  (window.FJKM_initSidebar && window.FJKM_initSidebar());
+  (window.FJKM_initActiveSidebar && window.FJKM_initActiveSidebar());
   prepareResponsiveInterface();
   observeResponsiveContent();
-  window.FJKM_initManualDateInputs();
-  window.FJKM_initMoneyInputs();
-  document.querySelectorAll('.fidel-lookup').forEach(window.FJKM_initFidelLookup);
-  document.querySelectorAll('.phone-input').forEach(window.FJKM_initPhoneInput);
+  (window.FJKM_initManualDateInputs && window.FJKM_initManualDateInputs());
+  (window.FJKM_initMoneyInputs && window.FJKM_initMoneyInputs());
+  (window.FJKM_initFidelLookup && document.querySelectorAll('.fidel-lookup').forEach(window.FJKM_initFidelLookup));
+  (window.FJKM_initPhoneInput && document.querySelectorAll('.phone-input').forEach(window.FJKM_initPhoneInput));
   initProjectPaymentSelect();
   document.querySelectorAll('.print-clean-table').forEach(updateTableTotal);
-  window.FJKM_initModalReset();
-  window.FJKM_initViewMemberModal();
-  window.FJKM_initPremiumAnimations();
-  window.FJKM_initFlashDismiss();
-  window.FJKM_initFormLoading();
-  window.FJKM_initButtonFeedback();
+  (window.FJKM_initModalReset && window.FJKM_initModalReset());
+  (window.FJKM_initViewMemberModal && window.FJKM_initViewMemberModal());
+  (window.FJKM_initPremiumAnimations && window.FJKM_initPremiumAnimations());
+  (window.FJKM_initFlashDismiss && window.FJKM_initFlashDismiss());
+  (window.FJKM_initFormLoading && window.FJKM_initFormLoading());
+  (window.FJKM_initButtonFeedback && window.FJKM_initButtonFeedback());
 
   document.querySelectorAll('form.needs-validation').forEach(function(form){
     form.addEventListener('submit', function(event){

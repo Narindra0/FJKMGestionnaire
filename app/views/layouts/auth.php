@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- CSS principal versionné : force le navigateur/PWA à charger la mise en forme responsive finale. -->
     <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/layout.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/dark.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
 </head>
 <body class="auth-page">
     <?= $content ?>

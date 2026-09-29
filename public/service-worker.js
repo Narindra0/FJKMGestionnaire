@@ -3,9 +3,11 @@
  | Ce fichier contient les scripts JavaScript de l'interface : il améliore l'interactivité côté navigateur.
  */
 // Cache PWA : nom versionné pour éviter que l'ancien CSS/JS reste chargé après correction.
-const CACHE_NAME = 'fjkm-obligation-v20260709-communion-safe-v1';
+const CACHE_NAME = 'fjkm-obligation-v20260929-css-restaure-v1';
 const ASSETS = [
-  './', './assets/css/app.css', './assets/js/app.js', './assets/js/dashboard.js', './assets/img/logo.svg'
+  './', './assets/css/app.css', './assets/css/layout.css', './assets/css/components.css',
+  './assets/css/dark.css', './assets/css/utilities.css',
+  './assets/js/app.js', './assets/js/dashboard.js', './assets/img/logo.svg'
 ];
 self.addEventListener('install', event => {
   self.skipWaiting();

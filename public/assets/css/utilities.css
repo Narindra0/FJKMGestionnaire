@@ -231,3 +231,522 @@ a:focus-visible,button:focus-visible{
     scroll-behavior: auto !important;
   }
 }
+
+/* ---- Styles restaures (absents depuis le decoupage 06728f5) ---- */
+.no-print{display:block}
+.print-filtered-table{white-space:nowrap}
+.table th.no-print, .table td.no-print{display:table-cell}
+.table tfoot .no-print{display:table-cell}
+.print-clean-table thead{display:table-header-group}
+.print-clean-table tfoot{display:table-footer-group}
+.print-clean-table{border-collapse:collapse!important}
+.print-clean-table tbody tr:nth-child(even){background:rgba(13,71,161,.025)}
+.member-print-photo{width:92px;height:92px;object-fit:cover;border-radius:14px;border:1px solid var(--border);background:#fff}
+#memberPrintInfo .table th{width:140px;background:#eef5ff;color:#0d47a1}
+.print-clean-table thead th{font-weight:900;letter-spacing:.02em}
+.member-print-actions .btn{min-height:40px}
+.card-print-controls{display:flex;justify-content:center;padding:18px}
+.module-filter-toolbar .print-filtered-table{
+  white-space:nowrap;
+  min-width:112px;
+}
+.project-filter-toolbar.module-filter-toolbar .print-filtered-table{
+  min-width:98px;
+  min-height:40px;
+  padding-left:.65rem;
+  padding-right:.65rem;
+  white-space:nowrap;
+}
+.communion-filter-toolbar.module-filter-toolbar .print-filtered-table{
+  min-height:40px;
+  height:40px;
+}
+@media (max-width:991.98px){
+  .login-card{min-height:0;max-width:690px}
+  .login-hero{min-height:260px;padding:34px;align-items:flex-start}
+  .login-logo{width:78px;margin-bottom:14px}
+  .login-hero h1{font-size:clamp(1.45rem,5vw,2rem)}
+  .login-form-panel{padding:32px!important}
+  .login-form-content{max-width:none}
+  .sidebar{position:sticky;top:0;z-index:40;width:100%;height:auto;padding:12px 14px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.18)}
+  .brand{margin-bottom:10px;gap:10px}
+  .brand img{width:42px;height:42px;border-radius:14px}
+  .brand strong{font-size:1rem}
+  .brand small{font-size:.76rem}
+  .sidebar nav{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:2px 2px 7px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .sidebar nav a{flex:0 0 auto;scroll-snap-align:start;border-radius:999px;padding:9px 12px;font-size:.88rem;white-space:nowrap;background:rgba(255,255,255,.08)}
+  .sidebar nav a:hover{transform:none}
+  .sidebar a.active{box-shadow:none;background:rgba(255,255,255,.24)}
+  .main-content{margin-left:0;width:100%}
+  .filter-card .filter-field{flex:1 1 160px}
+  .filter-card .filter-field-search{flex:1 1 200px}
+  .filter-card .filter-actions-row{justify-content:stretch}
+  .filter-card .filter-actions-row .btn{flex:1}
+  .sidebar nav::-webkit-scrollbar{ display:none; }
+  .sidebar nav{ -ms-overflow-style:none; scrollbar-width:none; }
+  .nav-link{ min-height:44px; }
+  .btn{ min-height:44px; }
+  .form-control, .form-select{ min-height:44px; }
+  .month-filter-checkbox{ min-width:20px; min-height:20px; }
+  .sidebar.mobile-open{
+    transform:translateX(0);
+  }
+  .main-content{
+    margin-left:0!important;width:100%!important;
+  }
+}
+@media (max-width:575.98px){
+  .login-page-container{padding:0;align-items:stretch}
+  .login-card{width:100%;min-height:100dvh;border-radius:0;box-shadow:none}
+  .login-hero{min-height:220px;padding:28px 22px}
+  .login-logo{width:66px;padding:6px;border-radius:18px}
+  .login-hero h1{font-size:1.34rem;line-height:1.22}
+  .login-form-panel{padding:28px 22px 36px!important;align-items:flex-start}
+  .login-options{align-items:flex-start;flex-direction:column;gap:10px}
+  .forgot-password-link{text-align:left}
+  .login-submit{font-size:1rem}
+}
+@media(max-width:991.98px){
+  .app-shell{display:block}
+  .sidebar{
+    position:sticky;top:0;z-index:40;
+    width:100%!important;height:auto;max-height:56px;
+    flex-direction:row;align-items:center;
+    padding:10px 14px;overflow:visible;
+    border-bottom:1px solid rgba(255,255,255,.18);
+  }
+  .sidebar.collapsed{width:100%!important}
+  .sidebar-header{flex:1;padding:0;min-height:auto}
+  .brand img{width:36px;height:36px;padding:4px;border-radius:10px}
+  .brand-text strong{font-size:15px}
+  .brand-text small{font-size:11px}
+  .sidebar-nav{
+    display:none;position:fixed;top:56px;left:0;width:100%;
+    height:calc(100vh - 56px);
+    background:linear-gradient(180deg,var(--fjkm-blue),#052b6e);
+    overflow-y:auto;padding:8px 12px 16px;
+    z-index:105;
+  }
+  .sidebar-nav.open{display:block}
+  .mobile-menu-toggle{
+    display:flex!important;
+    width:32px;height:32px;border-radius:10px;
+    background:rgba(255,255,255,.12);border:0;color:white;cursor:pointer;
+    align-items:center;justify-content:center;font-size:18px;
+  }
+  .nav-section-title{font-size:10px;padding:8px 10px 3px}
+  .nav-link{padding:9px 10px;font-size:.88rem}
+  .nav-link i{font-size:1.15rem;width:20px}
+  .nav-link .nav-text,.sidebar.collapsed .nav-link .nav-text{opacity:1;width:auto;margin:0}
+  .nav-link small{display:block}
+  .sidebar-footer{display:none}
+  .sidebar-header .brand-text small{display:block}
+  .main-content,.sidebar.collapsed ~ .main-content,.main-content.sidebar-collapsed{margin-left:0;width:100%}
+  .topbar{position:relative;top:auto;display:grid;gap:12px;padding:14px 16px}
+  .topbar-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:0}
+  .topbar-actions .btn,.user-pill{flex:1 1 auto;min-width:130px}
+  .user-pill{padding:8px 12px;text-align:center}
+  .member-card-body{grid-template-columns:1fr;text-align:center}
+  .login-hero{padding:32px}
+  .login-form-panel{border-radius:0}
+  .search-input{min-width:180px;width:100%}
+  .card-heading{display:block}
+  .card-heading span{display:inline-block;margin-top:8px}
+  .filter-card .filter-fields-row{gap:10px}
+  .filter-card .filter-field.filter-field-search{flex:1 1 100%;min-width:100%}
+  .filter-date-range{width:100%}
+}
+@media print{
+  .sidebar,.topbar,.btn,.dataTables_wrapper .dt-search,.dataTables_wrapper .dt-length,.dataTables_wrapper .dt-paging,.dataTables_info{display:none!important}
+  .main-content{margin:0;width:100%}
+  .page-content{padding:0}
+  .premium-card,.stat-card{box-shadow:none;border:1px solid #ddd}
+  body{background:white}
+  .no-print,.collapse,.print-row,.btn{display:none!important}
+  .page-content{padding:0!important}
+  .premium-card{border:0!important;padding:0!important}
+  .no-print,.action-buttons,.table-search-zone,#christianeFormCard{display:none!important}
+  .data-table tfoot th{background:white!important}
+  thead{display:table-header-group!important}
+  tfoot{display:table-footer-group!important}
+  .table-search-zone,.no-print,.action-buttons,.sidebar,.topbar,.btn{display:none!important}
+  .premium-card{overflow:visible!important}
+  .data-table{min-width:0!important;width:100%!important}
+  .member-card-print{padding:0}
+  .member-card{box-shadow:none}
+  .member-info-table th,.member-info-table td{border:1px solid #777}
+  .print-clean-table th,.print-clean-table td{font-size:11px;padding:5px}
+  .no-print,.table-search-zone{display:none!important}
+  .data-table th,.data-table td,.print-clean-table th,.print-clean-table td{border:1px solid #777!important}
+  .sidebar a.active{box-shadow:none}
+  #memberPrintInfo{page-break-inside:avoid}
+  .member-print-photo{width:80px;height:80px}
+  .card-print-controls{display:none!important}
+  .month-period-filter,.reset-table-filters,.dashboard-reset-btn,.manual-date-icon,.manual-date-native{display:none!important}
+}
+@media(max-width:768px){
+  .table-search-zone{justify-content:flex-start;width:100%}
+  .table-search-zone .form-control{max-width:none;width:100%}
+  .action-buttons{flex-wrap:wrap}
+  .date-range-zone .form-control{max-width:none;min-width:130px;flex:1 1 140px}
+  .date-range-zone .btn{width:100%}
+  .month-period-filter{flex:1 1 100%;min-width:100%}
+  .month-filter-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .month-period-panel{width:100%}
+  .reset-table-filters{flex:1 1 100%}
+}
+@media (min-width:992px) and (max-width:1399.98px){
+  .compact-report-form{
+    grid-template-columns:minmax(110px,.65fr) minmax(150px,1fr) minmax(135px,.85fr) minmax(135px,.85fr) minmax(200px,1.2fr);
+  }
+  .compact-report-form .report-action-group{
+    grid-column:1/-1;
+    justify-self:end;
+    width:auto!important;
+    min-width:min(100%,430px);
+  }
+  .module-list-header{
+    align-items:flex-start!important;
+  }
+  .module-filter-toolbar{
+    grid-template-columns:minmax(112px,auto) minmax(248px,1fr) auto minmax(145px,.75fr) auto minmax(145px,.75fr) minmax(220px,1.2fr) minmax(112px,auto);
+  }
+  .project-list-header.module-list-header{
+    display:grid!important;
+    grid-template-columns:auto 1fr;
+    align-items:end!important;
+  }
+  .project-filter-toolbar.module-filter-toolbar{
+    grid-template-columns:minmax(96px,auto) minmax(184px,.9fr) auto minmax(122px,.65fr) auto minmax(122px,.65fr) minmax(160px,1fr) minmax(96px,auto)!important;
+  }
+  .project-filter-toolbar.module-filter-toolbar .month-period-filter{
+    min-width:184px;
+  }
+  .project-filter-toolbar.module-filter-toolbar .manual-date-field, .project-filter-toolbar.module-filter-toolbar .date-range-filter{
+    min-width:122px;
+    max-width:138px;
+  }
+  .project-filter-toolbar.module-filter-toolbar .search-input{
+    min-width:160px;
+  }
+  .communion-list-header.module-list-header{
+    grid-template-columns:auto 1fr;
+  }
+  .communion-filter-toolbar.module-filter-toolbar{
+    grid-template-columns:minmax(96px,auto) minmax(184px,.9fr) auto minmax(122px,.65fr) auto minmax(122px,.65fr) minmax(160px,1fr) minmax(96px,auto)!important;
+  }
+}
+@media(max-width:1200px){
+  .data-table{min-width:900px}
+  .action-buttons .btn{min-width:auto}
+}
+@media(max-width:767.98px){
+  .filter-card{padding:14px 16px}
+  .filter-card .filter-fields-row{flex-direction:column}
+  .filter-card .filter-field{width:100%;flex:1 1 100%}
+  .filter-card .filter-field.filter-field-reset{width:auto;flex:0 0 auto}
+  .filter-card .filter-actions-row{flex-wrap:wrap}
+  .filter-card .filter-actions-row .btn{flex:1 1 auto;min-width:0}
+}
+@media(max-width:576px){
+  .month-grid{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  .page-content{padding:10px}
+  .premium-card,.stat-card{padding:13px;border-radius:15px}
+  .topbar h1{font-size:1.05rem}
+  .topbar-actions .btn,.user-pill{min-width:100%;width:100%}
+  .month-grid{grid-template-columns:1fr}
+  table.responsive-card-table tbody td{display:block;text-align:left}
+  table.responsive-card-table tbody td::before{display:block;max-width:100%;margin-bottom:.25rem}
+  .month-filter-list, .month-grid{
+    grid-template-columns:1fr!important;
+  }
+}
+@media(max-width:992px){
+  .top-recette-strip{grid-template-columns:1fr}
+  .inline-action-form{flex-wrap:wrap;min-width:0}
+  .inline-action-form .form-select,.inline-action-form .form-control{min-width:0;flex:1 1 130px}
+  .compact-password{min-width:100%}
+  .month-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:768px) and (max-width:1199.98px){
+  .project-page .premium-card{padding:20px}
+  .project-list-header{align-items:flex-start}
+  .project-filter-toolbar{justify-content:flex-start;width:100%}
+  .project-filter-toolbar .manual-date-field{width:170px;flex:0 1 170px}
+  .project-payment-submit-col{justify-content:flex-start}
+  .project-submit-btn{min-width:180px}
+  .responsive-form .btn,form.row .btn{width:100%}
+  .table-search-zone{justify-content:flex-start}
+  .table-search-zone .search-input{flex:1 1 260px;max-width:none}
+}
+@media (max-width:360px){
+  #communionMonthGrid.communion-month-grid{
+    grid-template-columns:1fr!important;
+  }
+}
+@media (min-width:768px) and (max-width:991.98px){
+  .compact-report-form{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .compact-report-form .report-action-group{
+    grid-column:1/-1;
+    grid-auto-flow:column;
+  }
+  .module-list-header{
+    display:grid!important;
+    grid-template-columns:1fr;
+    align-items:start!important;
+  }
+  .module-filter-toolbar{
+    width:100%;
+    justify-content:stretch!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+  .module-filter-toolbar .reset-table-filters, .module-filter-toolbar .month-period-filter, .module-filter-toolbar .search-input, .module-filter-toolbar .print-filtered-table{
+    min-width:0;
+    max-width:none;
+    width:100%;
+  }
+  .module-filter-toolbar .month-period-filter{
+    grid-column:span 2;
+  }
+  .module-filter-toolbar .search-input{
+    grid-column:span 2;
+  }
+  .month-filter-list, .month-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+  #communionMonthGrid.communion-month-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  #communionMonthGrid.communion-month-grid .month-box{
+    height:34px;
+    min-height:34px;
+    padding:0 8px!important;
+  }
+  #communionMonthGrid.communion-month-grid .month-box .form-check{
+    font-size:.82rem;
+  }
+  .project-list-header.module-list-header{
+    display:grid!important;
+    grid-template-columns:1fr;
+    align-items:start!important;
+  }
+  .project-filter-toolbar.module-filter-toolbar{
+    width:100%;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    justify-content:stretch!important;
+  }
+  .project-filter-toolbar.module-filter-toolbar .reset-table-filters, .project-filter-toolbar.module-filter-toolbar .month-period-filter, .project-filter-toolbar.module-filter-toolbar .manual-date-field, .project-filter-toolbar.module-filter-toolbar .search-input, .project-filter-toolbar.module-filter-toolbar .print-filtered-table{
+    width:100%;
+    min-width:0;
+    max-width:none;
+  }
+  .project-filter-toolbar.module-filter-toolbar .month-period-filter, .project-filter-toolbar.module-filter-toolbar .search-input{
+    grid-column:span 2;
+  }
+  .communion-list-header.module-list-header{
+    grid-template-columns:1fr;
+    align-items:start!important;
+  }
+  .communion-filter-toolbar.module-filter-toolbar{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    width:100%;
+  }
+  .communion-filter-toolbar.module-filter-toolbar .reset-table-filters, .communion-filter-toolbar.module-filter-toolbar .month-period-filter, .communion-filter-toolbar.module-filter-toolbar .date-range-filter, .communion-filter-toolbar.module-filter-toolbar .search-input, .communion-filter-toolbar.module-filter-toolbar .print-filtered-table{
+    width:100%;
+    min-width:0;
+    max-width:none;
+  }
+  .communion-filter-toolbar.module-filter-toolbar .month-period-filter, .communion-filter-toolbar.module-filter-toolbar .search-input{
+    grid-column:span 2;
+  }
+}
+@media (max-width:767.98px){
+  .project-page{gap:1rem}
+  .project-page .premium-card{padding:16px;border-radius:18px}
+  .project-card-heading{display:grid;gap:.6rem}
+  .project-card-heading span{width:100%;text-align:center}
+  .project-page h3{font-size:1.05rem;line-height:1.3}
+  .project-page .form-label{min-height:auto;font-size:.9rem}
+  .project-page .form-control,.project-page .form-select{min-height:46px;font-size:.95rem}
+  .project-actions-col{grid-template-columns:1fr 1fr}
+  .project-payment-submit-col{justify-content:stretch}
+  .project-payment-submit-col .project-submit-btn{width:100%}
+  .project-list-header{display:grid;gap:.9rem}
+  .project-filter-toolbar{display:grid;grid-template-columns:1fr;gap:.65rem;width:100%}
+  .project-filter-toolbar .manual-date-field,.project-filter-toolbar .search-input,.project-filter-toolbar .month-period-filter,.project-filter-toolbar .btn{width:100%;min-width:0;flex-basis:auto}
+  .project-filter-label{margin-top:.25rem}
+  .project-table-wrap{border:0;background:transparent;overflow:visible}
+  .project-table{min-width:0;border-collapse:separate;border-spacing:0 12px}
+  .project-table thead{display:none}
+  .project-table tbody,.project-table tr,.project-table td{display:block;width:100%}
+  .project-table tbody tr{border:1px solid var(--border);border-radius:16px;background:#fff;box-shadow:0 10px 24px rgba(13,71,161,.08);padding:.35rem .8rem;overflow:hidden}
+  .project-table tbody td{border:0!important;border-bottom:1px solid #edf2f7!important;display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;padding:.72rem 0!important;text-align:right}
+  .project-table tbody td:last-child{border-bottom:0!important}
+  .project-table tbody td::before{content:attr(data-label);font-weight:900;color:#173b70;text-align:left;min-width:42%;max-width:48%}
+  .project-table tfoot{display:block;margin-top:.75rem;border:1px solid var(--border);border-radius:16px;background:#eef5ff;padding:.75rem}
+  .project-table tfoot tr,.project-table tfoot th{display:block;width:100%;border:0!important;text-align:left!important;background:transparent!important;color:#173b70!important;padding:.25rem 0!important}
+  .project-row-actions{display:grid;grid-template-columns:1fr;gap:.45rem;width:100%}
+  .project-row-actions .btn,.project-row-actions form,.project-row-actions form .btn{width:100%}
+  .dark .project-table tbody tr{background:#111827;border-color:#475569}
+  .dark .project-table tbody td{border-bottom-color:#334155!important}
+  .dark .project-table tbody td::before,.dark .project-table tfoot th{color:#dbeafe!important}
+  .dark .project-table tfoot{background:#172554;border-color:#475569}
+  .page-content{padding:14px}
+  .premium-card,.stat-card{padding:16px;border-radius:18px;box-shadow:0 10px 26px rgba(13,71,161,.07)}
+  .premium-card h3{font-size:1.06rem;line-height:1.3}
+  .card-heading{display:grid!important;gap:.55rem}
+  .card-heading span{width:100%;text-align:center}
+  form.row{--bs-gutter-x:.75rem;--bs-gutter-y:.85rem}
+  .responsive-form>[class*="col"],form.row>[class*="col"]{width:100%;flex:0 0 100%;max-width:100%}
+  .responsive-form .btn,form.row .btn,.btn-action{width:100%;min-width:0}
+  .inline-action-form{display:grid;width:100%;gap:.5rem}
+  .inline-action-form .form-control,.inline-action-form .form-select,.inline-action-form .btn{width:100%;min-width:0}
+  .table-search-zone,.date-range-zone{display:grid!important;grid-template-columns:1fr;align-items:stretch;justify-content:stretch;width:100%;gap:.65rem}
+  .table-search-zone label{margin-bottom:0;font-weight:800}
+  .table-search-zone .form-control,.table-search-zone .form-select,.table-search-zone .manual-date-field,.table-search-zone .search-input,.table-search-zone .btn{width:100%;max-width:none;min-width:0}
+  .month-grid{grid-template-columns:1fr 1fr;gap:9px}
+  .month-box{padding:10px;border-radius:13px}
+  .top-recette-strip{gap:10px}
+  .stat-card{min-height:auto}
+  .stat-card strong{font-size:1.35rem;word-break:break-word}
+  .activity-list li{padding:10px}
+  .member-card-print{padding:10px;overflow-x:auto}
+  .member-card{width:100%;min-width:280px;padding:16px;border-radius:18px}
+  .member-card-header{display:grid;text-align:center;justify-items:center}
+  .member-card-body{grid-template-columns:1fr;text-align:center}
+  .avatar-xl{width:120px;height:120px}
+  .table-responsive{overflow:visible}
+  table.responsive-card-table{width:100%!important;min-width:0!important;border-collapse:separate!important;border-spacing:0 12px!important}
+  table.responsive-card-table thead{display:none!important}
+  table.responsive-card-table tbody,table.responsive-card-table tr,table.responsive-card-table td,table.responsive-card-table th{display:block;width:100%}
+  table.responsive-card-table tbody tr{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 22px rgba(13,71,161,.08);padding:.35rem .8rem;overflow:hidden}
+  table.responsive-card-table tbody td{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;border:0!important;border-bottom:1px solid #edf2f7!important;padding:.7rem 0!important;text-align:right;white-space:normal!important;word-break:break-word}
+  table.responsive-card-table tbody td:last-child{border-bottom:0!important}
+  table.responsive-card-table tbody td::before{content:attr(data-label);flex:0 0 42%;max-width:48%;font-weight:900;color:#173b70;text-align:left;word-break:normal}
+  table.responsive-card-table tbody td[data-label="Actions"]{display:block;text-align:left}
+  table.responsive-card-table tbody td[data-label="Actions"]::before{display:block;max-width:100%;margin-bottom:.5rem}
+  table.responsive-card-table .action-buttons{display:grid;width:100%;grid-template-columns:1fr;gap:.45rem;white-space:normal}
+  table.responsive-card-table .action-buttons .btn,table.responsive-card-table .action-buttons form,table.responsive-card-table .action-buttons form .btn{width:100%}
+  table.responsive-card-table tfoot{display:block;margin-top:.7rem;background:#eef5ff;border:1px solid var(--border);border-radius:14px;padding:.7rem}
+  table.responsive-card-table tfoot tr,table.responsive-card-table tfoot th,table.responsive-card-table tfoot td{display:block;width:100%;border:0!important;background:transparent!important;text-align:left!important;color:#173b70!important;padding:.2rem 0!important}
+  .dataTables_wrapper .row{gap:.6rem}
+  .dataTables_wrapper .dataTables_length,.dataTables_wrapper .dataTables_filter,.dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate{text-align:left!important;width:100%}
+  .dataTables_wrapper .pagination{justify-content:flex-start;flex-wrap:wrap}
+  .dark table.responsive-card-table tbody tr{background:#111827;border-color:#475569}
+  .dark table.responsive-card-table tbody td{border-bottom-color:#334155!important}
+  .dark table.responsive-card-table tbody td::before,.dark table.responsive-card-table tfoot th,.dark table.responsive-card-table tfoot td{color:#dbeafe!important}
+  .dark table.responsive-card-table tfoot{background:#172554;border-color:#475569}
+  .filter-card .filter-fields-row{flex-direction:column;gap:10px}
+  .filter-card .filter-field, .filter-card .filter-field-search, .filter-card .filter-field-reset{width:100%;flex:1 1 100%}
+  .filter-card .filter-field-reset .btn-reset{width:100%;justify-content:center;background:rgba(100,116,139,0.06);border-radius:12px}
+  .filter-card .filter-actions-row .btn{width:100%;justify-content:center}
+  .compact-report-form{
+    grid-template-columns:1fr;
+    gap:.65rem!important;
+  }
+  .report-action-group{
+    grid-auto-flow:row;
+    grid-template-columns:1fr;
+  }
+  .module-list-header{
+    display:grid!important;
+    grid-template-columns:1fr;
+    align-items:stretch!important;
+    gap:.75rem!important;
+  }
+  .module-filter-toolbar{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    align-items:stretch!important;
+    justify-content:stretch!important;
+    width:100%;
+  }
+  .module-filter-toolbar .form-control, .module-filter-toolbar .form-select, .module-filter-toolbar .btn, .module-filter-toolbar .month-period-filter, .module-filter-toolbar .month-period-filter summary, .module-filter-toolbar .search-input, .module-filter-toolbar .date-range-filter{
+    width:100%;
+    min-width:0;
+    max-width:none;
+  }
+  .month-filter-list, .month-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .month-period-panel{
+    position:static;
+    width:100%;
+    border-radius:0 0 16px 16px;
+  }
+  #communionForm .communion-month-actions{
+    align-items:stretch;
+  }
+  #communionForm #selectAllMonths{
+    width:100%;
+    max-width:none;
+  }
+  #communionMonthGrid.communion-month-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  #communionMonthGrid.communion-month-grid .month-box{
+    height:34px;
+    min-height:34px;
+  }
+  .project-filter-toolbar.module-filter-toolbar{
+    grid-template-columns:1fr!important;
+    width:100%;
+  }
+  .project-filter-toolbar.module-filter-toolbar .reset-table-filters, .project-filter-toolbar.module-filter-toolbar .month-period-filter, .project-filter-toolbar.module-filter-toolbar .month-period-filter summary, .project-filter-toolbar.module-filter-toolbar .manual-date-field, .project-filter-toolbar.module-filter-toolbar .date-range-filter, .project-filter-toolbar.module-filter-toolbar .search-input, .project-filter-toolbar.module-filter-toolbar .print-filtered-table{
+    width:100%;
+    min-width:0;
+    max-width:none;
+  }
+  .project-filter-toolbar.module-filter-toolbar .project-filter-label{
+    text-align:left;
+    margin-top:.2rem;
+  }
+  #communionForm .communion-month-actions, #communionForm #selectAllMonths{
+    width:100%;
+  }
+  .communion-list-header.module-list-header{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    align-items:stretch!important;
+  }
+  .communion-filter-toolbar.module-filter-toolbar{
+    grid-template-columns:1fr!important;
+    width:100%;
+  }
+  .communion-filter-toolbar.module-filter-toolbar .reset-table-filters, .communion-filter-toolbar.module-filter-toolbar .month-period-filter, .communion-filter-toolbar.module-filter-toolbar .month-period-filter summary, .communion-filter-toolbar.module-filter-toolbar .date-range-filter, .communion-filter-toolbar.module-filter-toolbar .search-input, .communion-filter-toolbar.module-filter-toolbar .print-filtered-table{
+    width:100%;
+    min-width:0;
+    max-width:none;
+  }
+  .communion-filter-toolbar.module-filter-toolbar .form-label{
+    text-align:left;
+  }
+  table.responsive-card-table tbody tr{
+    animation: cardSlideIn 0.35s var(--ease-out) both;
+  }
+  table.responsive-card-table tbody tr:nth-child(1){ animation-delay: 0.03s; }
+  table.responsive-card-table tbody tr:nth-child(2){ animation-delay: 0.06s; }
+  table.responsive-card-table tbody tr:nth-child(3){ animation-delay: 0.09s; }
+  table.responsive-card-table tbody tr:nth-child(4){ animation-delay: 0.12s; }
+  table.responsive-card-table tbody tr:nth-child(5){ animation-delay: 0.15s; }
+  .dataTables_wrapper .dt-paging .paginate_button{
+    min-width:38px;
+    min-height:38px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .dataTables_wrapper .dt-search{
+    margin-bottom:8px;
+  }
+  .dataTables_wrapper .dt-search input{
+    width:100% !important;
+    min-height:42px;
+  }
+}

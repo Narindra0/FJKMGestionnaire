@@ -190,3 +190,6 @@
   backdrop-filter:blur(4px);
 }
 .sidebar-overlay.active{display:block}
+
+/* ---- Styles restaures (absents depuis le decoupage 06728f5) ---- */
+.sidebar small{display:block;color:#d6e8ff;font-weight:600;font-size:12px}

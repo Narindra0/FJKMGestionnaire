@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="<?= e(csrf_token()) ?>">
     <title><?= e($title ?? config_app('name')) ?></title>
     <link rel="manifest" href="<?= url('manifest.json') ?>">
-    <meta name="theme-color" content="#0d47a1">
+    <meta name="theme-color" content="#5B21B6">
 
     <!-- Preconnect : anticiper les connexions CDN -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -25,8 +25,8 @@
     <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/layout.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
-    <link rel="stylesheet" href="<?= asset('css/dark.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/dark.css') ?>">
 
     <!-- CSS non critique : charge après le rendu -->
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">

@@ -10,8 +10,8 @@
 <!-- Modal Ajout/Modification Communion -->
 <div class="modal fade" id="communionModal" tabindex="-1" aria-labelledby="communionModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg" style="border-radius:20px;">
-      <div class="modal-header border-0 pb-0" style="padding:24px 28px 0;">
+    <div class="modal-content border-0 modal-airy">
+      <div class="modal-header border-0 pb-0">
         <h5 class="modal-title fw-bold fs-5" id="communionModalTitle">
           <i class="bi bi-people text-primary"></i>
           <span id="communionModalTitleText">Nouvelle entrée communion</span>
@@ -19,7 +19,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <form id="communionForm" method="post" action="<?= url('communion/entries') ?>" data-create-action="<?= url('communion/entries') ?>" class="needs-validation" novalidate>
-        <div class="modal-body" style="padding:20px 28px 16px;">
+        <div class="modal-body">
           <?= csrf_field() ?>
           <input type="hidden" name="fidel_id" id="communionFidelId">
 
@@ -72,7 +72,7 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer border-0 pt-0" style="padding:0 28px 24px;">
+        <div class="modal-footer border-0 pt-0">
           <button type="button" class="btn btn-light" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Annuler</button>
           <button id="communionSubmit" type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Enregistrer</button>
         </div>

@@ -16,9 +16,9 @@
     <!-- CSS principal versionné : force le navigateur/PWA à charger la mise en forme responsive finale. -->
     <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/layout.css') ?>">
-    <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
-    <link rel="stylesheet" href="<?= asset('css/dark.css') ?>">
-    <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
+<link rel="stylesheet" href="<?= asset('css/components.css') ?>">
+<link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
+<link rel="stylesheet" href="<?= asset('css/dark.css') ?>">
 </head>
 <body class="auth-page">
     <?= $content ?>

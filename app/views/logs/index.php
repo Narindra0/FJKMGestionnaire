@@ -76,7 +76,7 @@
     <div class="premium-card">
         <?php if (empty($logs)): ?>
         <div class="text-center py-5">
-            <i class="bi bi-journal-text" style="font-size:3rem;color:#dee2e6;"></i>
+            <i class="bi bi-journal-text state-icon"></i>
             <p class="text-muted mt-3 mb-0">Aucune activité trouvée pour ces filtres.</p>
         </div>
         <?php else: ?>
@@ -99,7 +99,7 @@
                     <tr>
                         <td class="text-muted small">#<?= $log['id'] ?></td>
                         <td>
-                            <span class="badge" style="background:rgba(13,110,253,0.08);color:#1a5bbf;font-weight:500;">
+                            <span class="badge badge-soft">
                                 <i class="<?= \App\Models\AuditLog::actionIcon($log['action']) ?> me-1"></i>
                                 <?= e(\App\Models\AuditLog::actionLabel($log['action'])) ?>
                             </span>
@@ -233,8 +233,8 @@
                 <?php if (!empty($payload)): ?>
                 <div class="mt-3">
                     <h6 class="fw-bold mb-2"><i class="bi bi-json me-1"></i>Données transmises</h6>
-                    <div class="bg-dark text-light rounded p-3" style="max-height:300px;overflow-y:auto;">
-                        <pre class="mb-0 small" style="white-space:pre-wrap;word-break:break-word;"><?= e(json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) ?></pre>
+                    <div class="bg-dark text-light rounded p-3 json-viewer">
+                        <pre class="mb-0 small"><?= e(json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) ?></pre>
                     </div>
                 </div>
                 <?php endif; ?>

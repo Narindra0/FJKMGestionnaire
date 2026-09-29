@@ -3,7 +3,7 @@
  | Ce fichier contient les scripts JavaScript de l'interface : il améliore l'interactivité côté navigateur.
  */
 // Cache PWA : nom versionné pour éviter que l'ancien CSS/JS reste chargé après correction.
-const CACHE_NAME = 'fjkm-obligation-v20260929-css-restaure-v1';
+const CACHE_NAME = 'fjkm-obligation-v20260929-design-v2';
 const ASSETS = [
   './', './assets/css/app.css', './assets/css/layout.css', './assets/css/components.css',
   './assets/css/dark.css', './assets/css/utilities.css',

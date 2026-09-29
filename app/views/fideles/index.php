@@ -9,8 +9,8 @@
 <!-- Modal Ajout/Modification Chrétien -->
 <div class="modal fade" id="christianeModal" tabindex="-1" aria-labelledby="christianeModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg" style="border-radius:20px;">
-      <div class="modal-header border-0 pb-0" style="padding:24px 28px 0;">
+    <div class="modal-content border-0 modal-airy">
+      <div class="modal-header border-0 pb-0">
         <h5 class="modal-title fw-bold fs-5" id="christianeModalTitle">
           <i class="bi bi-person-badge text-primary"></i>
           <span id="christianeModalTitleText">Nouveau Chrétien</span>
@@ -18,7 +18,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <form id="christianeForm" method="post" action="<?= url('fideles') ?>" data-create-action="<?= url('fideles') ?>" enctype="multipart/form-data" class="needs-validation" novalidate>
-        <div class="modal-body" style="padding:20px 28px 16px;">
+        <div class="modal-body">
           <?= csrf_field() ?>
           <div class="row g-3">
             <div class="col-lg-4 col-md-6">
@@ -81,7 +81,7 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer border-0 pt-0" style="padding:0 28px 24px;">
+        <div class="modal-footer border-0 pt-0">
           <button type="button" class="btn btn-light" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Annuler</button>
           <button id="christianeSubmit" type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Enregistrer</button>
         </div>
@@ -94,20 +94,20 @@
 <!-- Modal Premium Voir Chrétien -->
 <div class="modal fade" id="christianeViewModal" tabindex="-1" aria-labelledby="christianeViewModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg" style="border-radius:20px;">
-      <div class="modal-header border-0 pb-0" style="padding:24px 28px 0;">
+    <div class="modal-content border-0 modal-airy">
+      <div class="modal-header border-0 pb-0">
         <h5 class="modal-title fw-bold fs-5" id="christianeViewModalTitle">
           <i class="bi bi-person-vcard text-primary"></i>
           <span>Fiche Chrétien</span>
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
-      <div class="modal-body" style="padding:20px 28px 16px;">
+      <div class="modal-body">
         <div id="christianeViewContent">
           <div class="text-center py-4 text-muted"><i class="bi bi-arrow-up-circle fs-1 d-block mb-2"></i> Cliquez sur l'œil 👁️ d'un membre pour voir sa fiche</div>
         </div>
       </div>
-      <div class="modal-footer border-0 pt-0" style="padding:0 28px 24px;">
+      <div class="modal-footer border-0 pt-0">
         <button type="button" class="btn btn-light" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Fermer</button>
       </div>
     </div>

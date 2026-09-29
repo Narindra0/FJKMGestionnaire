@@ -16,8 +16,8 @@ $monthsFr = [
 <!-- Modal Paramètre Projet (ADMIN) -->
 <div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg" style="border-radius:20px;">
-      <div class="modal-header border-0 pb-0" style="padding:24px 28px 0;">
+    <div class="modal-content border-0 modal-airy">
+      <div class="modal-header border-0 pb-0">
         <h5 class="modal-title fw-bold fs-5" id="projectModalTitle">
           <i class="bi bi-building text-primary"></i>
           <span id="projectModalTitleText">Paramètre projet</span>
@@ -25,7 +25,7 @@ $monthsFr = [
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <form id="projectForm" method="post" action="<?= url('projects') ?>" data-create-action="<?= url('projects') ?>" class="needs-validation" novalidate>
-        <div class="modal-body" style="padding:20px 28px 16px;">
+        <div class="modal-body">
           <?= csrf_field() ?>
           <input type="hidden" name="action_type" value="project_parameter">
           <div class="row g-3">
@@ -54,7 +54,7 @@ $monthsFr = [
             </div>
           </div>
         </div>
-        <div class="modal-footer border-0 pt-0" style="padding:0 28px 24px;">
+        <div class="modal-footer border-0 pt-0">
           <button type="button" class="btn btn-light" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Annuler</button>
           <button id="projectSubmit" type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Enregistrer</button>
         </div>
@@ -67,8 +67,8 @@ $monthsFr = [
 <!-- Modal Paiement Projet -->
 <div class="modal fade" id="projectPaymentModal" tabindex="-1" aria-labelledby="projectPaymentModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg" style="border-radius:20px;">
-      <div class="modal-header border-0 pb-0" style="padding:24px 28px 0;">
+    <div class="modal-content border-0 modal-airy">
+      <div class="modal-header border-0 pb-0">
         <h5 class="modal-title fw-bold fs-5" id="projectPaymentModalTitle">
           <i class="bi bi-wallet2 text-primary"></i>
           <span id="projectPaymentModalTitleText">Enregistrement paiement projet</span>
@@ -76,7 +76,7 @@ $monthsFr = [
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <form id="projectPaymentForm" method="post" action="<?= url('projects') ?>" class="needs-validation" novalidate>
-        <div class="modal-body" style="padding:20px 28px 16px;">
+        <div class="modal-body">
           <?= csrf_field() ?>
           <input type="hidden" id="projectBudgetRaw" value="0">
           <input type="hidden" id="projectRestRaw" value="0">
@@ -135,7 +135,7 @@ $monthsFr = [
             </div>
           </div>
         </div>
-        <div class="modal-footer border-0 pt-0" style="padding:0 28px 24px;">
+        <div class="modal-footer border-0 pt-0">
           <button type="button" class="btn btn-light" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Annuler</button>
           <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Enregistrer</button>
         </div>

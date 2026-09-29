@@ -9,8 +9,8 @@
 <!-- Modal Ajout/Modification Entrée -->
 <div class="modal fade" id="entryModal" tabindex="-1" aria-labelledby="entryModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg" style="border-radius:20px;">
-      <div class="modal-header border-0 pb-0" style="padding:24px 28px 0;">
+    <div class="modal-content border-0 modal-airy">
+      <div class="modal-header border-0 pb-0">
         <h5 class="modal-title fw-bold fs-5" id="entryModalTitle">
           <i class="bi bi-arrow-down-circle text-primary"></i>
           <span id="entryModalTitleText">Nouvelle entrée</span>
@@ -18,7 +18,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <form id="entryForm" method="post" action="<?= url('entrees') ?>" data-create-action="<?= url('entrees') ?>" class="needs-validation" novalidate>
-        <div class="modal-body" style="padding:20px 28px 16px;">
+        <div class="modal-body">
           <?= csrf_field() ?>
           <div class="row g-3">
             <div class="col-md-6">
@@ -52,7 +52,7 @@
             <input type="hidden" id="existingEntryId" name="entry_id" value="">
           </div>
         </div>
-        <div class="modal-footer border-0 pt-0" style="padding:0 28px 24px;">
+        <div class="modal-footer border-0 pt-0">
           <button type="button" class="btn btn-light" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Annuler</button>
           <button id="entrySubmit" type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Enregistrer</button>
         </div>

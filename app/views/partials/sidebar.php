@@ -17,9 +17,6 @@
         <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Réduire / agrandir le menu" title="Réduire le menu">
             <i class="bi bi-chevron-left"></i>
         </button>
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Ouvrir le menu" title="Menu">
-            <i class="bi bi-list"></i>
-        </button>
     </div>
 
     <nav class="sidebar-nav">
@@ -94,7 +91,7 @@
             </div>
             <div class="modal-body text-center py-4">
                 <div class="mb-3">
-                    <i class="bi bi-question-circle text-warning" style="font-size:3rem;"></i>
+                    <i class="bi bi-question-circle text-warning state-icon"></i>
                 </div>
                 <p class="mb-1 fw-semibold fs-6">Êtes-vous sûr de vouloir vous déconnecter ?</p>
                 <p class="text-muted small mb-0">Vous devrez vous reconnecter pour accéder à l'application.</p>

@@ -15,5 +15,6 @@ export default defineConfig({
   build: {
     outDir: '../dist/react',
     emptyOutDir: true,
-  }
+  },
+  base: '/', // Base path pour le build servi à la racine
 });

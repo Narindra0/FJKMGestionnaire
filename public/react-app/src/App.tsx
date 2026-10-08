@@ -8,7 +8,7 @@ type Role = 'ADMIN' | 'USER' | 'VISITEUR';
 type ModuleKey = 'dashboard' | 'entrees' | 'sorties' | 'fideles' | 'obligations' | 'communion' | 'projects' | 'reports' | 'users' | 'imports' | 'logs';
 
 // API client
-const API_BASE = '/api';
+const API_BASE = import.meta.env.MODE === 'development' ? 'http://localhost:8000/api' : '/api';
 
 const api = {
   login: async (identifier: string, password: string) => {

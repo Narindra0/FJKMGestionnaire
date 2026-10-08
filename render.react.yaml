@@ -15,7 +15,7 @@ services:
       - key: APP_DEBUG
         value: false
       - key: APP_URL
-        value: https://fjkm-gestionnaire-react.onrender.com
+        sync: false
       - key: APP_NAME
         value: "GESTION D'OBLIGATION AU SEIN D'EGLISE FJKM MALAZA GILEADA"
       - key: APP_SHORT_NAME

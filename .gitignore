@@ -1,18 +1,25 @@
-# Environnement
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+public/dist/
+public/react/dist/
+
+# Environment
 .env
-
-# Dépendances
-/vendor/
-
-# Uploads (fichiers utilisateur)
-/public/uploads/*
+.env.local
+.env.production
 
 # Logs
-/storage/logs/*
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# OS files
-Thumbs.db
+# OS
 .DS_Store
+Thumbs.db
 
 # IDE
 .vscode/
@@ -21,14 +28,5 @@ Thumbs.db
 *.swo
 *~
 
-# Build artifacts (générés par build.php)
-public/assets/css/app.min.css
-public/assets/js/app.min.js
-public/assets/js/dashboard.min.js
-public/assets/manifest.json
-build.php
-
-# Docker
-.env
-storage/logs/*
-public/uploads/*
+# DesignMockup (non suivi)
+DesignMockup/

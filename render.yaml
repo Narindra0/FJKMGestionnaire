@@ -3,6 +3,7 @@ services:
     name: fjkm-gestionnaire
     runtime: docker
     dockerfilePath: Dockerfile
+    dockerContext: .
     envVars:
       - key: APP_ENV
         value: production

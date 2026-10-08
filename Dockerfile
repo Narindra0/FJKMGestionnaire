@@ -1,6 +1,6 @@
 FROM php:8.3-apache
 
-# Installer les extensions PHP + Composer
+# Installer les extensions PHP + Composer + Node.js
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg62-turbo-dev \
@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     unzip \
     curl \
+    nodejs \
+    npm \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
     && a2enmod rewrite \
@@ -32,7 +34,13 @@ RUN composer install --no-dev --no-scripts --no-autoloader
 # Etape 3 : copier le code de l'application
 COPY . .
 
-# Etape 4 : generer l'autoloader optimisé avec le code applicatif présent
+# Etape 4 : Builder React
+WORKDIR /var/www/html/public/react-app
+RUN npm install
+RUN npm run build
+WORKDIR /var/www/html
+
+# Etape 5 : generer l'autoloader optimisé avec le code applicatif présent
 RUN composer dump-autoload --optimize --no-dev
 
 # Permissions

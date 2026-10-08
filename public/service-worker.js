@@ -2,12 +2,13 @@
  | Commentaire technique
  | Ce fichier contient les scripts JavaScript de l'interface : il améliore l'interactivité côté navigateur.
  */
-// Cache PWA : nom versionné pour éviter que l'ancien CSS/JS reste chargé après correction.
-const CACHE_NAME = 'fjkm-obligation-v20260929-design-v2';
+// Cache PWA : nom versionné pour éviter qu'un ancien bundle reste chargé après déploiement.
+// L'application React est servie depuis /react/ ; les assets filés (hash) sont cache-immutables.
+const CACHE_NAME = 'fjkm-gestionnaire-v20261008-spa';
 const ASSETS = [
-  './', './assets/css/app.css', './assets/css/layout.css', './assets/css/components.css',
-  './assets/css/dark.css', './assets/css/utilities.css',
-  './assets/js/app.js', './assets/js/dashboard.js', './assets/img/logo.svg'
+  './',
+  './react/index.html',
+  './assets/img/logo.svg'
 ];
 self.addEventListener('install', event => {
   self.skipWaiting();

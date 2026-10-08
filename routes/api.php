@@ -5,9 +5,15 @@
  | API REST complète pour le frontend React.
  */
 use App\Controllers\ApiController;
+use App\Controllers\HealthController;
+use App\Controllers\ReportApiController;
+use App\Controllers\ImportApiController;
 
 // === Routes publiques (authentification) ===
 $router->post('/api/auth/login', [ApiController::class, 'login']);
+
+// === Monitoring (Uptime Robot) ===
+$router->get('/api/health', [HealthController::class, 'index']);
 
 // === Routes protégées (nécessitent AuthMiddleware) ===
 
@@ -69,3 +75,12 @@ $router->get('/api/logs', [ApiController::class, 'logsList'], ['AuthMiddleware']
 
 // Références
 $router->get('/api/references/next', [ApiController::class, 'nextReference'], ['AuthMiddleware']);
+
+// Rapports (données + export CSV/PDF)
+$router->get('/api/reports', [ReportApiController::class, 'index'], ['AuthMiddleware']);
+$router->get('/api/reports/export', [ReportApiController::class, 'export'], ['AuthMiddleware']);
+
+// Importation Excel/CSV (ADMIN)
+$router->get('/api/imports', [ImportApiController::class, 'tables'], ['AuthMiddleware']);
+$router->post('/api/imports', [ImportApiController::class, 'store'], ['AuthMiddleware']);
+$router->get('/api/imports/template', [ImportApiController::class, 'template'], ['AuthMiddleware']);

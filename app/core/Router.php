@@ -60,7 +60,8 @@ final class Router
         }
 
         http_response_code(404);
-        View::render('errors/404', ['title' => 'Page introuvable']);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['success' => false, 'message' => 'Endpoint introuvable.', 'code' => 404], JSON_UNESCAPED_UNICODE);
     }
 
     private function match(string $routeUri, string $path): array|false

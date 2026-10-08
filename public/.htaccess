@@ -10,8 +10,9 @@
     RewriteEngine On
 
     # 1) API REST (backend PHP) -> transmise au point d'entrée index.php.
-    #    La requête conserve son URI /api/... et le routeur la dirige vers api.php.
-    RewriteRule ^api/ index.php [QSA,L]
+    #    /api tout seul est aussi envoyé au routeur, qui repond 404 JSON :
+    #    aucun listing de repertoire ni d'endpoint n'est expose.
+    RewriteRule ^api(/.*)?$ index.php [QSA,L]
 
     # 2) Fichiers réels (assets React sous /react/, manifest.json, service-worker, etc.)
     #    sont servis directement par Apache.

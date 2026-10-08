@@ -7,31 +7,12 @@ namespace App\Core;
 
 abstract class Controller
 {
-    protected function view(string $view, array $data = [], string $layout = 'layouts/main'): void
-    {
-        View::render($view, $data, $layout);
-    }
-
     protected function json(array $payload, int $status = 200): void
     {
         http_response_code($status);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         exit;
-    }
-
-    protected function redirect(string $path): void
-    {
-        header('Location: ' . url($path));
-        exit;
-    }
-
-    protected function requirePost(): void
-    {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            http_response_code(405);
-            exit('Méthode non autorisée');
-        }
     }
 
     /**

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Toaster, toast } from 'sonner';
 import { LayoutDashboard, Users, ArrowDownToLine, ArrowUpFromLine, HandCoins, HeartHandshake, FolderKanban, FileBarChart, ShieldCheck, ClipboardList, Menu, LogOut, ChevronRight, Check, X, Search, Bell, Plus, Download, Filter, CalendarDays, TrendingUp, CircleDollarSign, WalletCards, MoreHorizontal, Settings, FileText, ArrowDownLeft, ArrowUpRight, UserRound, BookOpen, Upload, ChevronDown, Sparkles, FileCheck2 } from 'lucide-react';
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
@@ -136,6 +136,40 @@ const api = {
     const res = await fetch(`${API_BASE}/exits?page=${page}&search=${encodeURIComponent(search)}`);
     return await res.json();
   },
+  reports: async (from: string, to: string, type: string, q = '') => {
+    const params = new URLSearchParams({ from, to, type, q });
+    const res = await fetch(`${API_BASE}/reports?${params}`);
+    return await res.json();
+  },
+  importTables: async () => {
+    const res = await fetch(`${API_BASE}/imports`);
+    return await res.json();
+  },
+  importUpload: async (table: string, file: File) => {
+    const form = new FormData();
+    form.append('table_name', table);
+    form.append('excel', file);
+    const res = await fetch(`${API_BASE}/imports`, { method: 'POST', body: form });
+    return await res.json();
+  },
+};
+
+// Téléchargement d'un fichier via l'API (session cookie incluse, blob côté client).
+const downloadFromApi = async (path: string, filename: string) => {
+  const res = await fetch(`${API_BASE}${path}`);
+  if (!res.ok) {
+    toast.error('Téléchargement impossible.');
+    return;
+  }
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
 };
 
 // Objectif annuel de collecte communion (à terme : paramétrable via settings)
@@ -2001,17 +2035,36 @@ function ReportsPage() {
   const [reportType, setReportType] = useState('general');
   const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
   const [endDate, setEndDate] = useState(new Date().toISOString().split('T')[0]);
-
-  const handleExport = () => {
-    toast.success('Export CSV téléchargé');
-  };
-
-  const handlePrint = () => {
-    toast.success('Vue imprimable prête');
-    window.print();
-  };
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
 
   const formatMGA = (value: number) => `${new Intl.NumberFormat('fr-FR').format(value)} Ar`;
+
+  const handleGenerate = async () => {
+    setLoading(true);
+    try {
+      const result = await api.reports(startDate, endDate, reportType);
+      if (result?.success) setData(result);
+      else toast.error(result?.message || 'Rapport indisponible');
+    } catch {
+      toast.error('Erreur lors du chargement du rapport');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    handleGenerate();
+  }, []);
+
+  const exportParams = (format: string) =>
+    new URLSearchParams({ from: startDate, to: endDate, type: reportType, format }).toString();
+
+  const handleExportCsv = () =>
+    downloadFromApi(`/reports/export?${exportParams('csv')}`, `rapport-${reportType}.csv`);
+
+  const handleExportPdf = () =>
+    downloadFromApi(`/reports/export?${exportParams('pdf')}`, `rapport-${reportType}.pdf`);
 
   return (
     <div>
@@ -2022,10 +2075,13 @@ function ReportsPage() {
           <p className="page-description">Préparez des vues fiables pour vos réunions et vos décisions.</p>
         </div>
         <div className="page-header-actions">
-          <button className="button button-secondary" onClick={handleExport}>
+          <button className="button button-secondary" onClick={handleExportCsv}>
             <Download size={16} />Exporter CSV
           </button>
-          <button className="button button-primary" onClick={handlePrint}>
+          <button className="button button-secondary" onClick={handleExportPdf}>
+            <FileText size={16} />Exporter PDF
+          </button>
+          <button className="button button-primary" onClick={() => window.print()}>
             <FileText size={16} />Imprimer le rapport
           </button>
         </div>
@@ -2056,24 +2112,26 @@ function ReportsPage() {
           <span>Au</span>
           <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
         </label>
-        <button className="button button-primary">Filtrer</button>
+        <button className="button button-primary" onClick={handleGenerate} disabled={loading}>
+          {loading ? 'Chargement…' : 'Filtrer'}
+        </button>
       </div>
 
       <div className="report-summary">
         <div className="report-summary-card green">
           <ArrowDownLeft size={19} />
           <span>Entrées</span>
-          <strong>7 420 000 Ar</strong>
+          <strong>{formatMGA(Number(data?.totals?.entries ?? 0))}</strong>
         </div>
         <div className="report-summary-card coral">
           <ArrowUpRight size={19} />
           <span>Sorties</span>
-          <strong>2 950 000 Ar</strong>
+          <strong>{formatMGA(Number(data?.totals?.exits ?? 0))}</strong>
         </div>
         <div className="report-summary-card gold">
           <CircleDollarSign size={19} />
           <span>Solde</span>
-          <strong>4 470 000 Ar</strong>
+          <strong>{formatMGA(Number(data?.totals?.balance ?? 0))}</strong>
         </div>
       </div>
 
@@ -2100,14 +2158,145 @@ function ReportsPage() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td colSpan={6} style={{ textAlign: 'center', padding: '40px', color: '#8f938f' }}>
-                  Sélectionnez des filtres et cliquez sur "Filtrer" pour générer le rapport
-                </td>
-              </tr>
+              {(data?.rows ?? []).length === 0 ? (
+                <tr>
+                  <td colSpan={5} style={{ textAlign: 'center', padding: '40px', color: '#8f938f' }}>
+                    {loading ? 'Chargement du rapport…' : 'Aucune opération sur cette période et ce filtre.'}
+                  </td>
+                </tr>
+              ) : (
+                (data.rows as any[]).map((row: any, index: number) => (
+                  <tr key={index}>
+                    <td>{row.date}</td>
+                    <td>{row.type}</td>
+                    <td>{row.label}</td>
+                    <td>{row.category}</td>
+                    <td className="align-right">{formatMGA(Number(row.amount ?? 0))}</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  );
+}
+
+// Importation Page (admin) : dépôt de fichier + import réel via l'API.
+function ImportPage() {
+  const [tables, setTables] = useState<Record<string, string>>({});
+  const [selected, setSelected] = useState('fideles');
+  const [file, setFile] = useState<File | null>(null);
+  const [importing, setImporting] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    api.importTables().then(res => {
+      if (res?.success) setTables(res.data ?? {});
+    }).catch(() => toast.error('Tables importables indisponibles'));
+  }, []);
+
+  const pickFile = (f: File | undefined | null) => {
+    if (!f) return;
+    if (f.size > 2 * 1024 * 1024) { toast.error('Taille maximale : 2 Mo'); return; }
+    setFile(f);
+  };
+
+  const handleImport = async () => {
+    if (!file) { toast.info('Sélectionnez un fichier CSV ou Excel.'); return; }
+    setImporting(true);
+    try {
+      const res = await api.importUpload(selected, file);
+      if (res?.success) { toast.success(res.message); setFile(null); inputRef.current && (inputRef.current.value = ''); }
+      else toast.error(res?.message || 'Import refusé');
+    } catch {
+      toast.error('Erreur lors de l’import');
+    } finally {
+      setImporting(false);
+    }
+  };
+
+  return (
+    <div>
+      <PageHeader
+        eyebrow="ADMINISTRATION"
+        title="Importation"
+        description="Importez des données existantes avec un contrôle des colonnes et des formats."
+        action={
+          <button className="button button-primary" onClick={handleImport} disabled={importing}>
+            <Upload size={17} />{importing ? 'Import en cours…' : 'Importer un fichier'}
+          </button>
+        }
+      />
+      <div className="report-filter panel" style={{ marginBottom: 16 }}>
+        <div>
+          <span className="eyebrow">Cible</span>
+          <h2>Table à alimenter</h2>
+        </div>
+        <label>
+          <span>Table</span>
+          <select value={selected} onChange={(e) => setSelected(e.target.value)}>
+            {Object.keys(tables).length === 0 ? (
+              <option value="fideles">Fidèles</option>
+            ) : (
+              Object.entries(tables).map(([key, label]) => (
+                <option key={key} value={key}>{label}</option>
+              ))
+            )}
+          </select>
+        </label>
+      </div>
+      <div
+        className={`import-dropzone${dragActive ? ' import-drop-active' : ''}`}
+        onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
+        onDragLeave={() => setDragActive(false)}
+        onDrop={(e) => { e.preventDefault(); setDragActive(false); pickFile(e.dataTransfer.files?.[0]); }}
+      >
+        <div className="import-drop-icon"><Upload size={24} /></div>
+        <h2>{file ? file.name : 'Déposez votre fichier ici'}</h2>
+        <p>Formats acceptés : CSV, XLSX · Taille maximale : 2 Mo</p>
+        <button className="button button-secondary" onClick={() => inputRef.current?.click()}>Choisir un fichier</button>
+        <input
+          ref={inputRef}
+          type="file"
+          accept=".csv,.xlsx,.xls"
+          style={{ display: 'none' }}
+          onChange={(e) => pickFile(e.target.files?.[0])}
+        />
+      </div>
+      <div className="import-table panel">
+        <div className="table-header">
+          <div>
+            <span className="eyebrow">Modèles disponibles</span>
+            <h2>Tables importables</h2>
+          </div>
+        </div>
+        {Object.entries(tables).map(([key, label]) => (
+          <div className="import-row" key={key}>
+            <div className="import-row-icon"><FileText size={17} /></div>
+            <div>
+              <strong>{label}</strong>
+              <span>CSV / Excel</span>
+            </div>
+            {key === 'fideles' ? (
+              <button
+                className="text-button"
+                onClick={() => downloadFromApi('/imports/template?format=xlsx', 'modele_import_fideles.xlsx')}
+              >
+                Télécharger le modèle <Download size={14} />
+              </button>
+            ) : (
+              <button
+                className="text-button"
+                onClick={() => setSelected(key)}
+              >
+                Importer dans cette table <ChevronRight size={14} />
+              </button>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -2314,56 +2503,7 @@ function AdminPage({ module }: { module: 'users' | 'imports' | 'logs' }) {
   }
 
   // module === 'imports'
-  return (
-    <div>
-      <PageHeader
-        eyebrow="ADMINISTRATION"
-        title="Importation"
-        description="Importez des données existantes avec un contrôle des colonnes et des formats."
-        action={
-          <button
-            className="button button-primary"
-            onClick={() => toast.info('Sélectionnez un fichier CSV ou Excel.')}
-          >
-            <Upload size={17} />Importer un fichier
-          </button>
-        }
-      />
-      <div className="import-dropzone">
-        <div className="import-drop-icon"><Upload size={24} /></div>
-        <h2>Déposez votre fichier ici</h2>
-        <p>Formats acceptés : CSV, XLSX · Taille maximale : 2 Mo</p>
-        <button className="button button-secondary">Choisir un fichier</button>
-      </div>
-      <div className="import-table panel">
-        <div className="table-header">
-          <div>
-            <span className="eyebrow">Modèles disponibles</span>
-            <h2>Tables importables</h2>
-          </div>
-        </div>
-        {[
-          'Chrétiens',
-          'Entrées financières',
-          'Sorties financières',
-          'Obligations',
-          'Projets',
-          'Utilisateurs',
-        ].map((item, index) => (
-          <div className="import-row" key={item}>
-            <div className="import-row-icon"><FileText size={17} /></div>
-            <div>
-              <strong>{item}</strong>
-              <span>{index % 2 === 0 ? 'CSV · 8 colonnes' : 'CSV / Excel · 6 colonnes'}</span>
-            </div>
-            <button className="text-button">
-              Télécharger le modèle <Download size={14} />
-            </button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  return <ImportPage />;
 }
 
 // Finance Page (Entrées/Sorties)
@@ -2705,12 +2845,49 @@ function LegalPage({ kind }: { kind: 'privacy' | 'legal' | 'cookies' }) {
   );
 }
 
+// Routage par chemin d'URL : chaque module possède une adresse directe ;
+// les chemins inconnus affichent la page d'erreur 404 du SPA.
+const PATH_TO_MODULE: Record<string, ModuleKey> = {
+  '/': 'dashboard',
+  '/dashboard': 'dashboard',
+  '/entrees': 'entrees',
+  '/sorties': 'sorties',
+  '/obligations': 'obligations',
+  '/communion': 'communion',
+  '/projects': 'projects',
+  '/fideles': 'fideles',
+  '/reports': 'reports',
+  '/users': 'users',
+  '/imports': 'imports',
+  '/logs': 'logs',
+};
+const MODULE_TO_PATH: Record<ModuleKey, string> = {
+  dashboard: '/', entrees: '/entrees', sorties: '/sorties', obligations: '/obligations',
+  communion: '/communion', projects: '/projects', fideles: '/fideles', reports: '/reports',
+  users: '/users', imports: '/imports', logs: '/logs',
+};
+
+function NotFoundPage() {
+  return (
+    <div className="notfound-page">
+      <div className="notfound-card panel">
+        <span className="eyebrow">ERREUR 404</span>
+        <h1>Page introuvable</h1>
+        <p>La page demandée n&apos;existe pas ou a été déplacée.</p>
+        <a className="button button-primary" href="/">Retour au tableau de bord</a>
+      </div>
+    </div>
+  );
+}
+
 // Main App
 function App() {
-  const [user, setUser] = useState<any>(null);
-  const [activeModule, setActiveModule] = useState<ModuleKey>('dashboard');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pathname] = useState(window.location.pathname.replace(/\/$/, '') || '/');
+  const [user, setUser] = useState<any>(null);
+  const [activeModule, setActiveModule] = useState<ModuleKey>(
+    () => PATH_TO_MODULE[window.location.pathname.replace(/\/$/, '') || '/'] ?? 'dashboard'
+  );
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     api.me().then(data => {
@@ -2718,9 +2895,22 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    if (!user) return;
+    const target = MODULE_TO_PATH[activeModule] ?? '/';
+    if (window.location.pathname !== target) {
+      window.history.pushState(null, '', target);
+    }
+  }, [activeModule, user]);
+
   const legalKind = pathname === '/confidentialite' ? 'privacy' : pathname === '/cookies' ? 'cookies' : pathname === '/mentions-legales' ? 'legal' : null;
   if (legalKind) {
     return <LegalPage kind={legalKind} />;
+  }
+
+  // Chemin inconnu (ni page légale, ni module, ni /login) : page 404 standard.
+  if (pathname !== '/login' && !(pathname in PATH_TO_MODULE)) {
+    return <NotFoundPage />;
   }
 
   const handleLogin = (userData: any) => {

@@ -36,7 +36,6 @@ load_env();
 date_default_timezone_set(config_app('timezone'));
 
 $router = new \App\Core\Router();
-require BASE_PATH . '/routes/web.php';
 require BASE_PATH . '/routes/api.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';

@@ -6,24 +6,16 @@
 namespace App\Middlewares;
 
 use App\Core\Auth;
-use App\Core\Session;
 
 final class AuthMiddleware
 {
     public function handle(array $args = []): void
     {
+        // Le PHP ne sert plus que l'API REST : réponse JSON 401 standard, jamais de redirection HTML.
         if (!Auth::check()) {
-            $path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
-            // Pour l'API REST (React), repondre en JSON 401 : une redirection HTML
-            // provoque cote client une erreur de parsing "Unexpected token '<'".
-            if (str_contains($path, '/api/')) {
-                http_response_code(401);
-                header('Content-Type: application/json; charset=utf-8');
-                echo json_encode(['success' => false, 'message' => 'Non authentifie.', 'code' => 401]);
-                exit;
-            }
-            Session::flash('error', 'Veuillez vous connecter pour continuer.');
-            header('Location: ' . url('login'));
+            http_response_code(401);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['success' => false, 'message' => 'Non authentifié.', 'code' => 401], JSON_UNESCAPED_UNICODE);
             exit;
         }
     }

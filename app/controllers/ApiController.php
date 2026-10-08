@@ -122,7 +122,7 @@ final class ApiController extends Controller
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'matricule' => $user['matricule'],
-                'role' => $user['role']
+                'role' => $user['role_name'] ?? null
             ]
         ]);
     }
@@ -141,7 +141,7 @@ final class ApiController extends Controller
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'matricule' => $user['matricule'],
-                'role' => $user['role']
+                'role' => $user['role_name'] ?? null
             ]
         ]);
     }
@@ -841,7 +841,11 @@ final class ApiController extends Controller
         }
 
         $model = new User();
-        $users = $model->all();
+        $users = array_map(static function (array $u): array {
+            unset($u['password'], $u['role_id']);
+            $u['role'] = $u['role_name'] ?? null;
+            return $u;
+        }, $model->allWithRoles());
         $this->json(['success' => true, 'data' => $users]);
     }
 

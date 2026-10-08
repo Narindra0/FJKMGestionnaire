@@ -20,6 +20,10 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Config PHP production : desactive l'affichage des warnings/erreurs dans le HTML
+# (sans php.ini actif, binaire = display_errors On, ce qui corromprait les reponses JSON de /api).
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+
 # Copier la config Apache pour pointer vers /public
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 

@@ -198,4 +198,63 @@ final class CommunionPayment extends Model
         }
         return $candidate;
     }
+
+    public function listPaginated(int $page = 1, int $limit = 20, int $year = 0, int $month = 0): array
+    {
+        $offset = ($page - 1) * $limit;
+        $sql = "SELECT cp.*, f.matricule, f.full_name,
+                CASE cp.paid_month
+                    WHEN 1 THEN 'Janvier' WHEN 2 THEN 'Février' WHEN 3 THEN 'Mars'
+                    WHEN 4 THEN 'Avril' WHEN 5 THEN 'Mai' WHEN 6 THEN 'Juin'
+                    WHEN 7 THEN 'Juillet' WHEN 8 THEN 'Août' WHEN 9 THEN 'Septembre'
+                    WHEN 10 THEN 'Octobre' WHEN 11 THEN 'Novembre' WHEN 12 THEN 'Décembre'
+                    ELSE 'Mois' END AS month_name
+            FROM communion_payments cp
+            JOIN fideles f ON f.id=cp.fidel_id
+            WHERE 1=1";
+        $params = [];
+
+        if ($year > 0) {
+            $sql .= " AND cp.paid_year = :year";
+            $params['year'] = $year;
+        }
+
+        if ($month > 0) {
+            $sql .= " AND cp.paid_month = :month";
+            $params['month'] = $month;
+        }
+
+        $sql .= " ORDER BY cp.payment_date DESC, cp.id DESC LIMIT :limit OFFSET :offset";
+        $stmt = $this->db->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function count(int $year = 0, int $month = 0): int
+    {
+        $sql = "SELECT COUNT(*) FROM communion_payments WHERE 1=1";
+        $params = [];
+
+        if ($year > 0) {
+            $sql .= " AND paid_year = :year";
+            $params['year'] = $year;
+        }
+
+        if ($month > 0) {
+            $sql .= " AND paid_month = :month";
+            $params['month'] = $month;
+        }
+
+        $stmt = $this->db->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->execute();
+        return (int)$stmt->fetchColumn();
+    }
 }

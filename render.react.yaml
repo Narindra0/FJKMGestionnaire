@@ -1,0 +1,56 @@
+services:
+  # Service PHP Backend + React Frontend
+  - type: web
+    name: fjkm-gestionnaire-react
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.react
+    dockerContext: .
+    region: oregon
+    
+    # Environment variables
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://fjkm-gestionnaire-react.onrender.com
+      - key: APP_NAME
+        value: "GESTION D'OBLIGATION AU SEIN D'EGLISE FJKM MALAZA GILEADA"
+      - key: APP_SHORT_NAME
+        value: "FJKM Obligations"
+      - key: APP_TIMEZONE
+        value: Indian/Antananarivo
+      - key: APP_LOCALE
+        value: fr_MG
+      - key: DB_DRIVER
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "4000"
+      - key: DB_DATABASE
+        value: fjkm_obligation
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_CHARSET
+        value: utf8mb4
+      - key: DB_COLLATION
+        value: utf8mb4_unicode_ci
+      - key: DB_SSL_CA
+        value: ""
+      - key: SESSION_NAME
+        value: FJKM_SESSION_PROD
+      - key: CSRF_KEY
+        value: fjkm_csrf_prod_2026
+      - key: LOGIN_MAX_ATTEMPTS
+        value: "5"
+      - key: LOGIN_DECAY_MINUTES
+        value: "15"
+      - key: UPLOAD_MAX_SIZE
+        value: "2097152"
+      - key: ALLOWED_IMAGES
+        value: jpg,jpeg,png,webp

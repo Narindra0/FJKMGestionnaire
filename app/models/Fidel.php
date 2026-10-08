@@ -132,4 +132,54 @@ final class Fidel extends Model
         }
         return 'FJKM-' . str_pad((string)($lastNumber + 1), 5, '0', STR_PAD_LEFT);
     }
+
+    public function listPaginated(int $page = 1, int $limit = 20, string $search = '', string $status = ''): array
+    {
+        $offset = ($page - 1) * $limit;
+        $sql = "SELECT * FROM fideles WHERE 1=1";
+        $params = [];
+
+        if ($search !== '') {
+            $sql .= " AND (full_name LIKE :search OR matricule LIKE :search OR phone LIKE :search OR group_name LIKE :search)";
+            $params['search'] = '%' . $search . '%';
+        }
+
+        if ($status !== '') {
+            $sql .= " AND status = :status";
+            $params['status'] = $status;
+        }
+
+        $sql .= " ORDER BY full_name ASC LIMIT :limit OFFSET :offset";
+        $stmt = $this->db->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function count(string $search = '', string $status = ''): int
+    {
+        $sql = "SELECT COUNT(*) FROM fideles WHERE 1=1";
+        $params = [];
+
+        if ($search !== '') {
+            $sql .= " AND (full_name LIKE :search OR matricule LIKE :search OR phone LIKE :search OR group_name LIKE :search)";
+            $params['search'] = '%' . $search . '%';
+        }
+
+        if ($status !== '') {
+            $sql .= " AND status = :status";
+            $params['status'] = $status;
+        }
+
+        $stmt = $this->db->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->execute();
+        return (int)$stmt->fetchColumn();
+    }
 }

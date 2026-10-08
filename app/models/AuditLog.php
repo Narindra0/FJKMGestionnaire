@@ -116,6 +116,53 @@ final class AuditLog extends Model
         return $stmt->fetchAll(\PDO::FETCH_COLUMN);
     }
 
+    public function listPaginated(int $page = 1, int $limit = 20, string $search = ''): array
+    {
+        $offset = ($page - 1) * $limit;
+        $sql = "SELECT a.*, u.name AS user_name, u.email AS user_email
+            FROM audit_logs a
+            LEFT JOIN users u ON u.id = a.user_id
+            WHERE 1=1";
+        $params = [];
+
+        if ($search !== '') {
+            $sql .= " AND (a.payload LIKE :search OR u.name LIKE :search_name OR a.action LIKE :search_action)";
+            $params['search'] = '%' . $search . '%';
+            $params['search_name'] = '%' . $search . '%';
+            $params['search_action'] = '%' . $search . '%';
+        }
+
+        $sql .= " ORDER BY a.id DESC LIMIT :limit OFFSET :offset";
+        $stmt = $this->db->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function count(string $search = ''): int
+    {
+        $sql = "SELECT COUNT(*) FROM audit_logs a LEFT JOIN users u ON u.id = a.user_id WHERE 1=1";
+        $params = [];
+
+        if ($search !== '') {
+            $sql .= " AND (a.payload LIKE :search OR u.name LIKE :search_name OR a.action LIKE :search_action)";
+            $params['search'] = '%' . $search . '%';
+            $params['search_name'] = '%' . $search . '%';
+            $params['search_action'] = '%' . $search . '%';
+        }
+
+        $stmt = $this->db->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->execute();
+        return (int)$stmt->fetchColumn();
+    }
+
     /**
      * Libellé humain pour une action.
      */

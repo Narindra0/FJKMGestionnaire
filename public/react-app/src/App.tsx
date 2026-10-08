@@ -678,16 +678,15 @@ function DashboardPage({ onNavigate }: { onNavigate: (key: ModuleKey) => void })
             />
             <MetricCard
               label="Chrétiens actifs"
-              value="284"
-              helper="+12 ce trimestre"
-              trend="+4,4 %"
+              value={String(stats.counts?.fideles_actifs ?? 0)}
+              helper={`${stats.counts?.fideles_total ?? 0} enregistrés au total`}
               icon={Users}
               tone="blue"
             />
             <MetricCard
               label="Obligations à suivre"
-              value="38"
-              helper="12 paiements partiels"
+              value={String(stats.counts?.obligations_a_suivre ?? 0)}
+              helper={`${stats.counts?.obligations_partiels ?? 0} paiements partiels`}
               icon={HandCoins}
               tone="purple"
             />

@@ -28,7 +28,22 @@ final class ApiController extends Controller
     public function dashboardStats(): void
     {
         $finance = new FinanceService();
-        $this->json(['success' => true, 'totals' => $finance->totals(), 'communionTotals' => $finance->communionTotals(), 'series' => $finance->monthlySeries((int)date('Y'))]);
+        $fidelModel = new Fidel();
+        $obligationModel = new Obligation();
+        $unpaid = $obligationModel->count('', 'unpaid');
+        $partial = $obligationModel->count('', 'partial');
+        $this->json([
+            'success' => true,
+            'totals' => $finance->totals(),
+            'communionTotals' => $finance->communionTotals(),
+            'series' => $finance->monthlySeries((int)date('Y')),
+            'counts' => [
+                'fideles_total' => $fidelModel->count(),
+                'fideles_actifs' => $fidelModel->count('', 'active'),
+                'obligations_a_suivre' => $unpaid + $partial,
+                'obligations_partiels' => $partial,
+            ],
+        ]);
     }
 
     public function searchFideles(): void

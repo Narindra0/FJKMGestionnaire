@@ -19,6 +19,21 @@ final class Router
         $this->add('POST', $uri, $action, $middlewares);
     }
 
+    public function put(string $uri, array $action, array $middlewares = []): void
+    {
+        $this->add('PUT', $uri, $action, $middlewares);
+    }
+
+    public function patch(string $uri, array $action, array $middlewares = []): void
+    {
+        $this->add('PATCH', $uri, $action, $middlewares);
+    }
+
+    public function delete(string $uri, array $action, array $middlewares = []): void
+    {
+        $this->add('DELETE', $uri, $action, $middlewares);
+    }
+
     public function add(string $method, string $uri, array $action, array $middlewares = []): void
     {
         $this->routes[] = compact('method', 'uri', 'action', 'middlewares');

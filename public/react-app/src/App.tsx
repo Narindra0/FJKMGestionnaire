@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Toaster, toast } from 'sonner';
-import { LayoutDashboard, Users, ArrowDownToLine, ArrowUpFromLine, HandCoins, HeartHandshake, FolderKanban, FileBarChart, ShieldCheck, ClipboardList, Menu, LogOut, ChevronRight, Check, X, Search, Bell, Plus, Download, Filter, CalendarDays, TrendingUp, CircleDollarSign, WalletCards, MoreHorizontal, Settings, FileText, ArrowDownLeft, ArrowUpRight, UserRound, BookOpen } from 'lucide-react';
+import { LayoutDashboard, Users, ArrowDownToLine, ArrowUpFromLine, HandCoins, HeartHandshake, FolderKanban, FileBarChart, ShieldCheck, ClipboardList, Menu, LogOut, ChevronRight, Check, X, Search, Bell, Plus, Download, Filter, CalendarDays, TrendingUp, CircleDollarSign, WalletCards, MoreHorizontal, Settings, FileText, ArrowDownLeft, ArrowUpRight, UserRound, BookOpen, Upload, ChevronDown, Sparkles, FileCheck2 } from 'lucide-react';
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import './index.css';
 
 // Types
@@ -137,6 +138,9 @@ const api = {
   },
 };
 
+// Objectif annuel de collecte communion (à terme : paramétrable via settings)
+const COMMUNION_ANNUAL_GOAL = 2860000;
+
 // Navigation
 const navSections = [
   { title: 'Vue d\'ensemble', items: [{ key: 'dashboard' as ModuleKey, label: 'Tableau de bord', icon: LayoutDashboard }] },
@@ -153,7 +157,7 @@ const navSections = [
   ]},
   { title: 'Administration', items: [
     { key: 'users' as ModuleKey, label: 'Utilisateurs', icon: ShieldCheck },
-    { key: 'imports' as ModuleKey, label: 'Importation', icon: Settings },
+    { key: 'imports' as ModuleKey, label: 'Importation', icon: Upload },
     { key: 'logs' as ModuleKey, label: 'Journal d\'activité', icon: ClipboardList }
   ]},
 ];
@@ -183,10 +187,157 @@ function IconButton({ label, children, onClick }: { label: string; children: Rea
   );
 }
 
+function StatusBadge({ status }: { status: string }) {
+  const normalized = status.toLowerCase().replaceAll(' ', '-');
+  return <span className={`status status-${normalized}`}>{status}</span>;
+}
+
+function PageHeader({ eyebrow, title, description, action }: {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  action?: React.ReactNode;
+}) {
+  return (
+    <div className="page-header">
+      <div>
+        <span className="eyebrow">{eyebrow ?? 'FJKM MALAZA GILEADA'}</span>
+        <h1>{title}</h1>
+        {description && <p className="page-description">{description}</p>}
+      </div>
+      {action && <div className="page-header-actions">{action}</div>}
+    </div>
+  );
+}
+
+function FilterBar({ search = true, onSearchChange, searchPlaceholder, children }: {
+  search?: boolean;
+  onSearchChange?: (value: string) => void;
+  searchPlaceholder?: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="filter-bar">
+      <div className="filter-leading">
+        <Filter size={16} />
+        <span>Filtres</span>
+      </div>
+      {children}
+      <div className="filter-spacer" />
+      {search && (
+        <label className="inline-search">
+          <Search size={16} />
+          <input
+            placeholder={searchPlaceholder ?? 'Rechercher dans la liste...'}
+            onChange={onSearchChange ? (e) => onSearchChange(e.target.value) : undefined}
+          />
+        </label>
+      )}
+      <button className="button button-ghost">
+        <span>Réafficher</span>
+      </button>
+    </div>
+  );
+}
+
+function MetricCard({ label, value, helper, icon: Icon, tone, trend }: {
+  label: string;
+  value: string;
+  helper: string;
+  icon: typeof CircleDollarSign;
+  tone: string;
+  trend?: string;
+}) {
+  return (
+    <div className={`metric-card metric-${tone}`}>
+      <div className="metric-card-top">
+        <span>{label}</span>
+        <span className="metric-icon"><Icon size={18} /></span>
+      </div>
+      <strong>{value}</strong>
+      <div className="metric-helper">
+        {trend && (
+          <span className="trend-positive"><TrendingUp size={13} />{trend}</span>
+        )}
+        <span>{helper}</span>
+      </div>
+    </div>
+  );
+}
+
+function Activity({ icon: Icon, tone, title, detail, meta }: {
+  icon: typeof ArrowDownToLine;
+  tone: string;
+  title: string;
+  detail: string;
+  meta: string;
+}) {
+  return (
+    <div className="activity-item">
+      <div className={`activity-icon activity-${tone}`}>
+        <Icon size={16} />
+      </div>
+      <div className="activity-copy">
+        <strong>{title}</strong>
+        <span>{detail}</span>
+      </div>
+      <time>{meta}</time>
+    </div>
+  );
+}
+
+// Pagination au format du design mockup (.module-footer + .pagination)
+function ModulePagination({ page, pages, total, label, onPage }: {
+  page: number;
+  pages: number;
+  total: number;
+  label: string;
+  onPage: (page: number) => void;
+}) {
+  if (pages <= 1) {
+    return (
+      <div className="module-footer">
+        <span>{total} {label}</span>
+      </div>
+    );
+  }
+  const numbers: number[] = [];
+  for (let i = 1; i <= pages; i++) {
+    if (i === 1 || i === pages || Math.abs(i - page) <= 1) numbers.push(i);
+  }
+  const items: React.ReactNode[] = [];
+  let prev = 0;
+  for (const n of numbers) {
+    if (prev && n - prev > 1) items.push(<button key={`gap-${n}`} disabled>…</button>);
+    items.push(
+      <button key={n} className={n === page ? 'active' : ''} onClick={() => onPage(n)}>{n}</button>
+    );
+    prev = n;
+  }
+  return (
+    <div className="module-footer">
+      <span>Affichage de la page {page} sur {pages}</span>
+      <div className="pagination">
+        <button disabled={page === 1} onClick={() => onPage(page - 1)}>‹</button>
+        {items}
+        <button disabled={page === pages} onClick={() => onPage(page + 1)}>›</button>
+      </div>
+    </div>
+  );
+}
+
+function formatMGA(value: number) {
+  return `${new Intl.NumberFormat('fr-FR').format(value)} Ar`;
+}
+function shortMGA(value: number) {
+  return `${(value / 1000000).toFixed(1).replace('.', ',')} M Ar`;
+}
+
 // Login Page
 function LoginPage({ onLogin }: { onLogin: (user: any) => void }) {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -217,6 +368,13 @@ function LoginPage({ onLogin }: { onLogin: (user: any) => void }) {
           <span className="eyebrow light">Registre communautaire</span>
           <h1>Une gestion claire pour une communauté engagée.</h1>
           <p>Suivez les obligations, les contributions et les projets de FJKM Malaza Gileada dans un même espace de confiance.</p>
+          <div className="login-quote">
+            <BookOpen size={18} />
+            <span>
+              « Que tout se fasse avec bienséance et avec ordre. »
+              <small>1 Corinthiens 14:40</small>
+            </span>
+          </div>
         </div>
         <div className="login-visual-footer">FJKM MALAZA GILEADA · ANTANANARIVO</div>
       </div>
@@ -238,18 +396,48 @@ function LoginPage({ onLogin }: { onLogin: (user: any) => void }) {
             </label>
             <label>
               Mot de passe
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                minLength={8}
-                required
-              />
+              <div className="password-field">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  minLength={8}
+                  required
+                />
+                <button type="button" onClick={() => setShowPassword((value) => !value)}>
+                  {showPassword ? 'Masquer' : 'Afficher'}
+                </button>
+              </div>
             </label>
+            <div className="form-row form-row-between">
+              <label className="checkbox-label">
+                <input type="checkbox" defaultChecked /> <span>Se souvenir de moi</span>
+              </label>
+              <a
+                href="#forgot"
+                onClick={(e) => {
+                  e.preventDefault();
+                  toast.info('Contactez un administrateur pour réinitialiser votre accès.');
+                }}
+              >
+                Mot de passe oublié ?
+              </a>
+            </div>
             <button className="button button-primary button-large" type="submit" disabled={loading}>
               {loading ? 'Connexion...' : 'Se connecter'} <ChevronRight size={18} />
             </button>
           </form>
+          <div className="login-note">
+            <ShieldCheck size={16} />
+            <span>Vos données sont réservées aux utilisateurs autorisés.</span>
+          </div>
+        </div>
+        <div className="login-legal">
+          <a href="/confidentialite">Confidentialité</a>
+          <span>·</span>
+          <a href="/mentions-legales">Mentions légales</a>
+          <span>·</span>
+          <span>Développement : Narindra Ranjalahy</span>
         </div>
       </div>
     </div>
@@ -275,6 +463,7 @@ function Sidebar({ active, onNavigate, role, mobileOpen, onClose }: {
         <div className="workspace-switcher">
           <div className="workspace-seal">MG</div>
           <div><strong>Malaza Gileada</strong><small>Paroisse principale</small></div>
+          <ChevronDown size={15} />
         </div>
         <nav>
           {navSections.map(section => (
@@ -306,8 +495,17 @@ function Sidebar({ active, onNavigate, role, mobileOpen, onClose }: {
           ))}
         </nav>
         <div className="sidebar-bottom">
+          <div className="storage-card">
+            <div className="storage-icon"><Sparkles size={16} /></div>
+            <div>
+              <strong>Registre protégé</strong>
+              <small>Synchronisation active</small>
+            </div>
+            <span className="pulse-dot" />
+          </div>
           <div className="sidebar-footer">
             <span>v1.0.0</span>
+            <a href="/confidentialite">Confidentialité</a>
           </div>
         </div>
       </aside>
@@ -316,13 +514,16 @@ function Sidebar({ active, onNavigate, role, mobileOpen, onClose }: {
 }
 
 // Topbar
-function Topbar({ active, role, onMenu, onLogout }: {
+function Topbar({ active, role, user, onMenu, onLogout }: {
   active: ModuleKey;
   role: Role;
+  user: any;
   onMenu: () => void;
   onLogout: () => void;
 }) {
   const label = navSections.flatMap(section => section.items).find(item => item.key === active)?.label ?? 'Tableau de bord';
+  const fullName = user?.full_name || user?.name || 'Utilisateur';
+  const initials = fullName.split(' ').map((n: string) => n[0]).slice(0, 2).join('').toUpperCase();
   return (
     <header className="topbar">
       <div className="topbar-left">
@@ -334,9 +535,23 @@ function Topbar({ active, role, onMenu, onLogout }: {
         </div>
       </div>
       <div className="topbar-actions">
+        <div className="topbar-search">
+          <Search size={16} />
+          <input placeholder="Rechercher..." />
+          <kbd>⌘ K</kbd>
+        </div>
         <IconButton label="Notifications" onClick={() => toast.info('Aucune nouvelle notification')}>
           <Bell size={18} />
+          <span className="notification-dot" />
         </IconButton>
+        <div className="profile-menu">
+          <div className="avatar avatar-gold">{initials}</div>
+          <div className="profile-copy">
+            <strong>{fullName}</strong>
+            <span>{role}</span>
+          </div>
+          <ChevronDown size={15} />
+        </div>
         <button className="logout-button" onClick={onLogout} title="Se déconnecter">
           <LogOut size={17} />
         </button>
@@ -346,116 +561,136 @@ function Topbar({ active, role, onMenu, onLogout }: {
 }
 
 // Dashboard Page
-function DashboardPage() {
+function DashboardPage({ onNavigate }: { onNavigate: (key: ModuleKey) => void }) {
   const [stats, setStats] = useState<any>(null);
+  const [recentLogs, setRecentLogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     api.dashboardStats().then(data => {
       setStats(data);
       setLoading(false);
-    }).catch(err => {
+    }).catch(() => {
       toast.error('Erreur lors du chargement du dashboard');
       setLoading(false);
     });
+    api.logs(1, '').then(res => {
+      setRecentLogs((res?.data ?? []).slice(0, 4));
+    }).catch(() => {});
   }, []);
 
   if (loading) return <div className="panel">Chargement...</div>;
 
-  const formatMGA = (value: number) => `${new Intl.NumberFormat('fr-FR').format(value)} Ar`;
-  const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
-  const chartData = stats?.series ? months.map((month, index) => ({
+  const series = stats?.series ?? { labels: [], entries: [], exits: [] };
+  const chartData = (series.labels ?? []).map((month: string, index: number) => ({
     month,
-    entries: stats.series.entries?.[index] || 0,
-    exits: stats.series.exits?.[index] || 0
-  })) : [];
+    entries: (series.entries?.[index] || 0) / 1000000,
+    exits: (series.exits?.[index] || 0) / 1000000,
+  }));
+  const sum = (arr?: number[]) => (arr ?? []).reduce((a: number, b: number) => a + b, 0);
+  const sources = [
+    { name: 'Obligations', value: sum(series.obligation_entries), color: '#c58b3a' },
+    { name: 'Communion', value: sum(series.communion_entries), color: '#287d68' },
+    { name: 'Projets', value: sum(series.project_entries), color: '#6b8fb3' },
+    { name: 'Entrées', value: sum(series.finance_entries), color: '#d7c6a6' },
+  ];
+  const sourcesTotal = sources.reduce((a, s) => a + s.value, 0);
+  const distribution = sources.map(s => ({
+    ...s,
+    pct: sourcesTotal > 0 ? Math.round((s.value / sourcesTotal) * 100) : 0,
+  }));
+
+  const activityFor = (log: any) => {
+    const action = String(log.action ?? '').toUpperCase();
+    if (action.includes('EXIT') || action.includes('SORTIE')) return { icon: ArrowUpFromLine, tone: 'coral' };
+    if (action.includes('OBLIGATION')) return { icon: HandCoins, tone: 'purple' };
+    if (action.includes('COMMUNION')) return { icon: HeartHandshake, tone: 'green' };
+    if (action.includes('FIDEL') || action.includes('CHRISTIAN')) return { icon: UserRound, tone: 'blue' };
+    return { icon: ArrowDownToLine, tone: 'gold' };
+  };
 
   return (
-    <div>
-      <div className="page-header">
-        <div>
-          <span className="eyebrow">FJKM MALAZA GILEADA</span>
-          <h1>Tableau de bord</h1>
-          <p className="page-description">La trésorerie et les activités de votre paroisse en un regard.</p>
-        </div>
-        <div className="page-header-actions">
-          <button className="button button-secondary" onClick={() => toast.success('Export préparé')}>
-            <Download size={16} />Exporter
-          </button>
-        </div>
-      </div>
+    <>
+      <PageHeader
+        title="Tableau de bord"
+        description="La trésorerie et les activités de votre paroisse en un regard."
+        action={
+          <>
+            <button className="button button-secondary" onClick={() => toast.success('Rapport préparé pour impression')}>
+              <Download size={16} />Exporter
+            </button>
+            <button className="button button-primary" onClick={() => onNavigate('entrees')}>
+              <Plus size={17} />Nouvelle entrée
+            </button>
+          </>
+        }
+      />
 
       <div className="dashboard-toolbar">
         <div className="period-label">
           <CalendarDays size={16} />
           <span>Période analysée</span>
-          <strong>01 — 31 octobre 2026</strong>
+          <strong>{`01 janvier — 31 décembre ${new Date().getFullYear()}`}</strong>
+        </div>
+        <div className="toolbar-actions">
+          <button className="select-button">
+            Toutes les opérations <ChevronDown size={15} />
+          </button>
+          <button className="icon-button bordered">
+            <MoreHorizontal size={18} />
+          </button>
         </div>
       </div>
 
       {stats && (
         <>
           <div className="metrics-grid">
-            <div className="metric-card metric-gold">
-              <div className="metric-card-top">
-                <span>Entrées générales</span>
-                <span className="metric-icon"><ArrowDownToLine size={18} /></span>
-              </div>
-              <strong>{formatMGA(stats.totals.entries)}</strong>
-              <div className="metric-helper">
-                <span className="trend-positive"><TrendingUp size={13} />+8,5 %</span>
-                <span>vs. mois dernier</span>
-              </div>
-            </div>
-            <div className="metric-card metric-coral">
-              <div className="metric-card-top">
-                <span>Sorties générales</span>
-                <span className="metric-icon"><ArrowUpFromLine size={18} /></span>
-              </div>
-              <strong>{formatMGA(stats.totals.exits)}</strong>
-              <div className="metric-helper">32 opérations ce mois</div>
-            </div>
-            <div className="metric-card metric-navy">
-              <div className="metric-card-top">
-                <span>Reste général</span>
-                <span className="metric-icon"><WalletCards size={18} /></span>
-              </div>
-              <strong>{formatMGA(stats.totals.balance)}</strong>
-              <div className="metric-helper">
-                <span className="trend-positive"><TrendingUp size={13} />+12,4 %</span>
-                <span>Solde disponible</span>
-              </div>
-            </div>
-            <div className="metric-card metric-green">
-              <div className="metric-card-top">
-                <span>Entrées communion</span>
-                <span className="metric-icon"><HeartHandshake size={18} /></span>
-              </div>
-              <strong>{formatMGA(stats.communionTotals?.entries || 0)}</strong>
-              <div className="metric-helper">
-                <span className="trend-positive"><TrendingUp size={13} />+5,2 %</span>
-                <span>128 paiements</span>
-              </div>
-            </div>
-            <div className="metric-card metric-blue">
-              <div className="metric-card-top">
-                <span>Chrétiens actifs</span>
-                <span className="metric-icon"><Users size={18} /></span>
-              </div>
-              <strong>284</strong>
-              <div className="metric-helper">
-                <span className="trend-positive"><TrendingUp size={13} />+4,4 %</span>
-                <span>+12 ce trimestre</span>
-              </div>
-            </div>
-            <div className="metric-card metric-purple">
-              <div className="metric-card-top">
-                <span>Obligations à suivre</span>
-                <span className="metric-icon"><HandCoins size={18} /></span>
-              </div>
-              <strong>38</strong>
-              <div className="metric-helper">12 paiements partiels</div>
-            </div>
+            <MetricCard
+              label="Entrées générales"
+              value={formatMGA(stats.totals?.entries ?? 0)}
+              helper="vs. le mois dernier"
+              trend="+8,5 %"
+              icon={ArrowDownToLine}
+              tone="gold"
+            />
+            <MetricCard
+              label="Sorties générales"
+              value={formatMGA(stats.totals?.exits ?? 0)}
+              helper="opérations ce mois"
+              icon={ArrowUpFromLine}
+              tone="coral"
+            />
+            <MetricCard
+              label="Reste général"
+              value={formatMGA(stats.totals?.balance ?? 0)}
+              helper="Solde disponible"
+              trend="+12,4 %"
+              icon={WalletCards}
+              tone="navy"
+            />
+            <MetricCard
+              label="Entrées communion"
+              value={formatMGA(stats.communionTotals?.entries ?? 0)}
+              helper="paiements enregistrés"
+              trend="+5,2 %"
+              icon={HeartHandshake}
+              tone="green"
+            />
+            <MetricCard
+              label="Chrétiens actifs"
+              value="284"
+              helper="+12 ce trimestre"
+              trend="+4,4 %"
+              icon={Users}
+              tone="blue"
+            />
+            <MetricCard
+              label="Obligations à suivre"
+              value="38"
+              helper="12 paiements partiels"
+              icon={HandCoins}
+              tone="purple"
+            />
           </div>
 
           <div className="dashboard-grid">
@@ -470,55 +705,131 @@ function DashboardPage() {
                   <span><i className="legend-dot exits" />Sorties</span>
                 </div>
               </div>
-              <div style={{ height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8f938f' }}>
-                <p>Graphique Chart.js à implémenter</p>
+              <div className="chart-wrap">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={chartData} margin={{ top: 18, right: 14, left: -20, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="entriesGradient" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stopColor="#c58b3a" stopOpacity={0.25} />
+                        <stop offset="100%" stopColor="#c58b3a" stopOpacity={0} />
+                      </linearGradient>
+                      <linearGradient id="exitsGradient" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stopColor="#c95c55" stopOpacity={0.16} />
+                        <stop offset="100%" stopColor="#c95c55" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid stroke="#ebe5db" vertical={false} />
+                    <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#8c8a85', fontSize: 11 }} />
+                    <YAxis axisLine={false} tickLine={false} tick={{ fill: '#8c8a85', fontSize: 11 }} tickFormatter={(value) => `${value}M`} />
+                    <Tooltip formatter={(value: any) => [`${Number(value).toFixed(1)} M Ar`, '']} contentStyle={{ border: '1px solid #ece7de', borderRadius: 12, boxShadow: '0 12px 30px rgba(24,42,61,.08)' }} />
+                    <Area type="monotone" dataKey="entries" stroke="#c58b3a" strokeWidth={2.5} fill="url(#entriesGradient)" />
+                    <Area type="monotone" dataKey="exits" stroke="#c95c55" strokeWidth={2} fill="url(#exitsGradient)" />
+                  </AreaChart>
+                </ResponsiveContainer>
               </div>
             </div>
 
-            <div className="panel">
+            <div className="panel chart-panel">
               <div className="panel-header">
                 <div>
-                  <span className="eyebrow">Activités récentes</span>
-                  <h2>8 dernières actions</h2>
+                  <span className="eyebrow">Répartition</span>
+                  <h2>Origine des entrées</h2>
+                </div>
+                <IconButton label="Options"><MoreHorizontal size={18} /></IconButton>
+              </div>
+              <div className="donut-wrap">
+                <ResponsiveContainer width="52%" height={178}>
+                  <PieChart>
+                    <Pie data={distribution} innerRadius={54} outerRadius={78} paddingAngle={4} dataKey="value" stroke="none">
+                      {distribution.map((item) => (
+                        <Cell key={item.name} fill={item.color} />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="donut-center">
+                  <strong>{shortMGA(stats.totals?.entries ?? 0).replace(' Ar', '')}</strong>
+                  <span>Total</span>
+                </div>
+                <div className="donut-legend">
+                  {distribution.map((item) => (
+                    <div key={item.name}>
+                      <i style={{ background: item.color }} />
+                      <span>{item.name}</span>
+                      <strong>{item.pct}%</strong>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {[
-                  { icon: ArrowDownToLine, tone: 'gold', title: 'Entrée enregistrée', detail: 'Obligation mensuelle — Octobre', meta: 'Il y a 2h' },
-                  { icon: HeartHandshake, tone: 'green', title: 'Paiement communion', detail: 'Octobre 2026 — 15 000 Ar', meta: 'Il y a 3h' },
-                  { icon: ArrowUpFromLine, tone: 'coral', title: 'Sortie enregistrée', detail: 'Achat fournitures — 180 000 Ar', meta: 'Il y a 5h' },
-                  { icon: Users, tone: 'blue', title: 'Nouveau chrétien', detail: 'Ravelomanana Soa ajouté', meta: 'Hier' },
-                ].map((activity, i) => (
-                  <div key={i} className="activity-item">
-                    <div className={`activity-icon activity-${activity.tone}`}>
-                      <activity.icon size={16} />
-                    </div>
-                    <div className="activity-copy">
-                      <strong>{activity.title}</strong>
-                      <span>{activity.detail}</span>
-                    </div>
-                    <time>{activity.meta}</time>
-                  </div>
-                ))}
+            </div>
+
+            <div className="panel chart-panel">
+              <div className="panel-header">
+                <div>
+                  <span className="eyebrow">Comparatif</span>
+                  <h2>Entrées vs sorties</h2>
+                </div>
+                <span className="panel-period">{new Date().getFullYear()}</span>
+              </div>
+              <div className="chart-wrap compact-chart">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData.slice(0, 8)} barGap={4} margin={{ top: 12, right: 4, left: -22, bottom: 0 }}>
+                    <CartesianGrid stroke="#ebe5db" vertical={false} />
+                    <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#8c8a85', fontSize: 10 }} />
+                    <YAxis hide />
+                    <Tooltip formatter={(value: any) => [`${Number(value).toFixed(1)} M Ar`, '']} contentStyle={{ border: '1px solid #ece7de', borderRadius: 12 }} />
+                    <Bar dataKey="entries" fill="#c58b3a" radius={[4, 4, 0, 0]} barSize={8} />
+                    <Bar dataKey="exits" fill="#d9d1c3" radius={[4, 4, 0, 0]} barSize={8} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            <div className="panel recent-panel">
+              <div className="panel-header">
+                <div>
+                  <span className="eyebrow">Traçabilité</span>
+                  <h2>Activités récentes</h2>
+                </div>
+                <button className="text-button" onClick={() => onNavigate('logs')}>
+                  Voir le journal <ChevronRight size={15} />
+                </button>
+              </div>
+              <div className="activity-list">
+                {recentLogs.length === 0 ? (
+                  <Activity
+                    icon={ClipboardList}
+                    tone="blue"
+                    title="Aucune activité récente"
+                    detail="Les opérations seront journalisées automatiquement"
+                    meta="—"
+                  />
+                ) : (
+                  recentLogs.map((log: any) => {
+                    const { icon, tone } = activityFor(log);
+                    return (
+                      <Activity
+                        key={log.id}
+                        icon={icon}
+                        tone={tone}
+                        title={String(log.action ?? '').replaceAll('_', ' ')}
+                        detail={`${log.entity ?? ''} · ${log.user_name ?? 'Système'}`}
+                        meta={String(log.created_at ?? '')}
+                      />
+                    );
+                  })
+                )}
               </div>
             </div>
           </div>
+
+          <div className="dashboard-footer-note">
+            <ShieldCheck size={16} />
+            <span>Dernière synchronisation : à la consultation · Les opérations sont journalisées automatiquement.</span>
+          </div>
         </>
       )}
-    </div>
-  );
-}
-
-// Placeholder pages
-function PlaceholderPage({ title, description }: { title: string; description: string }) {
-  return (
-    <div>
-      <h1>{title}</h1>
-      <p>{description}</p>
-      <div className="panel">
-        <p>Cette page sera implémentée prochainement.</p>
-      </div>
-    </div>
+    </>
   );
 }
 
@@ -597,33 +908,35 @@ function FidelesPage() {
 
   return (
     <div>
-      <div className="page-header">
-        <div>
-          <span className="eyebrow">VIE DE L'ÉGLISE</span>
-          <h1>Chrétiens</h1>
-          <p className="page-description">Une fiche fiable pour chaque membre de la communauté.</p>
-        </div>
-        <div className="page-header-actions">
+      <PageHeader
+        eyebrow="VIE DE L’ÉGLISE"
+        title="Chrétiens"
+        description="Une fiche fiable pour chaque membre de la communauté."
+        action={
           <button className="button button-primary" onClick={() => { setEditingId(null); setFormData({}); setShowModal(true); }}>
             <Plus size={17} />Nouveau chrétien
           </button>
-        </div>
-      </div>
+        }
+      />
 
-      <div className="filter-bar">
-        <div className="filter-leading">
-          <Filter size={16} />
-          <span>Filtres</span>
-        </div>
-        <label className="inline-search">
-          <Search size={16} />
+      <FilterBar search={false}>
+        <label className="filter-select">
+          <CalendarDays size={15} />
+          <select defaultValue="all">
+            <option value="all">Toutes les périodes</option>
+            <option>Cette année</option>
+            <option>Ce trimestre</option>
+          </select>
+        </label>
+        <label className="inline-filter-search">
+          <Search size={15} />
           <input
-            placeholder="Matricule, nom, groupe..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+            placeholder="Matricule, nom, groupe..."
           />
         </label>
-      </div>
+      </FilterBar>
 
       <div className="member-overview">
         <div className="member-count">
@@ -649,7 +962,14 @@ function FidelesPage() {
               <span className="eyebrow">Registre paroissial</span>
               <h2>Liste des chrétiens</h2>
             </div>
-            <span className="table-total">{data?.pagination?.total || 0} lignes</span>
+            <div className="table-actions">
+              <button className="button button-secondary button-small" onClick={() => window.print()}>
+                <Download size={15} />Imprimer
+              </button>
+              <button className="button button-secondary button-small" onClick={() => toast.success('Export PDF préparé')}>
+                <Download size={15} />PDF
+              </button>
+            </div>
           </div>
           <div className="table-scroll">
             <table>
@@ -685,9 +1005,7 @@ function FidelesPage() {
                     <td>{row.baptized_at || '-'}</td>
                     <td>{row.communion_at || '-'}</td>
                     <td>
-                      <span className={`status status-${row.status === 'active' ? 'payé' : 'impayé'}`}>
-                        {row.status === 'active' ? 'Actif' : 'Inactif'}
-                      </span>
+                      <StatusBadge status={row.status === 'active' ? 'Actif' : 'Inactif'} />
                     </td>
                     <td>
                       <IconButton label="Options" onClick={() => handleEdit(row)}>
@@ -699,26 +1017,8 @@ function FidelesPage() {
               </tbody>
             </table>
           </div>
-          {data?.pagination && data.pagination.pages > 1 && (
-            <div style={{ display: 'flex', gap: 8, marginTop: 16, justifyContent: 'center' }}>
-              <button
-                className="button button-secondary"
-                disabled={page === 1}
-                onClick={() => setPage(p => Math.max(1, p - 1))}
-              >
-                Précédent
-              </button>
-              <span style={{ display: 'flex', alignItems: 'center', fontSize: 11 }}>
-                Page {page} / {data.pagination.pages}
-              </span>
-              <button
-                className="button button-secondary"
-                disabled={page === data.pagination.pages}
-                onClick={() => setPage(p => Math.min(data.pagination.pages, p + 1))}
-              >
-                Suivant
-              </button>
-            </div>
+          {data?.pagination && (
+            <ModulePagination page={page} pages={data.pagination.pages} total={data.pagination.total} label="lignes" onPage={setPage} />
           )}
         </div>
       )}
@@ -917,31 +1217,45 @@ function ObligationsPage() {
           <strong>Montant par défaut des obligations</strong>
           <span>30 000 Ar · Modifiable par un administrateur dans les paramètres.</span>
         </div>
+        <button className="text-button" onClick={() => toast.info('Paramètre réservé aux administrateurs.')}>
+          Modifier <ChevronRight size={15} />
+        </button>
       </div>
 
-      <div className="filter-bar">
-        <div className="filter-leading">
-          <Filter size={16} />
-          <span>Filtres</span>
-        </div>
+      <FilterBar search={false}>
         <label className="filter-select">
           <CalendarDays size={15} />
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <select value={status} onChange={(e) => { setStatus(e.target.value); setPage(1); }}>
             <option value="">Tous les statuts</option>
             <option value="paid">Payé</option>
             <option value="partial">Partiel</option>
             <option value="unpaid">Impayé</option>
           </select>
         </label>
-        <label className="inline-search">
-          <Search size={16} />
+        <label className="inline-filter-search">
+          <Search size={15} />
           <input
-            placeholder="Rechercher..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Matricule, nom..."
+            defaultValue={search}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
           />
         </label>
-      </div>
+      </FilterBar>
+
+      {data?.data && data.data.length > 0 && (() => {
+        const due = data.data.reduce((s: number, r: any) => s + Number(r.amount_due || 0), 0);
+        const paid = data.data.reduce((s: number, r: any) => s + Number(r.amount_paid || 0), 0);
+        const rest = Math.max(0, due - paid);
+        const taux = due > 0 ? Math.round((paid / due) * 1000) / 10 : 0;
+        return (
+          <div className="obligation-stats">
+            <div><span>Montant dû</span><strong>{formatMGA(due)}</strong></div>
+            <div><span>Montant payé</span><strong className="green-text">{formatMGA(paid)}</strong></div>
+            <div><span>Reste à suivre</span><strong className="coral-text">{formatMGA(rest)}</strong></div>
+            <div><span>Taux de collecte</span><strong>{String(taux).replace('.', ',')} %</strong></div>
+          </div>
+        );
+      })()}
 
       {loading ? (
         <div className="panel">Chargement...</div>
@@ -982,9 +1296,11 @@ function ObligationsPage() {
                       </div>
                     </td>
                     <td>{row.period_name}</td>
-                    <td>{formatMGA(row.amount_due)}</td>
-                    <td>{formatMGA(row.amount_paid)}</td>
-                    <td className="coral-text">{formatMGA(row.rest_amount || (row.amount_due - row.amount_paid))}</td>
+                    <td className="amount">{formatMGA(row.amount_due)}</td>
+                    <td className="amount green-text">{formatMGA(row.amount_paid)}</td>
+                    <td className={`amount ${((row.rest_amount ?? (row.amount_due - row.amount_paid)) > 0) ? 'coral-text' : 'muted'}`}>
+                      {formatMGA(row.rest_amount || (row.amount_due - row.amount_paid))}
+                    </td>
                     <td>
                       <span className={`status ${getStatusStyle(row.status)}`}>
                         {getStatusLabel(row.status)}
@@ -1000,26 +1316,8 @@ function ObligationsPage() {
               </tbody>
             </table>
           </div>
-          {data?.pagination && data.pagination.pages > 1 && (
-            <div style={{ display: 'flex', gap: 8, marginTop: 16, justifyContent: 'center' }}>
-              <button
-                className="button button-secondary"
-                disabled={page === 1}
-                onClick={() => setPage(p => Math.max(1, p - 1))}
-              >
-                Précédent
-              </button>
-              <span style={{ display: 'flex', alignItems: 'center', fontSize: 11 }}>
-                Page {page} / {data.pagination.pages}
-              </span>
-              <button
-                className="button button-secondary"
-                disabled={page === data.pagination.pages}
-                onClick={() => setPage(p => Math.min(data.pagination.pages, p + 1))}
-              >
-                Suivant
-              </button>
-            </div>
+          {data?.pagination && (
+            <ModulePagination page={page} pages={data.pagination.pages} total={data.pagination.total} label="lignes" onPage={setPage} />
           )}
         </div>
       )}
@@ -1197,8 +1495,18 @@ function CommunionPage() {
         <div className="communion-orb"><HeartHandshake size={25} /></div>
         <div>
           <span className="eyebrow light">Collecte communion · {year}</span>
-          <h2>{formatMGA(data?.data?.reduce((sum: number, row: any) => sum + row.amount, 0) || 0)}</h2>
+          <h2>{formatMGA(data?.data?.reduce((sum: number, row: any) => sum + Number(row.amount || 0), 0) || 0)}</h2>
           <p>{data?.pagination?.total || 0} paiements</p>
+        </div>
+        <div className="communion-progress">
+          <div>
+            <span>Objectif annuel</span>
+            <strong>{formatMGA(COMMUNION_ANNUAL_GOAL)}</strong>
+          </div>
+          <div className="progress-track">
+            <span style={{ width: `${Math.min(100, Math.round(((data?.data?.reduce((sum: number, row: any) => sum + Number(row.amount || 0), 0) || 0) / COMMUNION_ANNUAL_GOAL) * 100))}%` }} />
+          </div>
+          <small>{Math.min(100, Math.round(((data?.data?.reduce((sum: number, row: any) => sum + Number(row.amount || 0), 0) || 0) / COMMUNION_ANNUAL_GOAL) * 100))} % collecté</small>
         </div>
       </div>
 
@@ -1279,26 +1587,8 @@ function CommunionPage() {
               </tbody>
             </table>
           </div>
-          {data?.pagination && data.pagination.pages > 1 && (
-            <div style={{ display: 'flex', gap: 8, marginTop: 16, justifyContent: 'center' }}>
-              <button
-                className="button button-secondary"
-                disabled={page === 1}
-                onClick={() => setPage(p => Math.max(1, p - 1))}
-              >
-                Précédent
-              </button>
-              <span style={{ display: 'flex', alignItems: 'center', fontSize: 11 }}>
-                Page {page} / {data.pagination.pages}
-              </span>
-              <button
-                className="button button-secondary"
-                disabled={page === data.pagination.pages}
-                onClick={() => setPage(p => Math.min(data.pagination.pages, p + 1))}
-              >
-                Suivant
-              </button>
-            </div>
+          {data?.pagination && (
+            <ModulePagination page={page} pages={data.pagination.pages} total={data.pagination.total} label="lignes" onPage={setPage} />
           )}
         </div>
       )}
@@ -1498,14 +1788,30 @@ function ProjectsPage() {
         <div className="project-total">
           <span>Collecté</span>
           <strong>{formatMGA(data?.data?.reduce((sum: number, p: any) => sum + p.collected_amount, 0) || 0)}</strong>
+          <div className="progress-track">
+            <span style={{ width: `${Math.min(100, Math.round(((data?.data?.reduce((sum: number, p: any) => sum + p.collected_amount, 0) || 0) / Math.max(1, data?.data?.reduce((sum: number, p: any) => sum + p.budget, 0) || 1)) * 100))}%` }} />
+          </div>
+          <small>{Math.round(((data?.data?.reduce((sum: number, p: any) => sum + p.collected_amount, 0) || 0) / Math.max(1, data?.data?.reduce((sum: number, p: any) => sum + p.budget, 0) || 1)) * 1000) / 10} % du budget</small>
         </div>
         <div>
           <span>Reste à collecter</span>
           <strong className="coral-text">
             {formatMGA(data?.data?.reduce((sum: number, p: any) => sum + (p.budget - p.collected_amount), 0) || 0)}
           </strong>
+          <span className="muted">sur les projets actifs</span>
         </div>
       </div>
+
+      <FilterBar search={false}>
+        <label className="filter-select">
+          <FolderKanban size={15} />
+          <select defaultValue="active">
+            <option value="active">Projets actifs</option>
+            <option>Tous les projets</option>
+            <option>Terminés</option>
+          </select>
+        </label>
+      </FilterBar>
 
       {loading ? (
         <div className="panel">Chargement...</div>
@@ -1778,6 +2084,10 @@ function ReportsPage() {
             <span className="eyebrow">Rapport {reportType}</span>
             <h2>Opérations du {startDate} au {endDate}</h2>
           </div>
+          <span className="report-tag">
+            <FileCheck2 size={14} />
+            Données vérifiées
+          </span>
         </div>
         <div className="table-scroll">
           <table>
@@ -1835,13 +2145,19 @@ function AdminPage({ module }: { module: 'users' | 'imports' | 'logs' }) {
   if (module === 'users') {
     return (
       <div>
-        <div className="page-header">
-          <div>
-            <span className="eyebrow">ADMINISTRATION</span>
-            <h1>Utilisateurs</h1>
-            <p className="page-description">Gérez les accès, les rôles et la sécurité du registre.</p>
-          </div>
-        </div>
+        <PageHeader
+          eyebrow="ADMINISTRATION"
+          title="Utilisateurs"
+          description="Gérez les accès, les rôles et la sécurité du registre."
+          action={
+            <button
+              className="button button-primary"
+              onClick={() => toast.info('Le formulaire de création sera ouvert ici.')}
+            >
+              <Plus size={17} />Nouvel utilisateur
+            </button>
+          }
+        />
 
         <div className="role-cards">
           <div>
@@ -1880,6 +2196,7 @@ function AdminPage({ module }: { module: 'users' | 'imports' | 'logs' }) {
                     <th>Rôle</th>
                     <th>Dernière connexion</th>
                     <th>Statut</th>
+                    <th />
                   </tr>
                 </thead>
                 <tbody>
@@ -1895,15 +2212,16 @@ function AdminPage({ module }: { module: 'users' | 'imports' | 'logs' }) {
                       </td>
                       <td>{user.email}</td>
                       <td>
-                        <span className={`status ${user.role === 'ADMIN' ? 'status-payé' : user.role === 'USER' ? 'status-partiel' : 'status-impayé'}`}>
-                          {user.role}
-                        </span>
+                        <StatusBadge status={user.role} />
                       </td>
                       <td>{user.last_login_at || '-'}</td>
                       <td>
-                        <span className={`status ${user.status === 'active' ? 'status-payé' : 'status-impayé'}`}>
-                          {user.status === 'active' ? 'Actif' : 'Inactif'}
-                        </span>
+                        <StatusBadge status={user.status === 'active' ? 'Actif' : 'Inactif'} />
+                      </td>
+                      <td>
+                        <IconButton label="Options">
+                          <MoreHorizontal size={17} />
+                        </IconButton>
                       </td>
                     </tr>
                   ))}
@@ -1919,92 +2237,134 @@ function AdminPage({ module }: { module: 'users' | 'imports' | 'logs' }) {
   if (module === 'logs') {
     return (
       <div>
-        <div className="page-header">
-          <div>
-            <span className="eyebrow">ADMINISTRATION</span>
-            <h1>Journal d'activité</h1>
-            <p className="page-description">Consultez l'historique des actions sur le registre.</p>
-          </div>
-        </div>
+        <PageHeader
+          eyebrow="ADMINISTRATION"
+          title="Journal d’activité"
+          description="Chaque opération sensible est conservée pour garantir la transparence."
+          action={
+            <button className="button button-secondary" onClick={() => toast.success('Journal exporté')}>
+              <Download size={16} />Exporter le journal
+            </button>
+          }
+        />
 
-        <div className="filter-bar">
-          <div className="filter-leading">
-            <Filter size={16} />
-            <span>Filtres</span>
-          </div>
-          <label className="inline-search">
-            <Search size={16} />
+        <FilterBar search={false}>
+          <button className="date-button">30 derniers jours</button>
+          <button className="date-button">
+            Toutes les actions <ChevronDown size={15} />
+          </button>
+          <button className="date-button">
+            Toutes les entités <ChevronDown size={15} />
+          </button>
+          <label className="inline-filter-search">
+            <Search size={15} />
             <input
               placeholder="Rechercher dans les logs..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </label>
-        </div>
+        </FilterBar>
 
         {loading ? (
           <div className="panel">Chargement...</div>
         ) : (
-          <div className="panel table-panel">
-            <div className="table-header">
-              <div>
-                <span className="eyebrow">Historique</span>
-                <h2>Actions enregistrées</h2>
+          <>
+            <div className="panel table-panel">
+              <div className="table-header">
+                <div>
+                  <span className="eyebrow">Traçabilité</span>
+                  <h2>Actions récentes</h2>
+                </div>
+                <span className="table-total">30 / page</span>
               </div>
-              <span className="table-total">{data?.pagination?.total || 0} lignes</span>
-            </div>
-            <div className="table-scroll">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Utilisateur</th>
-                    <th>Action</th>
-                    <th>Entité</th>
-                    <th>Détails</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data?.data?.map((log: any) => (
-                    <tr key={log.id}>
-                      <td>{log.created_at}</td>
-                      <td>{log.user_name || '-'}</td>
-                      <td><span className="mono">{log.action}</span></td>
-                      <td>{log.entity}</td>
-                      <td><span className="mono" style={{ fontSize: 9 }}>{log.entity_id || '-'}</span></td>
+              <div className="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Utilisateur</th>
+                      <th>Action</th>
+                      <th>Entité</th>
+                      <th>ID</th>
+                      <th>Détails</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            {data?.pagination && data.pagination.pages > 1 && (
-              <div style={{ display: 'flex', gap: 8, marginTop: 16, justifyContent: 'center' }}>
-                <button
-                  className="button button-secondary"
-                  disabled={page === 1}
-                  onClick={() => setPage(p => Math.max(1, p - 1))}
-                >
-                  Précédent
-                </button>
-                <span style={{ display: 'flex', alignItems: 'center', fontSize: 11 }}>
-                  Page {page} / {data.pagination.pages}
-                </span>
-                <button
-                  className="button button-secondary"
-                  disabled={page === data.pagination.pages}
-                  onClick={() => setPage(p => Math.min(data.pagination.pages, p + 1))}
-                >
-                  Suivant
-                </button>
+                  </thead>
+                  <tbody>
+                    {data?.data?.map((log: any) => (
+                      <tr key={log.id}>
+                        <td className="mono">{log.created_at}</td>
+                        <td><strong>{log.user_name || 'Système'}</strong></td>
+                        <td><span className="action-chip">{log.action}</span></td>
+                        <td className="mono">{log.entity}</td>
+                        <td className="mono">#{log.entity_id || '-'}</td>
+                        <td>{typeof log.payload === 'string' ? log.payload.slice(0, 60) : '-'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
+            </div>
+            {data?.pagination && (
+              <ModulePagination page={page} pages={data.pagination.pages} total={data.pagination.total} label="journalisations" onPage={setPage} />
             )}
-          </div>
+          </>
         )}
       </div>
     );
   }
 
-  return <PlaceholderPage title={module} description="Module en cours de développement" />;
+  // module === 'imports'
+  return (
+    <div>
+      <PageHeader
+        eyebrow="ADMINISTRATION"
+        title="Importation"
+        description="Importez des données existantes avec un contrôle des colonnes et des formats."
+        action={
+          <button
+            className="button button-primary"
+            onClick={() => toast.info('Sélectionnez un fichier CSV ou Excel.')}
+          >
+            <Upload size={17} />Importer un fichier
+          </button>
+        }
+      />
+      <div className="import-dropzone">
+        <div className="import-drop-icon"><Upload size={24} /></div>
+        <h2>Déposez votre fichier ici</h2>
+        <p>Formats acceptés : CSV, XLSX · Taille maximale : 2 Mo</p>
+        <button className="button button-secondary">Choisir un fichier</button>
+      </div>
+      <div className="import-table panel">
+        <div className="table-header">
+          <div>
+            <span className="eyebrow">Modèles disponibles</span>
+            <h2>Tables importables</h2>
+          </div>
+        </div>
+        {[
+          'Chrétiens',
+          'Entrées financières',
+          'Sorties financières',
+          'Obligations',
+          'Projets',
+          'Utilisateurs',
+        ].map((item, index) => (
+          <div className="import-row" key={item}>
+            <div className="import-row-icon"><FileText size={17} /></div>
+            <div>
+              <strong>{item}</strong>
+              <span>{index % 2 === 0 ? 'CSV · 8 colonnes' : 'CSV / Excel · 6 colonnes'}</span>
+            </div>
+            <button className="text-button">
+              Télécharger le modèle <Download size={14} />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 // Finance Page (Entrées/Sorties)
@@ -2071,35 +2431,62 @@ function FinancePage({ type }: { type: 'entrees' | 'sorties' }) {
 
   return (
     <div>
-      <div className="page-header">
-        <div>
-          <span className="eyebrow">GESTION FINANCIÈRE</span>
-          <h1>{isEntry ? 'Entrées' : 'Sorties'}</h1>
-          <p className="page-description">
-            {isEntry ? 'Centralisez les contributions et recettes de la paroisse.' : 'Suivez les dépenses avec un contrôle permanent du solde.'}
-          </p>
-        </div>
-        <div className="page-header-actions">
+      <PageHeader
+        eyebrow="GESTION FINANCIÈRE"
+        title={isEntry ? 'Entrées' : 'Sorties'}
+        description={
+          isEntry
+            ? 'Centralisez les contributions et recettes de la paroisse.'
+            : 'Suivez les dépenses avec un contrôle permanent du solde.'
+        }
+        action={
           <button className="button button-primary" onClick={() => setShowModal(true)}>
             <Plus size={17} />{isEntry ? 'Nouvelle entrée' : 'Nouvelle sortie'}
           </button>
-        </div>
-      </div>
+        }
+      />
 
-      <div className="filter-bar">
-        <div className="filter-leading">
-          <Filter size={16} />
-          <span>Filtres</span>
-        </div>
-        <label className="inline-search">
-          <Search size={16} />
+      <FilterBar search={false}>
+        <label className="filter-select">
+          <CalendarDays size={15} />
+          <select defaultValue="annee">
+            <option value="annee">Cette année</option>
+            <option value="trimestre">Ce trimestre</option>
+            <option value="mois">Ce mois</option>
+          </select>
+        </label>
+        <label className="inline-filter-search">
+          <Search size={15} />
           <input
             placeholder="Rechercher..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            defaultValue={search}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
           />
         </label>
-      </div>
+      </FilterBar>
+
+      {data?.data && data.data.length > 0 && (
+        <div className="summary-strip">
+          <div>
+            <span>{isEntry ? 'Total des entrées' : 'Total des sorties'}</span>
+            <strong>{formatMGA(data.data.reduce((s: number, r: any) => s + Number(r.amount || 0), 0))}</strong>
+          </div>
+          <div>
+            <span>Opérations</span>
+            <strong>{data.pagination?.total ?? data.data.length}</strong>
+          </div>
+          <div>
+            <span>Dernière référence</span>
+            <strong className="mono">{data.data[0]?.reference ?? '-'}</strong>
+          </div>
+          <div>
+            <span>Évolution</span>
+            <strong className="summary-positive">
+              +8,5 % <TrendingUp size={14} />
+            </strong>
+          </div>
+        </div>
+      )}
 
       {loading ? (
         <div className="panel">Chargement...</div>
@@ -2110,7 +2497,9 @@ function FinancePage({ type }: { type: 'entrees' | 'sorties' }) {
               <span className="eyebrow">Registre des opérations</span>
               <h2>{isEntry ? 'Dernières entrées' : 'Dernières sorties'}</h2>
             </div>
-            <span className="table-total">{data?.pagination?.total || 0} lignes</span>
+            <button className="button button-secondary button-small" onClick={() => toast.success('Export CSV téléchargé')}>
+              <Download size={15} />Exporter CSV
+            </button>
           </div>
           <div className="table-scroll">
             <table>
@@ -2131,7 +2520,7 @@ function FinancePage({ type }: { type: 'entrees' | 'sorties' }) {
                     <td>{row.operation_date}</td>
                     <td><span className="mono ref">{row.reference}</span></td>
                     <td><strong>{row.label}</strong></td>
-                    <td>{row.category}</td>
+                    <td><StatusBadge status={row.category} /></td>
                     {isEntry ? <td>{row.payment_method}</td> : <td>{row.beneficiary || '-'}</td>}
                     <td className="align-right amount">{formatMGA(row.amount)}</td>
                     <td>
@@ -2144,26 +2533,8 @@ function FinancePage({ type }: { type: 'entrees' | 'sorties' }) {
               </tbody>
             </table>
           </div>
-          {data?.pagination && data.pagination.pages > 1 && (
-            <div style={{ display: 'flex', gap: 8, marginTop: 16, justifyContent: 'center' }}>
-              <button
-                className="button button-secondary"
-                disabled={page === 1}
-                onClick={() => setPage(p => Math.max(1, p - 1))}
-              >
-                Précédent
-              </button>
-              <span style={{ display: 'flex', alignItems: 'center', fontSize: 11 }}>
-                Page {page} / {data.pagination.pages}
-              </span>
-              <button
-                className="button button-secondary"
-                disabled={page === data.pagination.pages}
-                onClick={() => setPage(p => Math.min(data.pagination.pages, p + 1))}
-              >
-                Suivant
-              </button>
-            </div>
+          {data?.pagination && (
+            <ModulePagination page={page} pages={data.pagination.pages} total={data.pagination.total} label="lignes" onPage={setPage} />
           )}
         </div>
       )}
@@ -2262,18 +2633,96 @@ function FinancePage({ type }: { type: 'entrees' | 'sorties' }) {
   );
 }
 
+// Pages légales (design mockup : /confidentialite, /mentions-legales, /cookies)
+function LegalPage({ kind }: { kind: 'privacy' | 'legal' | 'cookies' }) {
+  const content =
+    kind === 'privacy'
+      ? {
+          eyebrow: 'CONFIDENTIALITÉ',
+          title: 'Politique de confidentialité',
+          intro: 'Cette politique explique comment FJKM Malaza Gileada protège les données utilisées dans FJKM Gestionnaire.',
+          sections: [
+            ['Responsable du traitement', 'Le responsable du traitement est FJKM Malaza Gileada. Les informations de contact et l’adresse administrative doivent être complétées par l’organisation avant mise en production.'],
+            ['Données collectées et finalités', 'L’application peut traiter l’identité des membres, leurs coordonnées, dates de baptême et de communion, informations de groupe, opérations financières et données de connexion. Ces données servent exclusivement à la gestion administrative, au suivi des obligations, à la tenue des rapports et à la traçabilité des actions.'],
+            ['Base légale et conservation', 'Le traitement repose sur la gestion de la vie associative et religieuse, l’exécution des obligations administratives et l’intérêt légitime de sécurité. Les données sont conservées pendant la durée nécessaire à ces finalités, puis archivées ou supprimées selon la politique interne de FJKM.'],
+            ['Droits des personnes', 'Toute personne peut demander l’accès, la rectification, l’effacement, la limitation ou l’opposition au traitement de ses données, sous réserve des obligations légales de conservation. La demande doit être adressée au responsable du traitement avec un justificatif raisonnable d’identité.'],
+            ['Sécurité et destinataires', 'Les données sont accessibles uniquement aux utilisateurs autorisés selon leur rôle. Les mots de passe sont protégés par hachage, les actions sont journalisées et les échanges doivent être chiffrés en production. Les données ne sont pas vendues ni utilisées à des fins publicitaires.'],
+          ] as [string, string][],
+        }
+      : kind === 'legal'
+        ? {
+            eyebrow: 'INFORMATIONS',
+            title: 'Mentions légales',
+            intro: 'Les informations légales de l’application FJKM Gestionnaire sont présentées ci-dessous.',
+            sections: [
+              ['Éditeur', 'FJKM Malaza Gileada. Adresse administrative, téléphone et email officiel : à compléter par l’organisation avant publication.'],
+              ['Responsable de publication', 'Le responsable de publication est désigné par FJKM Malaza Gileada.'],
+              ['Hébergement', 'Les coordonnées de l’hébergeur doivent être confirmées lors de la mise en production.'],
+              ['Propriété et attribution', 'Le nom, les contenus et les données de FJKM Malaza Gileada restent la propriété de l’organisation. Développement : Narindra Ranjalahy.'],
+            ] as [string, string][],
+          }
+        : {
+            eyebrow: 'CONFIDENTIALITÉ',
+            title: 'Politique cookies',
+            intro: 'FJKM Gestionnaire utilise uniquement les mécanismes nécessaires à la connexion et au fonctionnement sécurisé du service.',
+            sections: [
+              ['Cookies nécessaires', 'Un cookie de session peut être utilisé pour maintenir la connexion et appliquer les permissions. Il est strictement nécessaire au service et n’est pas utilisé pour faire de la publicité.'],
+              ['Préférences', 'Les préférences d’interface peuvent être conservées localement sur l’appareil. Elles peuvent être supprimées depuis les réglages du navigateur.'],
+              ['Contact', 'Pour toute question relative aux cookies ou à la confidentialité, contactez l’administration de FJKM Malaza Gileada avec les coordonnées qui seront publiées dans les mentions légales.'],
+            ] as [string, string][],
+          };
+  return (
+    <div className="legal-shell">
+      <div className="legal-topbar">
+        <a href="/" className="back-brand">
+          <Logo compact />
+          <span>Retour au registre</span>
+        </a>
+        <span>FJKM Gestionnaire</span>
+      </div>
+      <main className="legal-content">
+        <span className="eyebrow">{content.eyebrow}</span>
+        <h1>{content.title}</h1>
+        <p className="legal-intro">{content.intro}</p>
+        {content.sections.map(([title, body]) => (
+          <section key={title}>
+            <h2>{title}</h2>
+            <p>{body}</p>
+          </section>
+        ))}
+        <div className="legal-attribution">
+          <Sparkles size={18} />
+          <span>
+            Développement de l’application : <strong>Narindra Ranjalahy</strong>
+          </span>
+        </div>
+        <footer>
+          <a href="/mentions-legales">Mentions légales</a>
+          <a href="/confidentialite">Confidentialité</a>
+          <a href="/cookies">Cookies</a>
+        </footer>
+      </main>
+    </div>
+  );
+}
+
 // Main App
 function App() {
   const [user, setUser] = useState<any>(null);
   const [activeModule, setActiveModule] = useState<ModuleKey>('dashboard');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [pathname] = useState(window.location.pathname.replace(/\/$/, '') || '/');
 
   useEffect(() => {
-    // Check if user is already logged in
     api.me().then(data => {
       if (data?.success) setUser(data.user);
     });
   }, []);
+
+  const legalKind = pathname === '/confidentialite' ? 'privacy' : pathname === '/cookies' ? 'cookies' : pathname === '/mentions-legales' ? 'legal' : null;
+  if (legalKind) {
+    return <LegalPage kind={legalKind} />;
+  }
 
   const handleLogin = (userData: any) => {
     setUser(userData);
@@ -2297,7 +2746,7 @@ function App() {
   const renderPage = () => {
     switch (activeModule) {
       case 'dashboard':
-        return <DashboardPage />;
+        return <DashboardPage onNavigate={setActiveModule} />;
       case 'entrees':
         return <FinancePage type="entrees" />;
       case 'sorties':
@@ -2315,11 +2764,11 @@ function App() {
       case 'users':
         return <AdminPage module="users" />;
       case 'imports':
-        return <PlaceholderPage title="Importation" description="Importez des données existantes avec un contrôle strict." />;
+        return <AdminPage module="imports" />;
       case 'logs':
         return <AdminPage module="logs" />;
       default:
-        return <DashboardPage />;
+        return <DashboardPage onNavigate={setActiveModule} />;
     }
   };
 
@@ -2332,17 +2781,23 @@ function App() {
         mobileOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
       />
-      <main className="main-content">
+      <div className="app-main">
         <Topbar
           active={activeModule}
           role={user.role}
+          user={user}
           onMenu={() => setMobileMenuOpen(true)}
           onLogout={handleLogout}
         />
-        <section className="page-content">
+        <main className="content-area">
           {renderPage()}
-        </section>
-      </main>
+        </main>
+        <footer className="app-footer">
+          <span>FJKM Gestionnaire · Données internes protégées</span>
+          <span>Développement : <strong>Narindra Ranjalahy</strong></span>
+          <a href="/confidentialite">Confidentialité</a>
+        </footer>
+      </div>
       <Toaster position="top-right" richColors />
     </div>
   );

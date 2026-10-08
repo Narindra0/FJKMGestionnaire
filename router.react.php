@@ -28,7 +28,7 @@ if (str_starts_with($uri, '/api/')) {
 }
 
 // Servir le frontend React build
-if ($uri === '/' || $uri === '/index.html') {
+if ($uri === '/' || $uri === '/index.html' || in_array($uri, ['/confidentialite', '/mentions-legales', '/cookies'], true)) {
   $reactIndex = $publicPath . '/react/index.html';
   if (file_exists($reactIndex)) {
     header('Content-Type: text/html; charset=utf-8');

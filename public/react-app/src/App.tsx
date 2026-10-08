@@ -3,6 +3,7 @@ import { Toaster, toast } from 'sonner';
 import { LayoutDashboard, Users, ArrowDownToLine, ArrowUpFromLine, HandCoins, HeartHandshake, FolderKanban, FileBarChart, ShieldCheck, ClipboardList, Menu, LogOut, ChevronRight, Check, X, Search, Bell, Plus, Download, Filter, CalendarDays, TrendingUp, CircleDollarSign, WalletCards, MoreHorizontal, Settings, FileText, ArrowDownLeft, ArrowUpRight, UserRound, BookOpen, Upload, ChevronDown, Sparkles, FileCheck2 } from 'lucide-react';
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import './index.css';
+import logoUrl from './assets/logo.png';
 
 // Types
 type Role = 'ADMIN' | 'USER' | 'VISITEUR';
@@ -197,18 +198,12 @@ const navSections = [
 ];
 
 // Components
-function Logo({ compact = false }: { compact?: boolean }) {
+// Logo officiel (PNG blanc). `tone="light"` le laisse blanc sur fond sombre,
+// `tone="dark"` bascule automatiquement en noir (filtre CSS) sur fond clair.
+function Logo({ compact = false, tone = 'dark' }: { compact?: boolean; tone?: 'light' | 'dark' }) {
   return (
-    <div className={`brand ${compact ? 'brand-compact' : ''}`}>
-      <div className="brand-mark">
-        <span>F</span><span>J</span><span>K</span><span>M</span>
-      </div>
-      {!compact && (
-        <div>
-          <strong>FJKM</strong>
-          <small>GESTIONNAIRE</small>
-        </div>
-      )}
+    <div className={`brand brand-logo logo-${tone} ${compact ? 'brand-compact' : ''}`}>
+      <img src={logoUrl} alt="FJKM Gestionnaire" className="logo-img" />
     </div>
   );
 }
@@ -398,7 +393,7 @@ function LoginPage({ onLogin }: { onLogin: (user: any) => void }) {
         <div className="login-orbit orbit-one" />
         <div className="login-orbit orbit-two" />
         <div className="login-visual-content">
-          <Logo />
+          <Logo tone="light" />
           <span className="eyebrow light">Registre communautaire</span>
           <h1>Une gestion claire pour une communauté engagée.</h1>
           <p>Suivez les obligations, les contributions et les projets de FJKM Malaza Gileada dans un même espace de confiance.</p>

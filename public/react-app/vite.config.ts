@@ -1,8 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [react()],
+  // En build (production Apache), on sert le SPA depuis /react/ pour que les
+  // assets soient des fichiers reels (public/react/assets/*) et eviter toute
+  // collision avec les assets legacy de public/assets. En dev, on reste a la racine.
+  base: command === 'build' ? '/react/' : '/',
   server: {
     port: 3000,
     proxy: {
@@ -13,8 +17,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: '../dist/react',
+    outDir: '../react',
     emptyOutDir: true,
   },
-  base: '/', // Base path pour le build servi à la racine
-});
+}));

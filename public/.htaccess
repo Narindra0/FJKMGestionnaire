@@ -6,11 +6,22 @@
 # SÉCURITÉ
 # ============================
 <IfModule mod_rewrite.c>
-    Options -Indexes
+    Options -Indexes +FollowSymLinks
     RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^ index.php [QSA,L]
+
+    # 1) API REST (backend PHP) -> transmise au point d'entrée index.php.
+    #    La requête conserve son URI /api/... et le routeur la dirige vers api.php.
+    RewriteRule ^api/ index.php [QSA,L]
+
+    # 2) Fichiers réels (assets React sous /react/, manifest.json, service-worker, etc.)
+    #    sont servis directement par Apache.
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # 3) Toute autre route (/ , /confidentialite , /mentions-legales , /cookies ,
+    #    routes internes React...) -> application React (SPA). Le backend et la base
+    #    restent inchangés : ils ne sont appelés que via /api.
+    RewriteRule ^ react/index.html [L]
 </IfModule>
 
 <FilesMatch "\.(env|env\.example|ini|log|sql|md)$">

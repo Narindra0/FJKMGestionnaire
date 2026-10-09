@@ -8,6 +8,7 @@ import logoUrl from './assets/logo.png';
 // celle de l'application dans le bundle, et ses sélecteurs préfixés
 // .landing-shell neutralisent les conflits de noms (.brand, .button...).
 import Landing from './pages/Landing';
+import PublicFlux from './pages/PublicFlux';
 
 // Types
 type Role = 'ADMIN' | 'USER' | 'VISITEUR';
@@ -2896,11 +2897,13 @@ function App() {
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Route publique : '/' affiche la landing ; les pages légales sont publiques ;
-  // '/login' mène au formulaire ; tout le reste (modules) exige une session.
+  // Route publique : '/' affiche la landing ; '/consultation' l'espace public
+  // de lecture seule ; les pages légales sont publiques ; '/login' mène au
+  // formulaire ; tout le reste (modules) exige une session.
   const isLanding = pathname === '/';
+  const isConsultation = pathname === '/consultation';
   const legalKind = pathname === '/confidentialite' ? 'privacy' : pathname === '/cookies' ? 'cookies' : pathname === '/mentions-legales' ? 'legal' : null;
-  const isPublic = isLanding || legalKind !== null;
+  const isPublic = isLanding || isConsultation || legalKind !== null;
 
   useEffect(() => {
     api.me().then(data => {
@@ -2926,6 +2929,11 @@ function App() {
       window.history.replaceState(null, '', '/login');
     }
   }, [authChecked, user, isPublic]);
+
+  if (isConsultation) {
+    // Espace public : aucune session requise, données agrégées en lecture seule.
+    return <PublicFlux />;
+  }
 
   if (isLanding) {
     return (

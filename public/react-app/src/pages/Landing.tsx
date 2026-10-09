@@ -16,6 +16,7 @@ import {
   Menu,
   MessageCircle,
   ShieldCheck,
+  TrendingUp,
   Users,
   WalletCards,
   X,
@@ -87,7 +88,7 @@ const steps = [
 const questions = [
   {
     question: "Qui peut accéder à l’application ?",
-    answer: "L’accès est réservé aux membres habilités de FJKM Malaza Gileada. Les rôles ADMIN, USER et VISITEUR définissent les accès selon les responsabilités confiées.",
+    answer: "La gestion (saisie, modification, rapports détaillés) est réservée aux membres habilités de FJKM Malaza Gileada, avec les rôles ADMIN, USER et VISITEUR. Un espace public de consultation permet à chacun de suivre les grands flux d’entrées et sorties d’argent, en lecture seule et sans mot de passe.",
   },
   {
     question: "Que se passe-t-il si j’oublie mon mot de passe ?",
@@ -109,6 +110,7 @@ const questions = [
 
 const navItems = [
   ["Fonctionnalités", "#fonctionnalites"],
+  ["Consultation", "/consultation"],
   ["Sécurité", "#securite"],
   ["Verset du jour", "#verset"],
   ["Équipe", "#equipe"],
@@ -273,9 +275,10 @@ export default function Landing({ authed = false }: LandingProps) {
               <p className="hero-description">Suivez les obligations, les contributions, les fidèles et les projets de votre paroisse dans un même espace de confiance.</p>
               <div className="hero-actions">
                 <a className="button button-light" href={ctaHref}>{ctaLabel} <CtaArrow size={17} aria-hidden="true" /></a>
-                <a className="button button-outline" href="#fonctionnalites">Découvrir les fonctionnalités <ArrowDownToLine size={16} aria-hidden="true" /></a>
+                <a className="button button-outline" href="/consultation">Consulter les flux publics <TrendingUp size={16} aria-hidden="true" /></a>
+                <a className="button button-ghost" href="#fonctionnalites">Découvrir les fonctionnalités <ArrowDownToLine size={16} aria-hidden="true" /></a>
               </div>
-              <p className="hero-note"><ShieldCheck size={15} aria-hidden="true" /> Accès réservé aux membres habilités</p>
+              <p className="hero-note"><ShieldCheck size={15} aria-hidden="true" /> Gestion réservée aux membres habilités · flux agrégés consultables par tous, en lecture seule</p>
             </div>
             <DashboardPreview />
           </div>
@@ -430,6 +433,9 @@ export default function Landing({ authed = false }: LandingProps) {
             <h2 id="closing-title">Rejoignez l’espace de gestion<br /><em>de votre communauté.</em></h2>
             <p>Accès réservé aux membres habilités de FJKM Malaza Gileada.</p>
             <a className="button button-light" href={ctaHref}>{ctaLabel} <CtaArrow size={17} aria-hidden="true" /></a>
+            <p className="closing-alt">
+              Pas de compte ? <a href="/consultation">Consulter l’aperçu public des flux <TrendingUp size={15} aria-hidden="true" /></a>
+            </p>
           </div>
           <div className="closing-scripture-mark" aria-hidden="true"><BookOpen size={26} strokeWidth={1.3} /></div>
         </section>

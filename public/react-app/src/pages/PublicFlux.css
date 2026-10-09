@@ -1,0 +1,558 @@
+/* Page publique de consultation des flux — thème aligné sur la landing.
+   Tous les sélecteurs sont préfixés .flux-page pour cohabiter avec
+   Landing.css et index.css sans collision. */
+
+.flux-page .flux-header-title {
+  display: grid;
+  margin-right: auto;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.flux-page .flux-header-title small {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.flux-page .flux-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Bandeau d'introduction, dans l'esprit du hero de la landing. */
+.flux-page .flux-hero {
+  padding: 96px 0 74px;
+  background: var(--navy);
+  color: var(--paper);
+  position: relative;
+  overflow: clip;
+}
+
+.flux-page .flux-hero h1 {
+  max-width: 720px;
+  margin: 18px 0 14px;
+  color: var(--paper);
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.flux-page .flux-hero h1 em {
+  color: var(--soft-gold);
+  font-style: normal;
+}
+
+.flux-page .flux-hero .hero-eyebrow {
+  color: var(--soft-gold);
+}
+
+.flux-page .flux-hero-copy {
+  max-width: 640px;
+  margin: 0 0 28px;
+  color: rgb(255 253 249 / 76%);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.flux-page .flux-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.flux-page .flux-years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.flux-page .flux-year-pill {
+  min-width: 64px;
+  padding: 8px 14px;
+  border: 1px solid rgb(255 253 249 / 28%);
+  border-radius: 999px;
+  background: transparent;
+  color: rgb(255 253 249 / 78%);
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
+}
+
+.flux-page .flux-year-pill:hover:not(:disabled) {
+  border-color: var(--soft-gold);
+  color: var(--paper);
+}
+
+.flux-page .flux-year-pill.is-active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy);
+}
+
+.flux-page .flux-year-pill:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.flux-page .flux-refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: rgb(255 253 249 / 8%);
+  color: rgb(255 253 249 / 78%);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.flux-page .flux-refresh:hover:not(:disabled) {
+  background: rgb(255 253 249 / 14%);
+}
+
+.flux-page .flux-refresh:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+@keyframes flux-spin {
+  to { transform: rotate(360deg); }
+}
+
+.flux-page .flux-refresh .is-spinning {
+  animation: flux-spin 900ms linear infinite;
+}
+
+/* Corps de page */
+.flux-page .flux-content {
+  padding: 44px 0 64px;
+}
+
+.flux-page .flux-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 70px 0;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.flux-page .flux-loading-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: flux-pulse 1s ease-in-out infinite;
+}
+
+@keyframes flux-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Cartes de synthèse */
+.flux-page .flux-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.flux-page .flux-kpi {
+  display: grid;
+  gap: 4px;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: 0 10px 24px rgb(16 42 67 / 5%);
+}
+
+.flux-page .flux-kpi-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 8px;
+  place-items: center;
+  border-radius: 10px;
+}
+
+.flux-page .flux-kpi-in .flux-kpi-icon { background: rgb(40 125 104 / 12%); color: var(--green); }
+.flux-page .flux-kpi-out .flux-kpi-icon { background: rgb(201 92 85 / 12%); color: var(--coral); }
+.flux-page .flux-kpi-balance .flux-kpi-icon { background: rgb(197 139 58 / 14%); color: var(--gold); }
+.flux-page .flux-kpi-balance.is-negative .flux-kpi-icon { background: rgb(201 92 85 / 12%); color: var(--coral); }
+
+.flux-page .flux-kpi-label {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.flux-page .flux-kpi-value {
+  color: var(--navy);
+  font-size: clamp(19px, 2.2vw, 25px);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.flux-page .flux-kpi-balance.is-negative .flux-kpi-value { color: var(--coral); }
+
+.flux-page .flux-kpi small {
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* Panneaux */
+.flux-page .flux-panel {
+  margin-bottom: 24px;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: 0 10px 24px rgb(16 42 67 / 5%);
+}
+
+.flux-page .flux-panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 20px;
+}
+
+.flux-page .flux-panel-head h2 {
+  margin: 8px 0 0;
+  color: var(--navy);
+  font-family: "DM Sans", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.flux-page .flux-panel-head-compact {
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.flux-page .flux-legend {
+  display: flex;
+  gap: 16px;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.flux-page .flux-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.flux-page .flux-legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+}
+
+.flux-page .flux-legend-in { background: var(--green); }
+.flux-page .flux-legend-out { background: var(--coral); }
+
+.flux-page .flux-chart {
+  width: 100%;
+}
+
+.flux-page .flux-tooltip {
+  display: grid;
+  gap: 3px;
+  padding: 10px 13px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--paper);
+  box-shadow: 0 10px 20px rgb(16 42 67 / 14%);
+  font-size: 11px;
+}
+
+.flux-page .flux-tooltip strong {
+  color: var(--navy);
+  font-family: "DM Sans", sans-serif;
+}
+
+.flux-page .flux-tooltip-in { color: var(--green); }
+.flux-page .flux-tooltip-out { color: var(--coral); }
+
+/* Catégories */
+.flux-page .flux-two-col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.flux-page .flux-two-col .flux-panel {
+  margin-bottom: 24px;
+}
+
+.flux-page .flux-category-list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flux-page .flux-category-list > li {
+  display: grid;
+  gap: 5px;
+}
+
+.flux-page .flux-category-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.flux-page .flux-category-name {
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.flux-page .flux-category-amount {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.flux-page .flux-category-track {
+  height: 7px;
+  border-radius: 999px;
+  background: var(--ivory);
+  overflow: hidden;
+}
+
+.flux-page .flux-category-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.flux-page .flux-category-fill-in { background: var(--green); }
+.flux-page .flux-category-fill-out { background: var(--coral); }
+
+.flux-page .flux-category-list small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.flux-page .flux-empty {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Tableau des mouvements */
+.flux-page .flux-readonly-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  border: 1px solid rgb(40 125 104 / 35%);
+  border-radius: 999px;
+  background: rgb(40 125 104 / 8%);
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.flux-page .flux-table-wrap {
+  overflow-x: auto;
+}
+
+.flux-page .flux-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.flux-page .flux-table th {
+  padding: 0 14px 11px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.flux-page .flux-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--ivory);
+  color: var(--ink);
+}
+
+.flux-page .flux-table tbody tr:hover {
+  background: var(--ivory);
+}
+
+.flux-page .flux-table-amount {
+  text-align: right;
+}
+
+.flux-page .flux-table th.flux-table-amount {
+  text-align: right;
+}
+
+.flux-page .flux-amount-in { color: var(--green); font-weight: 700; }
+.flux-page .flux-amount-out { color: var(--coral); font-weight: 700; }
+
+.flux-page .flux-type-pill {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.flux-page .flux-type-in { background: rgb(40 125 104 / 11%); color: var(--green); }
+.flux-page .flux-type-out { background: rgb(201 92 85 / 11%); color: var(--coral); }
+
+.flux-page .flux-table-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 10.5px;
+  line-height: 1.7;
+}
+
+/* Bandeau confidentialité / rappel lecture seule */
+.flux-page .flux-privacy-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  padding: 22px 26px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--ivory);
+}
+
+.flux-page .flux-privacy-strip > svg {
+  flex: 0 0 auto;
+  color: var(--green);
+}
+
+.flux-page .flux-privacy-strip p {
+  flex: 1 1 320px;
+  margin: 0;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.flux-page .flux-privacy-strip strong {
+  color: var(--navy);
+}
+
+.flux-page .flux-error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-color: rgb(201 92 85 / 35%);
+}
+
+.flux-page .flux-error p {
+  margin: 0;
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.flux-page .flux-empty-state {
+  text-align: center;
+  padding: 54px 26px;
+}
+
+.flux-page .flux-empty-state h2 {
+  margin: 10px 0 8px;
+  color: var(--navy);
+  font-family: "DM Sans", sans-serif;
+  font-size: 20px;
+}
+
+.flux-page .flux-empty-state p {
+  margin: 0 auto;
+  max-width: 460px;
+  color: var(--ink);
+  font-size: 12px;
+}
+
+/* Adaptation mobile */
+@media (max-width: 850px) {
+  .flux-page .flux-hero {
+    padding: 64px 0 54px;
+  }
+
+  .flux-page .flux-refresh {
+    margin-left: 0;
+  }
+
+  .flux-page .flux-kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .flux-page .flux-two-col {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .flux-page .flux-panel {
+    padding: 20px 18px;
+  }
+
+  .flux-page .flux-toolbar {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .flux-page .header-inner {
+    min-height: 66px;
+    gap: 10px;
+  }
+
+  .flux-page .flux-header-title small {
+    display: none;
+  }
+
+  .flux-page .flux-header-actions .button-outline {
+    display: none;
+  }
+
+  .flux-page .flux-privacy-strip {
+    padding: 18px;
+  }
+}

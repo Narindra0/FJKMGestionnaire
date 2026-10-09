@@ -1512,3 +1512,34 @@ html:has(.landing-shell) {
 @media (max-width: 900px) {
   .dev-contacts { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
 }
+
+/* Accès à l'espace public de consultation (hero + section de fermeture). */
+.landing-shell .button-ghost {
+  border-color: transparent;
+  background: transparent;
+  color: rgb(255 253 249 / 74%) !important;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 253 249 / 26%);
+  text-underline-offset: 4px;
+}
+
+.landing-shell .button-ghost:hover {
+  color: var(--paper) !important;
+  text-decoration-color: var(--soft-gold);
+}
+
+.closing-inner .closing-alt {
+  margin: 16px 0 0;
+  color: rgb(255 253 249 / 62%);
+  font-size: 12px;
+}
+
+.closing-inner .closing-alt a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--soft-gold);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

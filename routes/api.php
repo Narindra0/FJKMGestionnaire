@@ -8,12 +8,19 @@ use App\Controllers\ApiController;
 use App\Controllers\HealthController;
 use App\Controllers\ReportApiController;
 use App\Controllers\ImportApiController;
+use App\Controllers\PublicFluxController;
 
 // === Routes publiques (authentification) ===
 $router->post('/api/auth/login', [ApiController::class, 'login']);
 
 // === Monitoring (Uptime Robot) ===
 $router->get('/api/health', [HealthController::class, 'index']);
+
+// === Espace public de consultation (lecture seule, sans mot de passe) ===
+// Données agrégées uniquement : totaux, séries mensuelles, catégories,
+// derniers mouvements sans champ nominatif. Aucune mutation possible :
+// seules des routes GET existent.
+$router->get('/api/public/flux', [PublicFluxController::class, 'overview']);
 
 // === Routes protégées (nécessitent AuthMiddleware) ===
 

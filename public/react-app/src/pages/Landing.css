@@ -1543,3 +1543,96 @@ html:has(.landing-shell) {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* Sélecteur de langue (landing + vue publique) : discret, en-tête clair
+   par défaut ; variante .lang-switch-light pour les fonds navy. */
+.landing-shell .lang-switch {
+  position: relative;
+  display: inline-flex;
+}
+
+.landing-shell .lang-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--navy);
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+
+.landing-shell .lang-trigger:hover {
+  border-color: var(--gold);
+}
+
+.landing-shell .lang-menu {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 7px);
+  right: 0;
+  min-width: 168px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  box-shadow: 0 14px 26px rgb(16 42 67 / 14%);
+}
+
+.landing-shell .lang-option {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 11px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.landing-shell .lang-option:hover {
+  background: var(--ivory);
+}
+
+.landing-shell .lang-option.is-active {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.landing-shell .lang-option-code {
+  color: var(--muted);
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.landing-shell .lang-option.is-active .lang-option-code {
+  color: var(--gold);
+}
+
+.landing-shell .lang-option > svg {
+  margin-left: auto;
+  color: var(--green);
+}
+
+/* Variante sur fond sombre (header public si besoin). */
+.landing-shell .lang-switch-light .lang-trigger {
+  border-color: rgb(255 253 249 / 28%);
+  background: rgb(255 253 249 / 8%);
+  color: var(--paper);
+}
+
+.landing-shell .lang-switch-light .lang-trigger:hover {
+  border-color: var(--soft-gold);
+}

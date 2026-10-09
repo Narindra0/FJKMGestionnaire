@@ -217,8 +217,14 @@ export default function Landing({ authed = false }: LandingProps) {
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+          const element = entry.target as HTMLElement;
+          element.classList.add("is-visible");
+          // Les styles en ligne survivent aux re-rendus React : sans eux,
+          // un clic en FAQ (changement de className) ferait disparaître
+          // les items déjà révélés, l'observateur ne les surveille plus.
+          element.style.opacity = "1";
+          element.style.transform = "translateY(0)";
+          observer.unobserve(element);
         }
       }
     }, { threshold: 0.12 });

@@ -266,6 +266,25 @@ html:has(.landing-shell) {
   color: var(--paper);
 }
 
+/* Photo du temple FJKM Malaza Gileada, voilée de bleu marine :
+   le texte du hero et la carte d'aperçu restent pleinement lisibles. */
+.hero-section::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  background: url("../assets/eglise-malaza.jpeg") center 28% / cover no-repeat;
+  opacity: 0.34;
+}
+
+.hero-section::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background: linear-gradient(100deg, rgb(13 34 55 / 0.96) 0%, rgb(16 42 67 / 0.86) 45%, rgb(16 42 67 / 0.52) 100%);
+}
+
 .hero-grid {
   position: relative;
   z-index: 2;

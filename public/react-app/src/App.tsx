@@ -2778,35 +2778,39 @@ function LegalPage({ kind }: { kind: 'privacy' | 'legal' | 'cookies' }) {
       ? {
           eyebrow: 'CONFIDENTIALITÉ',
           title: 'Politique de confidentialité',
-          intro: 'Cette politique explique comment FJKM Malaza Gileada protège les données utilisées dans FJKM Gestionnaire.',
+          intro: 'FJKM Gestionnaire est un outil interne au service de la paroisse FJKM Malaza Gileada. Cette politique explique, en langage clair, comment les données utilisées dans l’application sont collectées, protégées et utilisées.',
           sections: [
-            ['Responsable du traitement', 'Le responsable du traitement est FJKM Malaza Gileada. Les informations de contact et l’adresse administrative doivent être complétées par l’organisation avant mise en production.'],
-            ['Données collectées et finalités', 'L’application peut traiter l’identité des membres, leurs coordonnées, dates de baptême et de communion, informations de groupe, opérations financières et données de connexion. Ces données servent exclusivement à la gestion administrative, au suivi des obligations, à la tenue des rapports et à la traçabilité des actions.'],
-            ['Base légale et conservation', 'Le traitement repose sur la gestion de la vie associative et religieuse, l’exécution des obligations administratives et l’intérêt légitime de sécurité. Les données sont conservées pendant la durée nécessaire à ces finalités, puis archivées ou supprimées selon la politique interne de FJKM.'],
-            ['Droits des personnes', 'Toute personne peut demander l’accès, la rectification, l’effacement, la limitation ou l’opposition au traitement de ses données, sous réserve des obligations légales de conservation. La demande doit être adressée au responsable du traitement avec un justificatif raisonnable d’identité.'],
-            ['Sécurité et destinataires', 'Les données sont accessibles uniquement aux utilisateurs autorisés selon leur rôle. Les mots de passe sont protégés par hachage, les actions sont journalisées et les échanges doivent être chiffrés en production. Les données ne sont pas vendues ni utilisées à des fins publicitaires.'],
+            ['Responsable du traitement', 'Le responsable du traitement est FJKM Malaza Gileada (Antananarivo, Madagascar). L’application n’a aucune vocation commerciale : elle sert uniquement à la gestion administrative de la paroisse.'],
+            ['Données collectées et finalités', 'L’application traite l’identité des membres (nom, matricule, groupe, coordonnées), les dates de baptême et de communion, les opérations financières (obligations, entrées, sorties, communion, projets) et les journaux de connexion. Ces données servent exclusivement au suivi des obligations, à la tenue des registres et des rapports, et à la traçabilité des actions des responsables habilités.'],
+            ['Base légale et durée de conservation', 'Le traitement repose sur la gestion de la vie associative et religieuse, le respect des obligations administratives de l’Église et l’intérêt légitime de sécurité des registres. Les données sont conservées le temps nécessaire à ces finalités, puis archivées ou supprimées selon la politique interne de la paroisse.'],
+            ['Droits des personnes', 'Toute personne peut demander l’accès, la rectification, l’effacement ou la limitation du traitement de ses données, sous réserve des obligations légales de conservation des registres paroissiaux. La demande est adressée à l’administration de la paroisse, accompagnée d’un justificatif raisonnable d’identité.'],
+            ['Sécurité et destinataires', 'Les données sont accessibles uniquement aux utilisateurs habilités, selon leur rôle (ADMIN, USER, VISITEUR). Les mots de passe sont hachés, les sessions sont sécurisées, les actions sont journalisées et les échanges transitent en HTTPS. Les données ne sont ni vendues, ni partagées à des fins publicitaires.'],
+            ['Contact', 'Pour toute question relative à vos données : administration de FJKM Malaza Gileada, ou pour les aspects techniques le Lead Développeur, Narindra Ranjalahy (Ranjalahy.narindraa@gmail.com).'],
           ] as [string, string][],
         }
       : kind === 'legal'
         ? {
             eyebrow: 'INFORMATIONS',
             title: 'Mentions légales',
-            intro: 'Les informations légales de l’application FJKM Gestionnaire sont présentées ci-dessous.',
+            intro: 'Conformément aux usages en vigueur, les informations suivantes précisent qui édite, publie et héberge l’application FJKM Gestionnaire.',
             sections: [
-              ['Éditeur', 'FJKM Malaza Gileada. Adresse administrative, téléphone et email officiel : à compléter par l’organisation avant publication.'],
-              ['Responsable de publication', 'Le responsable de publication est désigné par FJKM Malaza Gileada.'],
-              ['Hébergement', 'Les coordonnées de l’hébergeur doivent être confirmées lors de la mise en production.'],
-              ['Propriété et attribution', 'Le nom, les contenus et les données de FJKM Malaza Gileada restent la propriété de l’organisation. Développement : Narindra Ranjalahy.'],
+              ['Éditeur', 'FJKM Malaza Gileada — paroisse de la FJKM (Fiangonan’i Jesoa Kristy eto Madagasikara), Antananarivo, Madagascar. L’application est un outil interne de gestion administrative au service de la communauté.'],
+              ['Responsable de publication', 'La publication est placée sous l’autorité du bureau de FJKM Malaza Gileada, qui valide les contenus, les accès et les évolutions du service.'],
+              ['Conception et développement', 'Lead Développeur du projet : Narindra Ranjalahy. Contact : Ranjalahy.narindraa@gmail.com · WhatsApp : 032 88 140 81 · Portfolio : https://narindraportfolio.netlify.app'],
+              ['Hébergement', 'L’application est hébergée sur la plateforme Render (Render, Inc., San Francisco, États-Unis), qui assure la disponibilité du service, le chiffrement HTTPS et la sauvegarde des données.'],
+              ['Propriété intellectuelle et attribution', 'Le nom, les contenus et les registres relatifs à FJKM Malaza Gileada restent la propriété de l’organisation. Le code applicatif est développé pour son usage exclusif. Le corpus biblique du « Message du jour » provient du dépôt public baiboly-json (RaveloMevaSoavina) ; l’édition exacte et les droits de reproduction sont en cours de confirmation par l’organisation.'],
+              ['Signalement', 'Tout signalement relatif à ce site (contenu, sécurité, données) peut être adressé au développeur aux coordonnées indiquées dans la rubrique « Conception et développement ».'],
             ] as [string, string][],
           }
         : {
             eyebrow: 'CONFIDENTIALITÉ',
             title: 'Politique cookies',
-            intro: 'FJKM Gestionnaire utilise uniquement les mécanismes nécessaires à la connexion et au fonctionnement sécurisé du service.',
+            intro: 'FJKM Gestionnaire utilise uniquement les mécanismes strictement nécessaires à la connexion et au bon fonctionnement sécurisé du service. Aucun cookie publicitaire ou de suivi tiers n’est déposé.',
             sections: [
-              ['Cookies nécessaires', 'Un cookie de session peut être utilisé pour maintenir la connexion et appliquer les permissions. Il est strictement nécessaire au service et n’est pas utilisé pour faire de la publicité.'],
-              ['Préférences', 'Les préférences d’interface peuvent être conservées localement sur l’appareil. Elles peuvent être supprimées depuis les réglages du navigateur.'],
-              ['Contact', 'Pour toute question relative aux cookies ou à la confidentialité, contactez l’administration de FJKM Malaza Gileada avec les coordonnées qui seront publiées dans les mentions légales.'],
+              ['Cookies nécessaires', 'Un cookie de session, strictement nécessaire, maintient la connexion et applique les permissions du rôle. Il ne survit pas volontairement au-delà de la session et ne fait l’objet d’aucune exploitation publicitaire.'],
+              ['Préférences locales', 'Certaines préférences d’interface (affichage, menu) peuvent être conservées localement sur l’appareil, pour le confort d’usage. Elles se suppriment à tout moment depuis les réglages du navigateur.'],
+              ['Mesures de périmètre', 'L’application est réservée aux membres habilités de FJKM Malaza Gileada ; elle n’a pas vocation à auditer des visiteurs à des fins statistiques.'],
+              ['Contact', 'Pour toute question relative aux cookies ou à la confidentialité : administration de FJKM Malaza Gileada, ou le Lead Développeur pour les aspects techniques (Ranjalahy.narindraa@gmail.com).'],
             ] as [string, string][],
           };
   return (
@@ -2831,7 +2835,10 @@ function LegalPage({ kind }: { kind: 'privacy' | 'legal' | 'cookies' }) {
         <div className="legal-attribution">
           <Sparkles size={18} />
           <span>
-            Développement de l’application : <strong>Narindra Ranjalahy</strong>
+            Conception et développement : <strong>Narindra Ranjalahy</strong>, Lead Développeur du projet ·{' '}
+            <a href="mailto:Ranjalahy.narindraa@gmail.com">Ranjalahy.narindraa@gmail.com</a> ·{' '}
+            <a href="https://wa.me/261328814081" target="_blank" rel="noopener noreferrer">WhatsApp 032 88 140 81</a> ·{' '}
+            <a href="https://narindraportfolio.netlify.app" target="_blank" rel="noopener noreferrer">Portfolio</a>
           </span>
         </div>
         <footer>

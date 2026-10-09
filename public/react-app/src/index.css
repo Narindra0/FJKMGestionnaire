@@ -1439,3 +1439,5 @@ tbody tr:hover {
 .notfound-card h1{color:var(--navy);font:600 30px 'DM Sans';margin:10px 0 12px}
 .notfound-card p{color:var(--muted);font-size:13px;line-height:1.7;margin:0 0 24px}
 .import-drop-active{border-color:var(--gold);background:rgba(197,139,58,.06)}
+
+.legal-attribution a{text-decoration:underline;text-underline-offset:2px}

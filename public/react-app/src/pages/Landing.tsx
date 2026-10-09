@@ -8,10 +8,13 @@ import {
   ChevronDown,
   FileBarChart,
   FolderKanban,
+  Globe,
   HandCoins,
   HeartHandshake,
   LayoutDashboard,
+  Mail,
   Menu,
+  MessageCircle,
   ShieldCheck,
   Users,
   WalletCards,
@@ -108,18 +111,17 @@ const navItems = [
   ["Fonctionnalités", "#fonctionnalites"],
   ["Sécurité", "#securite"],
   ["Verset du jour", "#verset"],
+  ["Équipe", "#equipe"],
   ["FAQ", "#faq"],
 ];
 
 function Brand({ light = false }: { light?: boolean }) {
+  // Choix produit : sur le site public, seul le logo est affiché ;
+  // l'accessibilité (nom du lien) conserve l'intitulé complet.
   return (
     <a className={`brand${light ? " brand-light" : ""}`} href="#accueil" aria-label="FJKM Gestionnaire — accueil">
       <span className="brand-symbol">
         <img src={logoUrl} alt="" />
-      </span>
-      <span className="brand-copy">
-        <span className="brand-name"><strong>Gestionnaire</strong></span>
-        <span className="brand-parish">FJKM Malaza Gileada</span>
       </span>
     </a>
   );
@@ -382,6 +384,39 @@ export default function Landing({ authed = false }: LandingProps) {
           </div>
         </section>
 
+        <section className="dev-section section-space" id="equipe" aria-labelledby="dev-title">
+          <div className="site-container">
+            <div className="dev-card reveal">
+              <span className="dev-seal" aria-hidden="true">NR</span>
+              <span className="eyebrow">LE PROJET ET SON ARTISAN</span>
+              <h2 id="dev-title">Narindra Ranjalahy</h2>
+              <p className="dev-role">Lead Développeur — FJKM Gestionnaire</p>
+              <p className="dev-copy">
+                À la conception et au développement de cet outil de gestion, du premier écran jusqu’à la mise
+                en ligne. Une question sur le fonctionnement ou une envie de faire évoluer l’application ?
+                Il est à l’écoute de la communauté.
+              </p>
+              <div className="dev-contacts">
+                <a className="dev-contact" href="mailto:Ranjalahy.narindraa@gmail.com">
+                  <Mail size={20} aria-hidden="true" />
+                  <small>E-mail</small>
+                  <strong>Ranjalahy.narindraa@gmail.com</strong>
+                </a>
+                <a className="dev-contact" href="https://wa.me/261328814081" target="_blank" rel="noopener noreferrer">
+                  <MessageCircle size={20} aria-hidden="true" />
+                  <small>WhatsApp</small>
+                  <strong>032 88 140 81</strong>
+                </a>
+                <a className="dev-contact" href="https://narindraportfolio.netlify.app" target="_blank" rel="noopener noreferrer">
+                  <Globe size={20} aria-hidden="true" />
+                  <small>Portfolio</small>
+                  <strong>narindraportfolio.netlify.app</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="closing-section" aria-labelledby="closing-title">
           <div className="closing-ornament" aria-hidden="true" />
           <div className="site-container closing-inner reveal">
@@ -408,7 +443,7 @@ export default function Landing({ authed = false }: LandingProps) {
           <div className="footer-values-block">
             <span className="footer-label">UNE GESTION AU SERVICE DE L’ÉGLISE</span>
             <p>Un outil de confiance pour une communauté engagée.</p>
-            <span className="footer-credit">Développement : Narindra Ranjalahy</span>
+            <span className="footer-credit">Développement : <a href="#equipe">Narindra Ranjalahy</a>, Lead Développeur</span>
           </div>
         </div>
         <div className="site-container footer-bottom">

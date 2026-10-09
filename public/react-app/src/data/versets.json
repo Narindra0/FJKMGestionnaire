@@ -1,0 +1,1242 @@
+{
+  "version": "1.0",
+  "translation": "Baiboly Malagasy (édition non précisée dans le dépôt)",
+  "source": "https://github.com/RaveloMevaSoavina/baiboly-json.git",
+  "sourceCommit": "4e64660b8eeb31cd9a967be8e1292a87b8c9ea77",
+  "license": "Aucune licence de reproduction n'est indiquée dans le dépôt au moment de l'extraction ; droits à confirmer avant toute publication.",
+  "verses": [
+    {
+      "id": 1,
+      "ref": "Salamo 16:8",
+      "book": "Salamo",
+      "chapter": 16,
+      "verse": 8,
+      "text": "Ataoko eo anatrehako foana i Jehovah. Tsy hangozohozo mihitsy aho satria izy eo ankavanako.",
+      "theme": "foi"
+    },
+    {
+      "id": 2,
+      "ref": "Salamo 23:1",
+      "book": "Salamo",
+      "chapter": 23,
+      "verse": 1,
+      "text": "I Jehovah no Mpiandry ahy. Tsy ho ory na inona na inona aho.",
+      "theme": "provision"
+    },
+    {
+      "id": 3,
+      "ref": "Salamo 23:4",
+      "book": "Salamo",
+      "chapter": 23,
+      "verse": 4,
+      "text": "Na dia mamakivaky lohasaha maizim-pito aza aho, Dia tsy misy loza atahorako, Satria ianao no eo anilako. Manome toky ahy ny tsorakazonao sy ny tehinao.",
+      "theme": "paix"
+    },
+    {
+      "id": 4,
+      "ref": "Salamo 27:1",
+      "book": "Salamo",
+      "chapter": 27,
+      "verse": 1,
+      "text": "I Jehovah no mpanazava sy mpamonjy ahy, Koa iza no hatahorako? I Jehovah no manda miaro ny aiko, Koa iza no haharaiki-tahotra ahy?",
+      "theme": "foi"
+    },
+    {
+      "id": 5,
+      "ref": "Salamo 34:8",
+      "book": "Salamo",
+      "chapter": 34,
+      "verse": 8,
+      "text": "Andramo dia ho hitanao fa tsara i Jehovah; Sambatra ny olona mialoka aminy. י [ Yôda ]",
+      "theme": "foi"
+    },
+    {
+      "id": 6,
+      "ref": "Salamo 37:3",
+      "book": "Salamo",
+      "chapter": 37,
+      "verse": 3,
+      "text": "Matokia an’i Jehovah ka manaova ny tsara; Aoka ianao honina amin’ny tany sy ho mendri-pitokisana amin’izay ataonao.",
+      "theme": "esperance"
+    },
+    {
+      "id": 7,
+      "ref": "Salamo 37:5",
+      "book": "Salamo",
+      "chapter": 37,
+      "verse": 5,
+      "text": "Ankino amin’i Jehovah ny lalanao; Miantehera aminy, dia hanampy anao izy.",
+      "theme": "foi"
+    },
+    {
+      "id": 8,
+      "ref": "Salamo 46:1",
+      "book": "Salamo",
+      "chapter": 46,
+      "verse": 1,
+      "text": "Fialofana sy hery ho antsika Andriamanitra. Vonona hanampy foana izy amin’ny fotoan-tsarotra.",
+      "theme": "paix"
+    },
+    {
+      "id": 9,
+      "ref": "Salamo 46:10",
+      "book": "Salamo",
+      "chapter": 46,
+      "verse": 10,
+      "text": "“Ekeo hoe resy ianareo, ary fantaro fa izaho no Andriamanitra. Hisandratra eo amin’ireo firenena aho, Ary hisandratra eran-tany.”",
+      "theme": "paix"
+    },
+    {
+      "id": 10,
+      "ref": "Salamo 55:22",
+      "book": "Salamo",
+      "chapter": 55,
+      "verse": 22,
+      "text": "Apetraho amin’i Jehovah izay manavesatra anao, Fa hanohana anao izy. Tsy havelany hianjera mihitsy ny olo-marina.",
+      "theme": "paix"
+    },
+    {
+      "id": 11,
+      "ref": "Salamo 62:8",
+      "book": "Salamo",
+      "chapter": 62,
+      "verse": 8,
+      "text": "Matokia azy foana ianareo, rey olona ô! Aborahy aminy ny ao am-ponareo. Fialofana ho antsika Andriamanitra. ( Sela )",
+      "theme": "foi"
+    },
+    {
+      "id": 12,
+      "ref": "Salamo 73:26",
+      "book": "Salamo",
+      "chapter": 73,
+      "verse": 26,
+      "text": "Mety hihareraka ny vatako sy ny foko, Fa Andriamanitra kosa no vatolampin’ny foko sy anjarako mandrakizay.",
+      "theme": "esperance"
+    },
+    {
+      "id": 13,
+      "ref": "Salamo 84:11",
+      "book": "Salamo",
+      "chapter": 84,
+      "verse": 11,
+      "text": "Fa masoandro sy ampinga i Jehovah Andriamanitra; Mankasitraka sy manome voninahitra izy. I Jehovah dia tsy hiahotra ny hanome zava-tsoa Ho an’ireo tsy mivadika.",
+      "theme": "foi"
+    },
+    {
+      "id": 14,
+      "ref": "Salamo 91:1",
+      "book": "Salamo",
+      "chapter": 91,
+      "verse": 1,
+      "text": "Izay mipetraka ao amin’ny toerana miafin’ny Avo Indrindra, Dia honina ao ambany alok’Ilay Mahery Indrindra.",
+      "theme": "foi"
+    },
+    {
+      "id": 15,
+      "ref": "Salamo 91:2",
+      "book": "Salamo",
+      "chapter": 91,
+      "verse": 2,
+      "text": "Hilaza amin’i Jehovah aho hoe: “Fialofako ianao, ary manda fiarovana ho ahy, Andriamanitro izay itokisako.”",
+      "theme": "foi"
+    },
+    {
+      "id": 16,
+      "ref": "Salamo 100:2",
+      "book": "Salamo",
+      "chapter": 100,
+      "verse": 2,
+      "text": "Manompoa an’i Jehovah sady mifalia. Mankanesa eo anatrehany sady mihobia.",
+      "theme": "service"
+    },
+    {
+      "id": 17,
+      "ref": "Salamo 103:2",
+      "book": "Salamo",
+      "chapter": 103,
+      "verse": 2,
+      "text": "Hidera an’i Jehovah aho! Tsy hohadinoiko mihitsy anie izay rehetra nataony!",
+      "theme": "provision"
+    },
+    {
+      "id": 18,
+      "ref": "Salamo 103:8",
+      "book": "Salamo",
+      "chapter": 103,
+      "verse": 8,
+      "text": "Mamindra fo sy mangoraka i Jehovah, Sady tsy mora tezitra ary tena be fitiavana sy tsy mivadika.",
+      "theme": "amour"
+    },
+    {
+      "id": 19,
+      "ref": "Salamo 118:24",
+      "book": "Salamo",
+      "chapter": 118,
+      "verse": 24,
+      "text": "Izao no andro nataon’i Jehovah; Hifaly sy hiravoravo isika mandritra izany.",
+      "theme": "esperance"
+    },
+    {
+      "id": 20,
+      "ref": "Salamo 119:105",
+      "book": "Salamo",
+      "chapter": 119,
+      "verse": 105,
+      "text": "Jiro ho an’ny tongotro ny teninao, Sady fahazavana ho an’ny lalako.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 21,
+      "ref": "Salamo 121:1",
+      "book": "Salamo",
+      "chapter": 121,
+      "verse": 1,
+      "text": "Manopy maso eny amin’ny tendrombohitra aho. Avy aiza no hahazoako fanampiana?",
+      "theme": "esperance"
+    },
+    {
+      "id": 22,
+      "ref": "Salamo 121:2",
+      "book": "Salamo",
+      "chapter": 121,
+      "verse": 2,
+      "text": "Avy amin’i Jehovah no ahazoako fanampiana, Avy amin’ilay Mpanao ny lanitra sy ny tany.",
+      "theme": "foi"
+    },
+    {
+      "id": 23,
+      "ref": "Salamo 121:7",
+      "book": "Salamo",
+      "chapter": 121,
+      "verse": 7,
+      "text": "Hiambina anao mba tsy hiharan’ny loza mihitsy i Jehovah. Hiaro ny ainao izy.",
+      "theme": "provision"
+    },
+    {
+      "id": 24,
+      "ref": "Salamo 133:1",
+      "book": "Salamo",
+      "chapter": 133,
+      "verse": 1,
+      "text": "Tsara sy mahafinaritra erỳ Rehefa miara-monina sady miray saina ny mpirahalahy!",
+      "theme": "amour"
+    },
+    {
+      "id": 25,
+      "ref": "Salamo 139:14",
+      "book": "Salamo",
+      "chapter": 139,
+      "verse": 14,
+      "text": "Midera anao aho, satria mahagaga sy mahatalanjona ny fomba nanaovanao ahy. Mahatalanjona ny asanao, Ary tena fantatro tsara izany.",
+      "theme": "foi"
+    },
+    {
+      "id": 26,
+      "ref": "Salamo 143:8",
+      "book": "Salamo",
+      "chapter": 143,
+      "verse": 8,
+      "text": "Ataovy maheno momba ny fitiavanao sy ny tsy fivadihanao aho amin’ny maraina, Fa matoky anao. Ampahafantaro ahy ny lalana tokony halehako, Satria ianao no ianteherako.",
+      "theme": "foi"
+    },
+    {
+      "id": 27,
+      "ref": "Salamo 145:9",
+      "book": "Salamo",
+      "chapter": 145,
+      "verse": 9,
+      "text": "Manao soa amin’ny rehetra i Jehovah, Ary hita amin’izay rehetra ataony fa mamindra fo izy. י [ Yôda ]",
+      "theme": "amour"
+    },
+    {
+      "id": 28,
+      "ref": "Salamo 145:18",
+      "book": "Salamo",
+      "chapter": 145,
+      "verse": 18,
+      "text": "Akaiky an’izay rehetra miantso azy i Jehovah, Dia izay rehetra miantso azy araka ny fahamarinana. ר [ Resa ]",
+      "theme": "foi"
+    },
+    {
+      "id": 29,
+      "ref": "Ohabolana 3:5",
+      "book": "Ohabolana",
+      "chapter": 3,
+      "verse": 5,
+      "text": "Matokia an’i Jehovah amin’ny fonao manontolo, Fa aza miantehitra amin’ny fahaizanao.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 30,
+      "ref": "Ohabolana 3:6",
+      "book": "Ohabolana",
+      "chapter": 3,
+      "verse": 6,
+      "text": "Eritrereto izy amin’izay rehetra ataonao, Dia hataony mandeha tsara ny fiainanao.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 31,
+      "ref": "Ohabolana 3:13",
+      "book": "Ohabolana",
+      "chapter": 3,
+      "verse": 13,
+      "text": "Sambatra ny olona mahita fahendrena, Sy ny olona lasa mahay mandinika.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 32,
+      "ref": "Ohabolana 3:17",
+      "book": "Ohabolana",
+      "chapter": 3,
+      "verse": 17,
+      "text": "Mahafinaritra ny lalany, Ary hahita fiadanana izay mandeha amin’ny lalany rehetra.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 33,
+      "ref": "Ohabolana 10:12",
+      "book": "Ohabolana",
+      "chapter": 10,
+      "verse": 12,
+      "text": "Ny fankahalana no mampiady olona, Fa ny fitiavana indray manarona ny fahadisoana rehetra.",
+      "theme": "amour"
+    },
+    {
+      "id": 34,
+      "ref": "Ohabolana 11:25",
+      "book": "Ohabolana",
+      "chapter": 11,
+      "verse": 25,
+      "text": "Handeha tsara ny fiainan’izay tia manome, Ary izay manome rano dia homena rano koa.",
+      "theme": "provision"
+    },
+    {
+      "id": 35,
+      "ref": "Ohabolana 12:25",
+      "book": "Ohabolana",
+      "chapter": 12,
+      "verse": 25,
+      "text": "Ny tebiteby ao am-pon’ny olona no mahakivy azy, Fa ny teny mampahery kosa no mahafalifaly azy.",
+      "theme": "paix"
+    },
+    {
+      "id": 36,
+      "ref": "Ohabolana 16:3",
+      "book": "Ohabolana",
+      "chapter": 16,
+      "verse": 3,
+      "text": "Ankino amin’i Jehovah daholo izay ataonao, Dia hahomby izay kasainao hatao.",
+      "theme": "foi"
+    },
+    {
+      "id": 37,
+      "ref": "Ohabolana 16:9",
+      "book": "Ohabolana",
+      "chapter": 16,
+      "verse": 9,
+      "text": "Mety ho efa mandamina tsara an’izay hataony ny olona, ao am-pony ao, Nefa i Jehovah no mitarika ny diany.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 38,
+      "ref": "Ohabolana 16:24",
+      "book": "Ohabolana",
+      "chapter": 16,
+      "verse": 24,
+      "text": "Toho-tantely ny teny mahafinaritra, Ka sady mamy no manasitrana ny taolana.",
+      "theme": "amour"
+    },
+    {
+      "id": 39,
+      "ref": "Ohabolana 17:17",
+      "book": "Ohabolana",
+      "chapter": 17,
+      "verse": 17,
+      "text": "Tia amin’ny fotoana rehetra ny tena namana, Sady tena rahalahy natao hanampy amin’ny fotoan-tsarotra.",
+      "theme": "amour"
+    },
+    {
+      "id": 40,
+      "ref": "Ohabolana 18:10",
+      "book": "Ohabolana",
+      "chapter": 18,
+      "verse": 10,
+      "text": "Ny anaran’i Jehovah dia tilikambo mafy. Mihazakazaka mankao ny olo-marina ka voaro.",
+      "theme": "foi"
+    },
+    {
+      "id": 41,
+      "ref": "Ohabolana 19:17",
+      "book": "Ohabolana",
+      "chapter": 19,
+      "verse": 17,
+      "text": "Izay miantra ny mahantra dia mampisambotra an’i Jehovah, Ka Izy no hamaly ny soa nataony.",
+      "theme": "service"
+    },
+    {
+      "id": 42,
+      "ref": "Ohabolana 22:9",
+      "book": "Ohabolana",
+      "chapter": 22,
+      "verse": 9,
+      "text": "Hotahina izay tia manome, Satria mizara ny sakafony amin’ny mahantra.",
+      "theme": "service"
+    },
+    {
+      "id": 43,
+      "ref": "Ohabolana 24:3",
+      "book": "Ohabolana",
+      "chapter": 24,
+      "verse": 3,
+      "text": "Fahendrena no ilain’izay hanorina trano, Ary fahaiza-mandinika no ilaina mba hahamafy orina azy.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 44,
+      "ref": "Ohabolana 24:14",
+      "book": "Ohabolana",
+      "chapter": 24,
+      "verse": 14,
+      "text": "Fantaro koa fa mahasoa anao ny fahendrena. Raha mahazo an’izany ianao, dia ho tsara ny hoavinao, Ary tsy ho foana ny fanantenanao.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 45,
+      "ref": "Ohabolana 27:17",
+      "book": "Ohabolana",
+      "chapter": 27,
+      "verse": 17,
+      "text": "Ny vy no mandranitra ny vy, Ary toy ny mandranitra ny namany koa ny olona rehefa manampy azy.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 46,
+      "ref": "Ohabolana 31:26",
+      "book": "Ohabolana",
+      "chapter": 31,
+      "verse": 26,
+      "text": "Hita hoe hendry izy rehefa miteny, Ary ny lalàn’ny hatsaram-panahy no eo am-bavany. צ [ Tsade ]",
+      "theme": "sagesse"
+    },
+    {
+      "id": 47,
+      "ref": "Isaia 26:3",
+      "book": "Isaia",
+      "chapter": 26,
+      "verse": 3,
+      "text": "Harovanao izay miantehitra tanteraka aminao. Hampiadaninao foana izy ireo, Satria ianao no itokisany.",
+      "theme": "paix"
+    },
+    {
+      "id": 48,
+      "ref": "Isaia 40:31",
+      "book": "Isaia",
+      "chapter": 40,
+      "verse": 31,
+      "text": "Fa izay manantena an’i Jehovah kosa hahazo hery indray. Hanidina ambony izy ireo, hoatran’ny hoe manana elatry ny voromahery. Hihazakazaka izy nefa tsy ho vizana, Ary handeha nefa tsy ho reraka.”",
+      "theme": "esperance"
+    },
+    {
+      "id": 49,
+      "ref": "Isaia 41:10",
+      "book": "Isaia",
+      "chapter": 41,
+      "verse": 10,
+      "text": "Aza matahotra fa manohana anao aho. Aza manahy fa izaho no Andriamanitrao. Hanatanjaka anao aho ka hanampy anao. Hitazona anao mafy amin’ny tanako ankavanana aho, dia ny tanako manao ny rariny.’",
+      "theme": "foi"
+    },
+    {
+      "id": 50,
+      "ref": "Isaia 43:2",
+      "book": "Isaia",
+      "chapter": 43,
+      "verse": 2,
+      "text": "Hanampy anao aho rehefa miampita rano ianao. Tsy ho tondraka sy tsy handifotra anao ny renirano rehefa miampita eny ianao. Tsy ho may ianao rehefa mandeha eo amin’ny afo, Ary tsy handoro anao ny lelafo.",
+      "theme": "foi"
+    },
+    {
+      "id": 51,
+      "ref": "Isaia 54:10",
+      "book": "Isaia",
+      "chapter": 54,
+      "verse": 10,
+      "text": "Fa na hesorina aza ny tendrombohitra, Ary na hihozongozona aza ny havoana, Dia mbola ho tia anao sy tsy hivadika aminao aho, Ary tsy ho rava ny fifanekem-pihavanana ataoko aminao”, hoy i Jehovah, Ilay mamindra fo aminao.",
+      "theme": "paix"
+    },
+    {
+      "id": 52,
+      "ref": "Isaia 55:12",
+      "book": "Isaia",
+      "chapter": 55,
+      "verse": 12,
+      "text": "Ho falifaly mantsy ianareo rehefa handeha, Ary hiadana rehefa hoentina mody. Hifaly sy hihoby eo anatrehanareo ny tendrombohitra sy ny havoana, Dia hitehaka daholo ny hazo any an-tsaha.",
+      "theme": "esperance"
+    },
+    {
+      "id": 53,
+      "ref": "Isaia 58:11",
+      "book": "Isaia",
+      "chapter": 58,
+      "verse": 11,
+      "text": "Hitarika anao foana i Jehovah, Ka hataony afa-po ianao, na dia any amin’ny tany karakaina aza. Hanatanjaka ny taolanao izy, Ka ho lasa hoatran’ny tanimboly azon-drano tsara ianao, Hoatran’ny loharano tsy mety ritra.",
+      "theme": "provision"
+    },
+    {
+      "id": 54,
+      "ref": "Jeremia 17:7",
+      "book": "Jeremia",
+      "chapter": 17,
+      "verse": 7,
+      "text": "Hotahina izay olona matoky an’i Jehovah Sy miantehitra amin’i Jehovah.",
+      "theme": "foi"
+    },
+    {
+      "id": 55,
+      "ref": "Jeremia 29:11",
+      "book": "Jeremia",
+      "chapter": 29,
+      "verse": 11,
+      "text": "“‘Fa fantatro tsara ny zavatra efa noeritreretiko hatao aminareo’, hoy i Jehovah. ‘Mieritreritra ny hanome anareo fiadanana aho fa tsy loza, mba hanananareo hoavy tsara sy fanantenana.",
+      "theme": "esperance"
+    },
+    {
+      "id": 56,
+      "ref": "Jeremia 31:3",
+      "book": "Jeremia",
+      "chapter": 31,
+      "verse": 3,
+      "text": "Niseho tamiko avy lavitra i Jehovah, ka nilaza hoe: “Fitiavana mandrakizay no itiavako anao. Izany no nahatonga ahy hitaona anao hanatona ahy, satria tia anao sy tsy mivadika aminao aho.",
+      "theme": "amour"
+    },
+    {
+      "id": 57,
+      "ref": "Matio 5:14",
+      "book": "Matio",
+      "chapter": 5,
+      "verse": 14,
+      "text": "“Ianareo no fahazavan’izao tontolo izao. Tsy azo afenina ny tanàna eny an-tampon-tendrombohitra.",
+      "theme": "service"
+    },
+    {
+      "id": 58,
+      "ref": "Matio 5:16",
+      "book": "Matio",
+      "chapter": 5,
+      "verse": 16,
+      "text": "Avelao hamirapiratra eo anatrehan’ny olona koa ny hazavanareo, mba ho hitany ny asa tsara ataonareo, ka hanome voninahitra an’ilay Rainareo any an-danitra izy.",
+      "theme": "service"
+    },
+    {
+      "id": 59,
+      "ref": "Matio 6:25",
+      "book": "Matio",
+      "chapter": 6,
+      "verse": 25,
+      "text": "“Izany no antony ilazako aminareo hoe: Aza manahy intsony ny amin’ny ainareo, hoe inona no hohaninareo na hosotroinareo, na manahy momba ny vatanareo, hoe inona no hotafinareo. Tsy sarobidy noho ny sakafo ve ny aina, ary tsy sarobidy noho ny fitafiana ny vatana?",
+      "theme": "paix"
+    },
+    {
+      "id": 60,
+      "ref": "Matio 6:26",
+      "book": "Matio",
+      "chapter": 6,
+      "verse": 26,
+      "text": "Jereo tsara ny voro-manidina: Tsy mba mamafy na mijinja na manangona sakafo ao an-trano fitehirizam-bokatra ireny, nefa manome sakafo azy ilay Rainareo any an-danitra. Tsy sarobidy noho ireny ve ianareo?",
+      "theme": "provision"
+    },
+    {
+      "id": 61,
+      "ref": "Matio 6:33",
+      "book": "Matio",
+      "chapter": 6,
+      "verse": 33,
+      "text": "“Katsaho foana àry aloha ilay Fanjakana sy ny fahamarinan’Andriamanitra, dia homena anareo koa izany rehetra izany.",
+      "theme": "provision"
+    },
+    {
+      "id": 62,
+      "ref": "Matio 7:7",
+      "book": "Matio",
+      "chapter": 7,
+      "verse": 7,
+      "text": "“Mangataha foana, dia homena ianareo. Mitadiava foana, dia hahita ianareo. Dondòny foana, dia hovohana ianareo.",
+      "theme": "foi"
+    },
+    {
+      "id": 63,
+      "ref": "Matio 7:12",
+      "book": "Matio",
+      "chapter": 7,
+      "verse": 12,
+      "text": "“Izay rehetra tianareo hataon’ny olona aminareo àry, dia mba ataovy aminy koa. Izany, raha ny marina, no lazain’ny Lalàna sy ny Mpaminany.",
+      "theme": "amour"
+    },
+    {
+      "id": 64,
+      "ref": "Matio 11:28",
+      "book": "Matio",
+      "chapter": 11,
+      "verse": 28,
+      "text": "Mankanesa atỳ amiko ianareo rehetra miasa mafy sy mitondra enta-mavesatra, fa hamelombelona anareo aho.",
+      "theme": "paix"
+    },
+    {
+      "id": 65,
+      "ref": "Matio 18:20",
+      "book": "Matio",
+      "chapter": 18,
+      "verse": 20,
+      "text": "Fa na aiza na aiza ivorian’ny olona roa na telo amin’ny anarako, dia eo afovoany aho.”",
+      "theme": "foi"
+    },
+    {
+      "id": 66,
+      "ref": "Matio 22:37",
+      "book": "Matio",
+      "chapter": 22,
+      "verse": 37,
+      "text": "Dia hoy i Jesosy taminy: “‘Tiavo i Jehovah Andriamanitrao amin’ny fonao manontolo sy ny tenanao manontolo ary ny sainao manontolo.’",
+      "theme": "amour"
+    },
+    {
+      "id": 67,
+      "ref": "Matio 22:39",
+      "book": "Matio",
+      "chapter": 22,
+      "verse": 39,
+      "text": "Ny faharoa, izay hoatr’izany ihany, dia izao: ‘Tiavo ny namanao tahaka ny tenanao.’",
+      "theme": "amour"
+    },
+    {
+      "id": 68,
+      "ref": "Matio 28:20",
+      "book": "Matio",
+      "chapter": 28,
+      "verse": 20,
+      "text": "sady ampianaro hankatò an’izay rehetra nandidiako anareo. Ary hiaraka aminareo foana aho isan’andro, mandra-pahatongan’ny faran’izao tontolo izao.”",
+      "theme": "foi"
+    },
+    {
+      "id": 69,
+      "ref": "Luka 10:27",
+      "book": "Luka",
+      "chapter": 10,
+      "verse": 27,
+      "text": "Hoy ny navaliny: “‘Tiavo i Jehovah Andriamanitrao amin’ny fonao manontolo sy ny tenanao manontolo sy ny herinao manontolo ary ny sainao manontolo’, ary ‘tiavo ny namanao tahaka ny tenanao.’”",
+      "theme": "amour"
+    },
+    {
+      "id": 70,
+      "ref": "Luka 12:32",
+      "book": "Luka",
+      "chapter": 12,
+      "verse": 32,
+      "text": "“Aza matahotra, ry ondry vitsy, fa sitraky ny Rainareo ny hanome anareo ny Fanjakana.",
+      "theme": "foi"
+    },
+    {
+      "id": 71,
+      "ref": "Luka 12:34",
+      "book": "Luka",
+      "chapter": 12,
+      "verse": 34,
+      "text": "Fa any amin’izay misy ny harenanareo, dia ho any koa ny fonareo.",
+      "theme": "sagesse"
+    },
+    {
+      "id": 72,
+      "ref": "Luka 6:38",
+      "book": "Luka",
+      "chapter": 6,
+      "verse": 38,
+      "text": "Aoka ianareo ho zatra manome, dia mba homena koa ianareo. Fatra tsara sy nafatratra sady nahontsana ary mihoatra no hararaka eo am-pofoanareo. Fa araka izay famarana ampiasainareo no hamarana ho anareo.”",
+      "theme": "service"
+    },
+    {
+      "id": 73,
+      "ref": "Jaona 3:16",
+      "book": "Jaona",
+      "chapter": 3,
+      "verse": 16,
+      "text": "“Fa tena tia an’izao tontolo izao Andriamanitra ka nanome an’ilay Zanany lahitokana, mba tsy ho ringana izay rehetra maneho finoana azy, fa hahazo fiainana mandrakizay.",
+      "theme": "foi"
+    },
+    {
+      "id": 74,
+      "ref": "Jaona 13:34",
+      "book": "Jaona",
+      "chapter": 13,
+      "verse": 34,
+      "text": "Izao no didy vaovao omeko anareo: Mifankatiava ianareo, ka hoatran’ny nitiavako anareo no tokony mba hifankatiavanareo koa.",
+      "theme": "amour"
+    },
+    {
+      "id": 75,
+      "ref": "Jaona 14:1",
+      "book": "Jaona",
+      "chapter": 14,
+      "verse": 1,
+      "text": "“Aza avela hitebiteby ny fonareo. Minoa an’Andriamanitra, dia minoa ahy koa.",
+      "theme": "paix"
+    },
+    {
+      "id": 76,
+      "ref": "Jaona 14:6",
+      "book": "Jaona",
+      "chapter": 14,
+      "verse": 6,
+      "text": "Hoy i Jesosy: “Izaho no lalana sy fahamarinana ary fiainana. Tsy misy olona mankany amin’ny Ray afa-tsy amin’ny alalako.",
+      "theme": "foi"
+    },
+    {
+      "id": 77,
+      "ref": "Jaona 14:27",
+      "book": "Jaona",
+      "chapter": 14,
+      "verse": 27,
+      "text": "Fiadanana no avelako ho anareo. Omeko anareo ny fiadanako. Hafa mihitsy anefa ny fomba anomezako azy, fa tsy hoatran’ny an’izao tontolo izao. Aza avela hitebiteby na hatahotra àry ny fonareo.",
+      "theme": "paix"
+    },
+    {
+      "id": 78,
+      "ref": "Jaona 15:5",
+      "book": "Jaona",
+      "chapter": 15,
+      "verse": 5,
+      "text": "Izaho no voaloboka dia ianareo no sampany. Izay tafaray amiko foana ary izaho tafaray aminy, dia izy no mamoa be. Fa tsy afaka manao na inona na inona mihitsy ianareo raha misaraka amiko.",
+      "theme": "foi"
+    },
+    {
+      "id": 79,
+      "ref": "Jaona 15:9",
+      "book": "Jaona",
+      "chapter": 15,
+      "verse": 9,
+      "text": "Mitovy amin’ny itiavan’ny Ray ahy no itiavako anareo. Koa ataovy foana izay hitiavako anareo.",
+      "theme": "amour"
+    },
+    {
+      "id": 80,
+      "ref": "Jaona 15:13",
+      "book": "Jaona",
+      "chapter": 15,
+      "verse": 13,
+      "text": "Tsy misy manana fitiavana lehibe noho izao, dia ny mahafoy ny ainy ho an’ny namany.",
+      "theme": "amour"
+    },
+    {
+      "id": 81,
+      "ref": "Jaona 16:33",
+      "book": "Jaona",
+      "chapter": 16,
+      "verse": 33,
+      "text": "Nilaza an’izany taminareo aho mba ho amin’ny alalako no hahazoanareo fiadanana. Eo amin’izao tontolo izao no hahitanareo fahoriana, nefa manàna herim-po! Izaho efa naharesy an’izao tontolo izao.”",
+      "theme": "paix"
+    },
+    {
+      "id": 82,
+      "ref": "Romana 8:28",
+      "book": "Romana",
+      "chapter": 8,
+      "verse": 28,
+      "text": "Fantatsika fa ny zava-drehetra ataon’Andriamanitra dia ataony miara-miasa mba hahasoa an’izay tia azy, izany hoe izay nantsoiny mifanaraka amin’ny fikasany.",
+      "theme": "esperance"
+    },
+    {
+      "id": 83,
+      "ref": "Romana 8:31",
+      "book": "Romana",
+      "chapter": 8,
+      "verse": 31,
+      "text": "Inona àry no holazaintsika amin’izany? Raha manohana antsika Andriamanitra, dia iza no hahavita hanohitra antsika?",
+      "theme": "foi"
+    },
+    {
+      "id": 84,
+      "ref": "Romana 8:38",
+      "book": "Romana",
+      "chapter": 8,
+      "verse": 38,
+      "text": "Fa matoky aho fa na fahafatesana, na fiainana, na anjely, na fanjakana, na zavatra amin’izao fotoana izao, na zavatra ho avy, na hery,",
+      "theme": "foi"
+    },
+    {
+      "id": 85,
+      "ref": "Romana 12:10",
+      "book": "Romana",
+      "chapter": 12,
+      "verse": 10,
+      "text": "Mifankatiava hoatran’ny mpirahalahy, ary ataovy izay hampiraiki-po anareo samy ianareo. Mifanomeza voninahitra, ka aoka ianareo no ho voalohany hanome voninahitra ny hafa.",
+      "theme": "amour"
+    },
+    {
+      "id": 86,
+      "ref": "Romana 12:13",
+      "book": "Romana",
+      "chapter": 12,
+      "verse": 13,
+      "text": "Mba anomezo amin’izay anananareo ny olona masina, araka izay ilainy. Miezaha ho tia mandray vahiny.",
+      "theme": "service"
+    },
+    {
+      "id": 87,
+      "ref": "Romana 12:18",
+      "book": "Romana",
+      "chapter": 12,
+      "verse": 18,
+      "text": "Raha azo atao, ka mbola miankina aminareo koa, dia mihavàna amin’ny olona rehetra.",
+      "theme": "paix"
+    },
+    {
+      "id": 88,
+      "ref": "Romana 15:13",
+      "book": "Romana",
+      "chapter": 15,
+      "verse": 13,
+      "text": "Ilay Andriamanitra manome fanantenana anie hameno fifaliana sy fiadanana ny fonareo, satria matoky azy ianareo! Amin’izay dia vao mainka ho azo antoka ny fanantenanareo noho ny herin’ny fanahy masina.",
+      "theme": "esperance"
+    },
+    {
+      "id": 89,
+      "ref": "1 Korintiana 13:4",
+      "book": "1 Korintiana",
+      "chapter": 13,
+      "verse": 4,
+      "text": "Ny fitiavana manam-paharetana sy tsara fanahy. Ny fitiavana tsy mialona, tsy mirehareha, tsy mieboebo,",
+      "theme": "amour"
+    },
+    {
+      "id": 90,
+      "ref": "1 Korintiana 13:7",
+      "book": "1 Korintiana",
+      "chapter": 13,
+      "verse": 7,
+      "text": "mandefitra ny zava-drehetra, mino ny zava-drehetra, manantena ny zava-drehetra, ary miaritra ny zava-drehetra.",
+      "theme": "amour"
+    },
+    {
+      "id": 91,
+      "ref": "1 Korintiana 14:40",
+      "book": "1 Korintiana",
+      "chapter": 14,
+      "verse": 40,
+      "text": "Ataovy amin’ny fomba mendrika sy milamina tsara anefa ny zava-drehetra.",
+      "theme": "ordre"
+    },
+    {
+      "id": 92,
+      "ref": "2 Korintiana 9:7",
+      "book": "2 Korintiana",
+      "chapter": 9,
+      "verse": 7,
+      "text": "Aoka ny tsirairay samy hanao araka izay fanapahan-keviny tao am-pony, tsy amin’alahelo na an-tery, fa ny mpanome amim-pifaliana no tian’Andriamanitra.",
+      "theme": "service"
+    },
+    {
+      "id": 93,
+      "ref": "2 Korintiana 9:8",
+      "book": "2 Korintiana",
+      "chapter": 9,
+      "verse": 8,
+      "text": "Hain’Andriamanitra koa ny maneho hatsaram-panahy miavaka be dia be aminareo, mba hanana ny ampy foana ianareo amin’ny zava-drehetra. Amin’izay dia hanananareo be dia be izay ilaina mba hanaovana ny asa tsara rehetra,",
+      "theme": "provision"
+    },
+    {
+      "id": 94,
+      "ref": "2 Korintiana 12:9",
+      "book": "2 Korintiana",
+      "chapter": 12,
+      "verse": 9,
+      "text": "Nilaza tamiko anefa izy hoe: “Ampy ho anao ny hatsaram-panahy miavaka asehoko aminao, satria tonga lafatra ny fiasan’ny heriko eo aminao rehefa malemy ianao.” Vao mainka àry aho faly hirehareha amin’ny fahalemeko, mba hanarona ahy foana toy ny tranolay ny herin’i Kristy.",
+      "theme": "foi"
+    },
+    {
+      "id": 95,
+      "ref": "Galatiana 5:13",
+      "book": "Galatiana",
+      "chapter": 5,
+      "verse": 13,
+      "text": "Efa nantsoina ho lasa olona afaka ianareo, ry rahalahy. Aza ampiasaina hanomezana fahafaham-po ny fanirian’ny nofo anefa izany fahafahana izany, fa aleo ny fitiavana no hahatonga anareo hifanompo.",
+      "theme": "service"
+    },
+    {
+      "id": 96,
+      "ref": "Galatiana 5:22",
+      "book": "Galatiana",
+      "chapter": 5,
+      "verse": 22,
+      "text": "Fa ny vokatry ny fanahy kosa dia fitiavana, fifaliana, fiadanana, faharetana, hatsaram-panahy, hatsaran-toetra, finoana,",
+      "theme": "amour"
+    },
+    {
+      "id": 97,
+      "ref": "Galatiana 6:2",
+      "book": "Galatiana",
+      "chapter": 6,
+      "verse": 2,
+      "text": "Miezaha foana hifanampy rehefa misy zava-tsarotra manavesatra, fa manatanteraka ny lalàn’i Kristy ianareo rehefa manao an’izany.",
+      "theme": "service"
+    },
+    {
+      "id": 98,
+      "ref": "Galatiana 6:9",
+      "book": "Galatiana",
+      "chapter": 6,
+      "verse": 9,
+      "text": "Aza mba reraka manao ny tsara mihitsy àry isika, satria hijinja ny vokatr’izany isika amin’ny fotoana mety, raha tsy kivy.",
+      "theme": "esperance"
+    },
+    {
+      "id": 99,
+      "ref": "Galatiana 6:10",
+      "book": "Galatiana",
+      "chapter": 6,
+      "verse": 10,
+      "text": "Koa raha mbola afaka manao soa ihany isika, dia tokony hanao soa amin’ny olona rehetra, indrindra fa amin’ny mpiray finoana amintsika.",
+      "theme": "service"
+    },
+    {
+      "id": 100,
+      "ref": "Efesianina 2:10",
+      "book": "Efesianina",
+      "chapter": 2,
+      "verse": 10,
+      "text": "Asa tanan’Andriamanitra mantsy isika sady noforonina hanao asa tsara, noho isika tafaray amin’i Kristy Jesosy. Efa nomanin’Andriamanitra mialoha hoe hataontsika izany asa izany.",
+      "theme": "service"
+    },
+    {
+      "id": 101,
+      "ref": "Efesianina 4:2",
+      "book": "Efesianina",
+      "chapter": 4,
+      "verse": 2,
+      "text": "izany hoe hanetry tena sy halemy fanahy foana, hanam-paharetana, hifandefitra noho ny fitiavana,",
+      "theme": "amour"
+    },
+    {
+      "id": 102,
+      "ref": "Efesianina 4:3",
+      "book": "Efesianina",
+      "chapter": 4,
+      "verse": 3,
+      "text": "ary hiezaka mafy ho tafaray foana sady hihavana, satria efa nampiraisin’ny fanahy masina ianareo.",
+      "theme": "ordre"
+    },
+    {
+      "id": 103,
+      "ref": "Efesianina 4:32",
+      "book": "Efesianina",
+      "chapter": 4,
+      "verse": 32,
+      "text": "Miezaha kosa ho tsara fanahy amin’ny namanareo avy, ka hangoraka sy hifamela heloka tanteraka, toy ny namelan’Andriamanitra tanteraka ny helokareo, tamin’ny alalan’i Kristy.",
+      "theme": "amour"
+    },
+    {
+      "id": 104,
+      "ref": "Efesianina 5:2",
+      "book": "Efesianina",
+      "chapter": 5,
+      "verse": 2,
+      "text": "Dia miezaha foana haneho fitiavana, hoatran’ny nitiavan’i Kristy antsika sy nanolorany ny tenany mba hatao fanatitra sy sorona ho antsika, ho hanitra mamerovero ho an’Andriamanitra.",
+      "theme": "amour"
+    },
+    {
+      "id": 105,
+      "ref": "Efesianina 6:7",
+      "book": "Efesianina",
+      "chapter": 6,
+      "verse": 7,
+      "text": "Manompoa amin’ny fo, toy ny hoe ho an’i Jehovah, fa tsy ho an’olona,",
+      "theme": "service"
+    },
+    {
+      "id": 106,
+      "ref": "Efesianina 6:10",
+      "book": "Efesianina",
+      "chapter": 6,
+      "verse": 10,
+      "text": "Farany, ataovy foana izay hahazoana hery avy amin’ny Tompo satria tena mahery izy.",
+      "theme": "foi"
+    },
+    {
+      "id": 107,
+      "ref": "Filipiana 2:3",
+      "book": "Filipiana",
+      "chapter": 2,
+      "verse": 3,
+      "text": "Aza tia ady na mirehareha, fa manetre tena ka hevero hoe ambony noho ianareo ny hafa.",
+      "theme": "ordre"
+    },
+    {
+      "id": 108,
+      "ref": "Filipiana 2:4",
+      "book": "Filipiana",
+      "chapter": 2,
+      "verse": 4,
+      "text": "Ary aza mitady izay hahasoa ny tenanareo fotsiny, fa izay hahasoa ny hafa koa.",
+      "theme": "service"
+    },
+    {
+      "id": 109,
+      "ref": "Filipiana 4:4",
+      "book": "Filipiana",
+      "chapter": 4,
+      "verse": 4,
+      "text": "Mifalia foana noho ny amin’ ny Tompo. Averiko ihany hoe: Mifalia!",
+      "theme": "esperance"
+    },
+    {
+      "id": 110,
+      "ref": "Filipiana 4:6",
+      "book": "Filipiana",
+      "chapter": 4,
+      "verse": 6,
+      "text": "Aza manahy na amin’inona na amin’inona, fa amin’ny zava-drehetra, dia ampahafantaro an’Andriamanitra ny fangatahanareo, amin’ny alalan’ny vavaka sy ny fitalahoana ary ny fisaorana.",
+      "theme": "paix"
+    },
+    {
+      "id": 111,
+      "ref": "Filipiana 4:7",
+      "book": "Filipiana",
+      "chapter": 4,
+      "verse": 7,
+      "text": "Ary ny fiadanan’Andriamanitra, izay mihoatra lavitra noho izay rehetra takatry ny sain’olombelona, no hiambina ny fonareo sy ny sainareo amin’ny alalan’i Kristy Jesosy.",
+      "theme": "paix"
+    },
+    {
+      "id": 112,
+      "ref": "Filipiana 4:13",
+      "book": "Filipiana",
+      "chapter": 4,
+      "verse": 13,
+      "text": "Fa manana ny hery hiatrehana an’izay rehetra mitranga aho, noho ilay manome hery ahy.",
+      "theme": "foi"
+    },
+    {
+      "id": 113,
+      "ref": "Kolosiana 3:12",
+      "book": "Kolosiana",
+      "chapter": 3,
+      "verse": 12,
+      "text": "Nofidin’Andriamanitra ianareo, ary masina sady tena tiana. Mitafia àry fitiavana lalina sy fangorahana, hatsaram-panahy, fanetren-tena, fahalemem-panahy, ary faharetana.",
+      "theme": "amour"
+    },
+    {
+      "id": 114,
+      "ref": "Kolosiana 3:13",
+      "book": "Kolosiana",
+      "chapter": 3,
+      "verse": 13,
+      "text": "Mahaiza foana mifandefitra sy mifamela heloka tanteraka, na dia misy manana antony itarainana momba ny sasany aza. Namela tanteraka ny helokareo i Jehovah, ka mba manaova hoatr’izany koa ianareo.",
+      "theme": "amour"
+    },
+    {
+      "id": 115,
+      "ref": "Kolosiana 3:14",
+      "book": "Kolosiana",
+      "chapter": 3,
+      "verse": 14,
+      "text": "Ambonin’izany rehetra izany, dia mitafia fitiavana, fa toy ny tady tonga lafatra mampifamatotra antsika izy io.",
+      "theme": "amour"
+    },
+    {
+      "id": 116,
+      "ref": "Kolosiana 3:23",
+      "book": "Kolosiana",
+      "chapter": 3,
+      "verse": 23,
+      "text": "Izay rehetra ataonareo dia ataovy amin’ny fo manontolo toy ny hoe ho an’i Jehovah, fa tsy ho an’olona.",
+      "theme": "service"
+    },
+    {
+      "id": 117,
+      "ref": "1 Tesalonianina 5:11",
+      "book": "1 Tesalonianina",
+      "chapter": 5,
+      "verse": 11,
+      "text": "Miezaha àry hifampahery sy hifanampy foana, hoatr’izao efa ataonareo izao.",
+      "theme": "service"
+    },
+    {
+      "id": 118,
+      "ref": "1 Tesalonianina 5:18",
+      "book": "1 Tesalonianina",
+      "chapter": 5,
+      "verse": 18,
+      "text": "Mahaiza misaotra amin’ny zava-drehetra, fa izany no sitrapon’Andriamanitra ho anareo mpanara-dia an’i Kristy Jesosy.",
+      "theme": "foi"
+    },
+    {
+      "id": 119,
+      "ref": "1 Tesalonianina 5:23",
+      "book": "1 Tesalonianina",
+      "chapter": 5,
+      "verse": 23,
+      "text": "Enga anie ilay Andriamanitry ny fiadanana mihitsy no hanamasina tanteraka anareo! Ry rahalahy, enga anie ilay toe-tsaina sy fiainana ary vatana iraisanareo ka samy tsy hisy kilema amin’ny lafiny rehetra, sady tsy hisy tsiny mihitsy amin’ny fanatrehan’i Jesosy Kristy Tompontsika!",
+      "theme": "paix"
+    },
+    {
+      "id": 120,
+      "ref": "2 Tesalonianina 3:3",
+      "book": "2 Tesalonianina",
+      "chapter": 3,
+      "verse": 3,
+      "text": "Tsy mivadika amin’ny teniny kosa ny Tompo, ka hanatanjaka anareo sy hiaro anareo tsy ho azon’ilay ratsy.",
+      "theme": "foi"
+    },
+    {
+      "id": 121,
+      "ref": "2 Tesalonianina 3:13",
+      "book": "2 Tesalonianina",
+      "chapter": 3,
+      "verse": 13,
+      "text": "Ianareo kosa, ry rahalahy, aza mba reraka manao ny tsara mihitsy.",
+      "theme": "service"
+    },
+    {
+      "id": 122,
+      "ref": "1 Timoty 4:12",
+      "book": "1 Timoty",
+      "chapter": 4,
+      "verse": 12,
+      "text": "Aza avela hisy hanao tsinontsinona anao satria hoe tanora ianao. Miezaha kosa ho modely ho an’ny olona tsy mivadika, amin’ny teny sy ny fitondran-tena sy ny fitiavana sy ny finoana ary ny fahadiovana.",
+      "theme": "service"
+    },
+    {
+      "id": 123,
+      "ref": "1 Timoty 6:18",
+      "book": "1 Timoty",
+      "chapter": 6,
+      "verse": 18,
+      "text": "Teneno izy ireo mba hanao soa, hanan-karena amin’ny asa tsara, ho tia manome, ho vonon-kizara,",
+      "theme": "service"
+    },
+    {
+      "id": 124,
+      "ref": "2 Timoty 1:7",
+      "book": "2 Timoty",
+      "chapter": 1,
+      "verse": 7,
+      "text": "Fa tsy mahatonga antsika ho kanosa ny toe-tsaina omen’Andriamanitra antsika, fa mahatonga antsika hahery sy ho be fitiavana ary hahay hisaina.",
+      "theme": "foi"
+    },
+    {
+      "id": 125,
+      "ref": "Hebreo 10:24",
+      "book": "Hebreo",
+      "chapter": 10,
+      "verse": 24,
+      "text": "Andao koa isika hifampiahy mba hifandrisika hampiseho fitiavana sy hanao asa tsara,",
+      "theme": "service"
+    },
+    {
+      "id": 126,
+      "ref": "Hebreo 12:1",
+      "book": "Hebreo",
+      "chapter": 12,
+      "verse": 1,
+      "text": "Koa satria misy an’ireo vavolombelona be dia be toy ny rahona ireo manodidina antsika, dia andao koa isika hanala an’izay rehetra manavesatra antsika sy ny ota mora manakantsakana antsika, ary andao isika hanohy an’ilay hazakazaka asaina ataontsika ka haharitra amin’izany.",
+      "theme": "esperance"
+    },
+    {
+      "id": 127,
+      "ref": "Hebreo 13:5",
+      "book": "Hebreo",
+      "chapter": 13,
+      "verse": 5,
+      "text": "Asehoy amin’ny fomba fiainanareo hoe tsy tia vola ianareo, ary miezaha hianina amin’izay efa eo. Fa hoy izy: “Tsy handao anao mihitsy aho, ary tsy hahafoy anao mihitsy.”",
+      "theme": "foi"
+    },
+    {
+      "id": 128,
+      "ref": "Hebreo 13:8",
+      "book": "Hebreo",
+      "chapter": 13,
+      "verse": 8,
+      "text": "Tsy miova i Jesosy Kristy omaly sy anio ary mandrakizay.",
+      "theme": "foi"
+    },
+    {
+      "id": 129,
+      "ref": "Hebreo 13:16",
+      "book": "Hebreo",
+      "chapter": 13,
+      "verse": 16,
+      "text": "Ankoatra izany, dia aza hadinoina ny manao soa sy ny mizara amin’ny hafa, fa tena mahafaly an’Andriamanitra ny sorona toy izany.",
+      "theme": "service"
+    },
+    {
+      "id": 130,
+      "ref": "1 Petera 4:8",
+      "book": "1 Petera",
+      "chapter": 4,
+      "verse": 8,
+      "text": "Ambonin’ny zavatra rehetra, dia mifankatiava lalina, satria manarona fahotana maro be ny fitiavana.",
+      "theme": "amour"
+    },
+    {
+      "id": 131,
+      "ref": "1 Petera 4:10",
+      "book": "1 Petera",
+      "chapter": 4,
+      "verse": 10,
+      "text": "Ampiasao mba hifanompoana izay nomena anareo, arakaraka izay noraisinareo tsirairay avy. Ianareo mantsy no mpanompo tsara izay manampy ny hafa handray soa amin’ny hatsaram-panahy miavaka asehon’Andriamanitra amin’ny fomba maro samihafa.",
+      "theme": "service"
+    },
+    {
+      "id": 132,
+      "ref": "1 Petera 5:7",
+      "book": "1 Petera",
+      "chapter": 5,
+      "verse": 7,
+      "text": "ary apetraho aminy daholo izay rehetra mampanahy anareo, satria miahy anareo izy.",
+      "theme": "paix"
+    },
+    {
+      "id": 133,
+      "ref": "1 Petera 5:10",
+      "book": "1 Petera",
+      "chapter": 5,
+      "verse": 10,
+      "text": "Rehefa avy nijaly vetivety anefa ianareo, dia hamita ny fampiofanana anareo ilay Andriamanitry ny hatsaram-panahy miavaka rehetra, izay niantso anareo ho amin’ny voninahiny mandrakizay, noho ianareo tafaray amin’i Kristy. Hanampy anareo ho mafy orina izy, sady hanatanjaka anareo, ary hataony mifototra tsara ianareo.",
+      "theme": "esperance"
+    },
+    {
+      "id": 134,
+      "ref": "1 Jaona 3:18",
+      "book": "1 Jaona",
+      "chapter": 3,
+      "verse": 18,
+      "text": "Tsy tokony ho tia amin’ny teny na amin’ny lela fotsiny isika, ry zanako malalako, fa tokony ho tia amin’ny fo kosa, ary tokony hasehontsika amin’ny atao izany.",
+      "theme": "amour"
+    },
+    {
+      "id": 135,
+      "ref": "1 Jaona 4:7",
+      "book": "1 Jaona",
+      "chapter": 4,
+      "verse": 7,
+      "text": "Ry malala, andao isika hifankatia foana, satria avy amin’Andriamanitra ny fitiavana. Izay rehetra tia koa dia naterak’Andriamanitra sady mahalala an’Andriamanitra.",
+      "theme": "amour"
+    },
+    {
+      "id": 136,
+      "ref": "1 Jaona 4:11",
+      "book": "1 Jaona",
+      "chapter": 4,
+      "verse": 11,
+      "text": "Ry malala, raha hoatr’izany no nitiavan’Andriamanitra antsika, dia tsy maintsy mifankatia koa isika.",
+      "theme": "amour"
+    },
+    {
+      "id": 137,
+      "ref": "1 Jaona 4:21",
+      "book": "1 Jaona",
+      "chapter": 4,
+      "verse": 21,
+      "text": "Ary izao no didy azontsika avy aminy: Tsy maintsy tia ny rahalahiny koa izay tia an’Andriamanitra.",
+      "theme": "amour"
+    }
+  ]
+}

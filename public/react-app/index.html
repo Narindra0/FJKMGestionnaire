@@ -6,12 +6,38 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>FJKM Gestionnaire</title>
+    <title>FJKM Gestionnaire — Gestion des obligations et fidèles de FJKM Malaza Gileada</title>
+    <meta name="description" content="Application de gestion de FJKM Malaza Gileada : obligations, mouvements, fidèles, communion et projets dans un espace réservé aux personnes habilitées." />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#102a43" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FJKM Gestionnaire" />
+    <meta property="og:title" content="FJKM Gestionnaire — FJKM Malaza Gileada" />
+    <meta property="og:description" content="Les obligations, fidèles, mouvements, communions et projets de la paroisse dans un même espace de confiance." />
+    <meta property="og:image" content="https://fjkmgestionnaire.onrender.com/assets/img/logo.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="FJKM Gestionnaire — FJKM Malaza Gileada" />
+    <meta name="twitter:description" content="Les obligations, fidèles, mouvements, communions et projets de la paroisse dans un même espace de confiance." />
+    <meta name="twitter:image" content="https://fjkmgestionnaire.onrender.com/assets/img/logo.png" />
     <link rel="icon" type="image/svg+xml" href="/assets/img/logo-icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"SoftwareApplication","name":"FJKM Gestionnaire","description":"Application de gestion des obligations, fidèles, mouvements, communions et projets de FJKM Malaza Gileada.","applicationCategory":"BusinessApplication","publisher":{"@type":"Organization","name":"FJKM Malaza Gileada"}}
+    </script>
+    <!-- Le verset du jour n'est volontairement jamais intégré aux métadonnées SEO. -->
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Fallback texte affiché avant hydratation React ou sans JavaScript. -->
+      <main aria-labelledby="fallback-title">
+        <p>FJKM MALAZA GILEADA · ANTANANARIVO</p>
+        <h1 id="fallback-title">Une gestion claire pour une communauté engagée.</h1>
+        <p>Suivez les obligations, les contributions, les fidèles et les projets de votre paroisse dans un même espace de confiance.</p>
+        <a href="/login">Se connecter à l’espace réservé aux membres habilités</a>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 

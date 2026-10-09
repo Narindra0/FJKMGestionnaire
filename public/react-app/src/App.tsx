@@ -4,6 +4,10 @@ import { LayoutDashboard, Users, ArrowDownToLine, ArrowUpFromLine, HandCoins, He
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import './index.css';
 import logoUrl from './assets/logo.png';
+// L'import de la landing est placé après './index.css' : sa CSS arrive après
+// celle de l'application dans le bundle, et ses sélecteurs préfixés
+// .landing-shell neutralisent les conflits de noms (.brand, .button...).
+import Landing from './pages/Landing';
 
 // Types
 type Role = 'ADMIN' | 'USER' | 'VISITEUR';
@@ -2840,10 +2844,10 @@ function LegalPage({ kind }: { kind: 'privacy' | 'legal' | 'cookies' }) {
   );
 }
 
-// Routage par chemin d'URL : chaque module possède une adresse directe ;
+// Routage par chemin d'URL : la racine '/' est la landing publique ; chaque
+// module de gestion possède une adresse directe protégée par la session ;
 // les chemins inconnus affichent la page d'erreur 404 du SPA.
 const PATH_TO_MODULE: Record<string, ModuleKey> = {
-  '/': 'dashboard',
   '/dashboard': 'dashboard',
   '/entrees': 'entrees',
   '/sorties': 'sorties',
@@ -2857,7 +2861,7 @@ const PATH_TO_MODULE: Record<string, ModuleKey> = {
   '/logs': 'logs',
 };
 const MODULE_TO_PATH: Record<ModuleKey, string> = {
-  dashboard: '/', entrees: '/entrees', sorties: '/sorties', obligations: '/obligations',
+  dashboard: '/dashboard', entrees: '/entrees', sorties: '/sorties', obligations: '/obligations',
   communion: '/communion', projects: '/projects', fideles: '/fideles', reports: '/reports',
   users: '/users', imports: '/imports', logs: '/logs',
 };
@@ -2869,7 +2873,7 @@ function NotFoundPage() {
         <span className="eyebrow">ERREUR 404</span>
         <h1>Page introuvable</h1>
         <p>La page demandée n&apos;existe pas ou a été déplacée.</p>
-        <a className="button button-primary" href="/">Retour au tableau de bord</a>
+        <a className="button button-primary" href="/dashboard">Retour au tableau de bord</a>
       </div>
     </div>
   );
@@ -2879,26 +2883,53 @@ function NotFoundPage() {
 function App() {
   const [pathname] = useState(window.location.pathname.replace(/\/$/, '') || '/');
   const [user, setUser] = useState<any>(null);
+  const [authChecked, setAuthChecked] = useState(false);
   const [activeModule, setActiveModule] = useState<ModuleKey>(
     () => PATH_TO_MODULE[window.location.pathname.replace(/\/$/, '') || '/'] ?? 'dashboard'
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Route publique : '/' affiche la landing ; les pages légales sont publiques ;
+  // '/login' mène au formulaire ; tout le reste (modules) exige une session.
+  const isLanding = pathname === '/';
+  const legalKind = pathname === '/confidentialite' ? 'privacy' : pathname === '/cookies' ? 'cookies' : pathname === '/mentions-legales' ? 'legal' : null;
+  const isPublic = isLanding || legalKind !== null;
+
   useEffect(() => {
     api.me().then(data => {
       if (data?.success) setUser(data.user);
-    });
+    }).catch(() => setUser(null)).finally(() => setAuthChecked(true));
   }, []);
 
+  // Synchronise l'URL avec le module actif une fois connecté (hors pages publiques).
   useEffect(() => {
-    if (!user) return;
-    const target = MODULE_TO_PATH[activeModule] ?? '/';
+    if (!user || isPublic) return;
+    const target = MODULE_TO_PATH[activeModule] ?? '/dashboard';
     if (window.location.pathname !== target) {
       window.history.pushState(null, '', target);
     }
-  }, [activeModule, user]);
+  }, [activeModule, user, isPublic]);
 
-  const legalKind = pathname === '/confidentialite' ? 'privacy' : pathname === '/cookies' ? 'cookies' : pathname === '/mentions-legales' ? 'legal' : null;
+  // Sécurisation des routes : chemin de module ouvert sans session valide ->
+  // redirection vers /login (l'API REST reste protégée par AuthMiddleware côté PHP).
+  useEffect(() => {
+    if (!authChecked || user || isPublic) return;
+    const current = window.location.pathname.replace(/\/$/, '') || '/';
+    if (current in PATH_TO_MODULE) {
+      window.history.replaceState(null, '', '/login');
+    }
+  }, [authChecked, user, isPublic]);
+
+  if (isLanding) {
+    return (
+      <>
+        <Landing authed={!!user} />
+        {/* Toaster requis par « Copier le verset » (toast sonner) sur la landing. */}
+        <Toaster position="top-right" richColors />
+      </>
+    );
+  }
+
   if (legalKind) {
     return <LegalPage kind={legalKind} />;
   }

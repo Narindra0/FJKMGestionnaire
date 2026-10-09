@@ -1,0 +1,5 @@
+# Corpus biblique — provenance et limites
+
+Le sous-corpus livré dans `versets.json` est extrait directement des fichiers JSON par livre du dépôt public [RaveloMevaSoavina/baiboly-json](https://github.com/RaveloMevaSoavina/baiboly-json), révision Git `4e64660b8eeb31cd9a967be8e1292a87b8c9ea77`. Le script `scripts/build-verse-corpus.mjs` ne recopie que les passages référencés dans sa sélection et conserve leur texte exact depuis les fichiers source.
+
+Le README du dépôt décrit les 66 livres et cite l’auteur du dépôt, mais ne précise ni édition biblique, ni titulaire des droits, ni licence autorisant la reproduction. En conséquence, la mention « Baiboly Malagasy » identifie ici la langue/source du contenu sans attester une édition MG1865, une licence libre ou une autorisation. La reproduction et la diffusion publique restent bloquées jusqu’à vérification écrite des droits applicables et validation des textes/références par un responsable FJKM. La prévisualisation de développement ne vaut pas autorisation de publication.

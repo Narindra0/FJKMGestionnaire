@@ -4,7 +4,7 @@
  */
 // Cache PWA : nom versionné pour éviter qu'un ancien bundle reste chargé après déploiement.
 // L'application React est servie depuis /react/ ; les assets filés (hash) sont cache-immutables.
-const CACHE_NAME = 'fjkm-gestionnaire-v20261008-spa';
+const CACHE_NAME = 'fjkm-gestionnaire-v20261008-landing';
 const ASSETS = [
   './',
   './react/index.html',

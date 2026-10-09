@@ -129,22 +129,19 @@ html:has(.landing-shell) {
   line-height: inherit;
 }
 
+/* Logo officiel (PNG blanc) posé à cru, sans boîte ni fond :
+   basculé en noir sur les fonds clairs, laissé blanc en pied de page. */
 .landing-shell .brand-symbol {
   display: grid;
-  width: 72px;
-  height: 44px;
-  flex: 0 0 72px;
+  flex: 0 0 auto;
   place-items: center;
-  overflow: hidden;
-  border: 1px solid var(--navy);
-  border-radius: 11px;
-  background: var(--navy);
 }
 
 .landing-shell .brand-symbol img {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: 38px;
   object-fit: contain;
+  filter: brightness(0);
 }
 
 .landing-shell .brand-copy {
@@ -1181,10 +1178,10 @@ html:has(.landing-shell) {
   padding-block: 44px 38px;
 }
 
-.landing-shell .brand-light .brand-symbol { border-color: rgb(255 253 249 / 23%); background: var(--navy); }
+.landing-shell .brand-light .brand-symbol img { filter: none; }
 .landing-shell .brand-light .brand-name { color: var(--paper); }
 .landing-shell .brand-light .brand-parish { color: rgb(255 253 249 / 62%); }
-.footer-location { margin: 13px 0 0 57px; color: rgb(255 253 249 / 58%); font-size: 10px; line-height: 1.7; }
+.footer-location { margin: 13px 0 0; color: rgb(255 253 249 / 58%); font-size: 10px; line-height: 1.7; }
 .footer-legal-block,
 .footer-values-block { display: flex; flex-direction: column; align-items: flex-start; }
 .footer-label { margin-bottom: 13px; color: var(--soft-gold); font-family: "DM Sans", sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; }
@@ -1227,7 +1224,9 @@ html:has(.landing-shell) {
 
 @media (max-width: 850px) {
   .header-inner { min-height: 74px; }
-  .header-login { display: none; }
+  /* Spécificité alignée sur `.landing-shell .button` : sinon le bouton
+     resterait visible dans l'en-tête mobile (il vit dans le tiroir). */
+  .landing-shell .header-login { display: none; }
   .mobile-menu-toggle {
     display: grid;
     width: 44px;
@@ -1275,7 +1274,7 @@ html:has(.landing-shell) {
   .site-container { width: calc(100% - 28px); }
   .header-inner { min-height: 68px; gap: 10px; }
   .landing-shell .brand { gap: 9px; }
-  .brand-symbol { width: 64px; height: 38px; flex-basis: 64px; border-radius: 9px; }
+  .landing-shell .brand-symbol img { height: 30px; }
   .brand-name { font-size: 14px; }
   .brand-parish { font-size: 9px; }
   .main-nav { padding-inline: 14px; }

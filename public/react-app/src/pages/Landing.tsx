@@ -45,7 +45,9 @@ const moduleTones: { icon: LucideIcon; tone: string }[] = [
   { icon: FileBarChart, tone: "navy" },
 ];
 
-const navHrefs = ["#fonctionnalites", "/consultation", "#securite", "#verset", "#equipe", "#faq"];
+// « Consultation » n'est pas un lien de navigation : l'accès public se fait
+// par le CTA du hero et le lien de la section de fermeture.
+const navHrefs = ["#fonctionnalites", "#securite", "#verset", "#equipe", "#faq"];
 
 function Brand({ light = false, ariaLabel }: { light?: boolean; ariaLabel: string }) {
   // Choix produit : sur le site public, seul le logo est affiché ;
@@ -186,10 +188,12 @@ export default function Landing({ authed = false }: LandingProps) {
             ))}
             <a className="nav-login-mobile" href={ctaHref} onClick={closeMenu}>{ctaLabel} <CtaArrow size={16} aria-hidden="true" /></a>
           </nav>
-          <LanguageSwitcher />
-          <a className="button button-primary header-login" href={ctaHref}>
-            {ctaLabel} <CtaArrow size={16} aria-hidden="true" />
-          </a>
+          <div className="header-actions">
+            <LanguageSwitcher />
+            <a className="button button-primary header-login" href={ctaHref}>
+              {ctaLabel} <CtaArrow size={16} aria-hidden="true" />
+            </a>
+          </div>
           <button
             className="mobile-menu-toggle"
             type="button"

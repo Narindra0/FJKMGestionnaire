@@ -111,6 +111,14 @@ html:has(.landing-shell) {
   gap: 24px;
 }
 
+/* Groupe de droite de l'en-tête : le sélecteur de langue est collé au
+   bouton de connexion, loin du remplissage space-between de la navbar. */
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .landing-shell .brand {
   color: inherit;
   letter-spacing: normal;

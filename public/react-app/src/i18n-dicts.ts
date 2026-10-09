@@ -21,7 +21,7 @@ export const dictFr = {
   },
   landing: {
     brandAria: "FJKM Gestionnaire — accueil",
-    nav: ["Fonctionnalités", "Consultation", "Sécurité", "Verset du jour", "Équipe", "FAQ"],
+    nav: ["Fonctionnalités", "Sécurité", "Verset du jour", "Équipe", "FAQ"],
     mainNavAria: "Navigation principale",
     menuOpen: "Ouvrir le menu",
     menuClose: "Fermer le menu",
@@ -260,7 +260,7 @@ export const dictMg: Dict = {
   },
   landing: {
     brandAria: "FJKM Gestionnaire — pejy fandraisana",
-    nav: ["Fahaiza-manao", "Famakiana", "Fahazoana antoka", "Andiniteny androany", "Antokona", "Fanontanina"],
+    nav: ["Fahaiza-manao", "Fahazoana antoka", "Andiniteny androany", "Antokona", "Fanontanina"],
     mainNavAria: "Fitetezena lehibe",
     menuOpen: "Hanokatra ny menu",
     menuClose: "Hanidy ny menu",
